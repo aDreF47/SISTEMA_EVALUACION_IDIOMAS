@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="754.0" prefWidth="1448.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExamenController">
+   <children>
+      <AnchorPane layoutX="54.0" layoutY="33.0" prefHeight="122.0" prefWidth="606.0">
+         <children>
+            <Label layoutX="18.0" layoutY="62.0" text="Modulo:" />
+            <Label layoutX="101.0" layoutY="62.0" text="{basico/ intermedio/avanzado}" />
+            <Label layoutX="18.0" layoutY="21.0" text="Curso:" />
+            <Label layoutX="101.0" layoutY="21.0" text="[Nombre del curso]" />
+            <Label layoutX="381.0" layoutY="19.0" text="Duracion:" />
+            <Label layoutX="381.0" layoutY="62.0" text="Tipo de examen:" />
+            <Label layoutX="469.0" layoutY="19.0" text="120 minutos" />
+            <Label layoutX="17.0" layoutY="91.0" text="DOcente" />
+            <Label layoutX="101.0" layoutY="91.0" text="Nombre docente" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="724.0" layoutY="33.0" prefHeight="122.0" prefWidth="606.0">
+         <children>
+            <Label layoutX="9.0" layoutY="70.0" text="Apellidos" />
+            <Label layoutX="11.0" layoutY="22.0" text="Nombre" />
+            <Label layoutX="331.0" layoutY="22.0" text="DNI" />
+            <TextField layoutX="97.0" layoutY="18.0" promptText="Nombre completo" />
+            <TextField layoutX="97.0" layoutY="66.0" promptText="Paterno y materno" />
+            <TextField layoutX="369.0" layoutY="18.0" />
+         </children>
+      </AnchorPane>
+      <TabPane layoutX="54.0" layoutY="161.0" prefHeight="481.0" prefWidth="1343.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="1 y 2">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="452.0" prefWidth="646.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 1:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="452.0" prefWidth="720.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 2:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <Button layoutX="566.0" layoutY="403.0" mnemonicParsing="false" text="Next" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="3 y 4">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="452.0" prefWidth="646.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 3:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="452.0" prefWidth="720.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 4:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <Button layoutX="607.0" layoutY="407.0" mnemonicParsing="false" text="Next" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="5 y 6">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="452.0" prefWidth="646.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 5:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="452.0" prefWidth="720.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 6:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <Button layoutX="575.0" layoutY="395.0" mnemonicParsing="false" text="Next" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="7 y 8">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="452.0" prefWidth="646.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 7:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="452.0" prefWidth="720.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 8:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <Button layoutX="607.0" layoutY="396.0" mnemonicParsing="false" text="Next" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="9 y 10">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="452.0" prefWidth="646.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 9:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="452.0" prefWidth="720.0">
+                           <children>
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 10:" />
+                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <Button layoutX="562.0" layoutY="390.0" mnemonicParsing="false" text="Entregar examen" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="1248.0" layoutY="659.0" mnemonicParsing="false" text="Ver calificacion" />
+   </children>
+</AnchorPane>

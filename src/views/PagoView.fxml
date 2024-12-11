@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PagoController">
+   <children>
+      <TextField layoutX="46.0" layoutY="137.0" />
+      <Label layoutX="46.0" layoutY="106.0" text="DNI cliente" />
+      <Label layoutX="43.0" layoutY="284.0" text="Fecha:" />
+      <Label layoutX="403.0" layoutY="46.0" text="Descripcion" />
+      <TextArea layoutX="314.0" layoutY="77.0" prefHeight="94.0" prefWidth="249.0" />
+      <TextField layoutX="43.0" layoutY="219.0" promptText="S/. 20" />
+      <Label layoutX="46.0" layoutY="192.0" text="Monto:" />
+      <DatePicker layoutX="35.0" layoutY="321.0" />
+      <Label fx:id="idcodigoPago" layoutX="413.0" layoutY="338.0" text="XXXXXX" />
+      <Label layoutX="385.0" layoutY="312.0" text="CODIGO DE PAGO" />
+      <Button layoutX="403.0" layoutY="217.0" mnemonicParsing="false" text="Depositar" />
+   </children>
+</AnchorPane>

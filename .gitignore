@@ -1,0 +1,46 @@
+# NetBeans specific #
+#####################
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+nbproject/private/
+build/
+dist/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Compiled source #
+###################
+*.class
+
+# Package files #
+#################
+*.jar
+*.war
+*.ear
+
+# OS generated files #
+######################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files #
+#############
+*.ipr
+*.iws
+*.iml
+
+# Other files and directories #
+###############################
+*.log
+*.sql
+*.jks
+*.keystore
+*.p12
+
+test/*
+
+src/utils/Conexion.java

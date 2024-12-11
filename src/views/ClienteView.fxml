@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClienteController">
+    <!-- Top Section -->
+    <top>
+        <HBox spacing="15.0" style="-fx-padding: 10; -fx-background-color: #0078D7;">
+            <Text style="-fx-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Estudiante" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#DisponibilidadAction" style="-fx-background-color: #005A9E; -fx-text-fill: white;" text="Horarios" />
+            <Button onAction="#HorarioAction" style="-fx-background-color: #005A9E; -fx-text-fill: white;" text="Matricula" />
+            <Button onAction="#ReporteAction" style="-fx-background-color: #005A9E; -fx-text-fill: white;" text="Mis cursos" />
+            <Button onAction="#SalirAction" style="-fx-background-color: #D9534F; -fx-text-fill: white;" text="Salir" />
+        </HBox>
+    </top>
+    
+    <!-- Left Section -->
+    <left>
+        <VBox prefHeight="514.0" prefWidth="212.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #F4F4F4;">
+            <ImageView fitHeight="165.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../imagen/docentePerfil.png" />
+                </image>
+                <VBox.margin>
+                    <Insets bottom="25.0" left="50.0" right="50.0" top="25.0" />
+                </VBox.margin>
+            </ImageView>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="92.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="197.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <Text style="-fx-font-size: 16px;" text="Nombre:" />
+                    <Label fx:id="idnombre" text="nom" GridPane.columnIndex="1" />
+                    <Text style="-fx-font-size: 16px;" text="Código:" GridPane.rowIndex="1" />
+                    <Text style="-fx-font-size: 16px;" text="Correo:" GridPane.rowIndex="2" />
+                    <Label fx:id="docentecodigo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label fx:id="docentecorreo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                </children>
+            </GridPane>
+        </VBox>
+    </left>
+    
+    <!-- Center Section -->
+    <center>
+        <TabPane fx:id="PaneDocente" prefWidth="914.0" style="-fx-padding: 10;" tabClosingPolicy="UNAVAILABLE">
+            <!-- Tab 1: Disponibilidad -->
+            <Tab fx:id="tabDisponibilidad" text="Horarios">
+                <VBox spacing="15.0" style="-fx-padding: 15;">
+                    <HBox spacing="20.0">
+                        <!-- Cursos Disponibles -->
+                        <VBox prefHeight="435.0" prefWidth="727.0" spacing="10.0">
+                            <Text style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Horarios disponibles" />
+                            <TableView fx:id="tableCursoDisponible" prefHeight="400.0" prefWidth="731.0">
+                                <columns>
+                                    <TableColumn fx:id="colIdioma" prefWidth="108.0" text="Idioma" />
+                                    <TableColumn fx:id="colHoraI" prefWidth="109.0" text="Hora Inicio" />
+                           <TableColumn fx:id="colHoraI1" prefWidth="109.0" text="Hora Fin" />
+                           <TableColumn fx:id="colHoraI2" prefWidth="109.0" text="Dia" />
+                           <TableColumn fx:id="colHoraI3" prefWidth="109.0" text="Docente" />
+                           <TableColumn fx:id="colHoraI31" prefWidth="109.0" text="Vacantes" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                        
+                        <!-- Días Disponibles -->
+                        <VBox prefHeight="435.0" prefWidth="110.0" spacing="10.0">
+                            <HBox spacing="5.0" />
+                            <HBox spacing="5.0" />
+                            <Button onAction="#GenerarHorarioAction" prefHeight="36.0" prefWidth="102.0" style="-fx-background-color: #0078D7; -fx-text-fill: white;" text="Adquirir">
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </Tab>
+            
+            <!-- Tab 2: Horario Generado -->
+            <Tab fx:id="tabHorarioGenerado" text="Matricula">
+            <content>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <VBox prefHeight="465.0" prefWidth="434.0">
+                        <children>
+                           <Label text="S/. 20.0" />
+                           <Label text="Codigo de pago:" />
+                           <TextField />
+                           <Label text="Fecha de pago" />
+                           <DatePicker />
+                           <Button mnemonicParsing="false" text="Aceptar" />
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="465.0" prefWidth="413.0">
+                        <children>
+                           <Label text="Detalles" />
+                           <Label text="Label" />
+                           <Label text="Label" />
+                           <Label text="Label" />
+                           <Label text="Label" />
+                           <Label text="Label" />
+                           <Button mnemonicParsing="false" text="Adquirir curso" />
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </content>
+            </Tab>
+            
+            <!-- Tab 3: Reporte -->
+            <Tab fx:id="tabReporte" text="Mis cursos">
+                <VBox spacing="10.0" style="-fx-padding: 15;">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="900.0" text="Lista de Cursos">
+                            <font>
+                                <Font name="System Bold Italic" size="23.0" />
+                            </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                        </Label>
+                        <TableView fx:id="tablaReporte" prefHeight="178.0" prefWidth="849.0">
+                            <columns>
+                                <TableColumn fx:id="cursoRepDocente" prefWidth="102.0" resizable="false" text="Idioma" />
+                                <TableColumn fx:id="horasRepDocente" minWidth="6.0" prefWidth="376.0" resizable="false" text="Horas">
+                                    <columns>
+                                        <TableColumn fx:id="deRepDocente" prefWidth="75.0" resizable="false" text="De" />
+                                        <TableColumn fx:id="hastaRepDocente" prefWidth="75.0" resizable="false" text="Hasta" />
+                                    </columns>
+                                </TableColumn>
+                                <TableColumn fx:id="diaRepDocente" prefWidth="131.0" resizable="false" text="Dia" />
+                        <TableColumn fx:id="diaRepDocente1" prefWidth="131.0" resizable="false" text="Docente" />
+                            </columns>
+                        </TableView>
+                  <Button mnemonicParsing="false" text="Clases" />
+                  <Button mnemonicParsing="false" text="Rendir Examen" />
+                    </children>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+    
+    <!-- Bottom Section -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 10; -fx-background-color: #F4F4F4;">
+            <Text style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Only One Coin - Idiomas" />
+        </HBox>
+    </bottom>
+</BorderPane>
