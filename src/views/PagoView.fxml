@@ -1,24 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PagoController">
-   <children>
-      <TextField layoutX="46.0" layoutY="137.0" />
-      <Label layoutX="46.0" layoutY="106.0" text="DNI cliente" />
-      <Label layoutX="43.0" layoutY="284.0" text="Fecha:" />
-      <Label layoutX="403.0" layoutY="46.0" text="Descripcion" />
-      <TextArea layoutX="314.0" layoutY="77.0" prefHeight="94.0" prefWidth="249.0" />
-      <TextField layoutX="43.0" layoutY="219.0" promptText="S/. 20" />
-      <Label layoutX="46.0" layoutY="192.0" text="Monto:" />
-      <DatePicker layoutX="35.0" layoutY="321.0" />
-      <Label fx:id="idcodigoPago" layoutX="413.0" layoutY="338.0" text="XXXXXX" />
-      <Label layoutX="385.0" layoutY="312.0" text="CODIGO DE PAGO" />
-      <Button layoutX="403.0" layoutY="217.0" mnemonicParsing="false" text="Depositar" />
-   </children>
-</AnchorPane>
+<GridPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="/styles/stylePago.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PagoController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <children>
+        <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <children>
+                <Label text="DNI cliente">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtDNI" promptText="Ingrese el DNI" />
+                <Label text="Monto">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtMontoIngresado" promptText="S/. 20" />
+                <Label text="Fecha">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="dpFechaPago" promptText="MM/DD/AAAA" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <children>
+                <Label text="Descripción">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtDescripcion" promptText="Ingrese una descripción" />
+                <HBox prefHeight="15.0" prefWidth="260.0" />
+                <Button fx:id="btnDepositar" mnemonicParsing="false" onAction="#depositarAction" styleClass="primary-button" text="Depositar">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <HBox prefHeight="23.0" prefWidth="260.0" />
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <VBox prefHeight="20.0" prefWidth="133.0">
+                            <children>
+                                <Label text="CÓDIGO DE PAGO">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="20.0" prefWidth="108.0">
+                            <children>
+                                <Label fx:id="lblCodigoPago" text="">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+        <Label text="Copiar códgio antes  de salir!" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin>
+        </Label>
+        <Button mnemonicParsing="false" onAction="#salirAction" styleClass="primary-button" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets left="230.0" />
+            </GridPane.margin>
+        </Button>
+      <ImageView fitHeight="127.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../images/pago.png" />
+         </image>
+         <GridPane.margin>
+            <Insets bottom="30.0" left="90.0" />
+         </GridPane.margin>
+      </ImageView>
+    </children>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+</GridPane>
