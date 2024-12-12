@@ -1,34 +1,40 @@
-/* Estilos generales */
-.fondo-pago {
-    -fx-background-color: white;
-    -fx-padding: 30px;
+.root {
+    -fx-background-color: #f5f5f5;
 }
-
-/* Campos de texto */
-.text-field, .password-field {
-    -fx-background-color: white;
-    -fx-border-color: #bdc3c7;
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+.text-field {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
     -fx-border-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 14px;
 }
-
-.text-field:focused, .password-field:focused {
-    -fx-border-color: #3498db;
-    -fx-border-width: 2px;
+.date-picker {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+/*    -fx-padding: 8px 12px;*/
+    -fx-font-size: 14px;
 }
-
-/* Botón de Pago */
-.boton-pagar {
-    -fx-background-color: #2ecc71;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-padding: 10px 20px;
+.primary-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 4px;
+    -fx-padding: 8px 16px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
-
-.boton-pagar:hover {
-    -fx-background-color: #27ae60;
+.primary-button:hover {
+    -fx-background-color: #0056b3;
 }
-
-/* Barra de Progreso */
-.progress-bar {
-    -fx-accent: #3498db;
+#codigo-pago-label, #codigo-pago-value {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
