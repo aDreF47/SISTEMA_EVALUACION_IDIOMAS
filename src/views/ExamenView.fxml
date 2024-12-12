@@ -1,68 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="754.0" prefWidth="1448.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExamenController">
+<AnchorPane id="AnchorPane" prefHeight="712.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExamenController">
    <children>
-      <AnchorPane layoutX="54.0" layoutY="33.0" prefHeight="122.0" prefWidth="606.0">
+      <AnchorPane layoutX="54.0" layoutY="33.0" prefHeight="122.0" prefWidth="596.0" style="-fx-background-color: #87CEEB; -fx-border-color: black;">
          <children>
-            <Label layoutX="18.0" layoutY="62.0" text="Modulo:" />
+            <Label layoutX="18.0" layoutY="62.0" text="Modulo:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <Label layoutX="101.0" layoutY="62.0" text="{basico/ intermedio/avanzado}" />
-            <Label layoutX="18.0" layoutY="21.0" text="Curso:" />
-            <Label layoutX="101.0" layoutY="21.0" text="[Nombre del curso]" />
-            <Label layoutX="381.0" layoutY="19.0" text="Duracion:" />
-            <Label layoutX="381.0" layoutY="62.0" text="Tipo de examen:" />
+            <Label layoutX="18.0" layoutY="21.0" text="Curso:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="nombreCurso" layoutX="101.0" layoutY="21.0" text="[Nombre del curso]" />
+            <Label layoutX="381.0" layoutY="19.0" text="Duracion:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="381.0" layoutY="62.0" text="Tipo de examen:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <Label layoutX="469.0" layoutY="19.0" text="120 minutos" />
-            <Label layoutX="17.0" layoutY="91.0" text="DOcente" />
-            <Label layoutX="101.0" layoutY="91.0" text="Nombre docente" />
+            <Label layoutX="17.0" layoutY="91.0" text="Docente">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="nombreDocente" layoutX="101.0" layoutY="91.0" text="Nombre docente" />
+            <Label fx:id="nivelExamen" layoutX="488.0" layoutY="62.0" prefHeight="17.0" prefWidth="91.0" text="Nivel del Examen" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="724.0" layoutY="33.0" prefHeight="122.0" prefWidth="606.0">
+      <AnchorPane layoutX="661.0" layoutY="33.0" prefHeight="122.0" prefWidth="669.0" style="-fx-background-color: #87CEEB; -fx-border-color: black;">
          <children>
             <Label layoutX="9.0" layoutY="70.0" text="Apellidos" />
             <Label layoutX="11.0" layoutY="22.0" text="Nombre" />
             <Label layoutX="331.0" layoutY="22.0" text="DNI" />
-            <TextField layoutX="97.0" layoutY="18.0" promptText="Nombre completo" />
-            <TextField layoutX="97.0" layoutY="66.0" promptText="Paterno y materno" />
-            <TextField layoutX="369.0" layoutY="18.0" />
+            <TextField fx:id="txtnombre" layoutX="97.0" layoutY="18.0" promptText="Nombre completo" style="-fx-border-radius: 2px;" />
+            <TextField fx:id="txtapellido" layoutX="97.0" layoutY="66.0" promptText="Paterno y materno" style="-fx-border-radius: 2px;" />
+            <TextField fx:id="txydni" layoutX="369.0" layoutY="18.0" promptText="Introducir DNI" style="-fx-border-radius: 2px;" />
          </children>
       </AnchorPane>
-      <TabPane layoutX="54.0" layoutY="161.0" prefHeight="481.0" prefWidth="1343.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="54.0" layoutY="161.0" prefHeight="481.0" prefWidth="1277.0" style="-fx-background-color: #B9E5E8;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="1 y 2">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <HBox prefHeight="452.0" prefWidth="646.0">
+                        <HBox prefHeight="452.0" prefWidth="646.0" style="-fx-border-color: black;">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: balck;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 1:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton fx:id="rbp1a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo1" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp1b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp1c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp1d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Label fx:id="pregunta1" layoutX="143.0" layoutY="50.0" prefHeight="17.0" prefWidth="434.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="452.0" prefWidth="720.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 2:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
-                                    <Button layoutX="566.0" layoutY="403.0" mnemonicParsing="false" text="Next" />
+                                    <RadioButton fx:id="rbp2a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo2" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp2b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo2">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp2c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo2">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp2d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo2">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Button layoutX="558.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnSiguiente1" style="-fx-background-color: #F4A460; -fx-border-color: black; -fx-border-radius: 5px;" text="Next">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                    <Label fx:id="pregunta2" layoutX="148.0" layoutY="50.0" prefHeight="17.0" prefWidth="454.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -77,27 +131,62 @@
                      <children>
                         <HBox prefHeight="452.0" prefWidth="646.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 3:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton fx:id="rbp3a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo3" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp3b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo3">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp3c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo3">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp3d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo3">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Label fx:id="pregunta3" layoutX="139.0" layoutY="50.0" prefHeight="17.0" prefWidth="466.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="452.0" prefWidth="720.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="670.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 4:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
-                                    <Button layoutX="607.0" layoutY="407.0" mnemonicParsing="false" text="Next" />
+                                    <RadioButton fx:id="rbp4a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo4" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp4b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo4">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp4c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo4">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp4d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo4">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Button layoutX="558.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnSiguiente2" style="-fx-background-color: #F4A460; -fx-border-color: black; -fx-border-radius: 5px;" text="Next">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                    <Label fx:id="pregunta4" layoutX="140.0" layoutY="50.0" prefHeight="17.0" prefWidth="501.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -112,27 +201,62 @@
                      <children>
                         <HBox prefHeight="452.0" prefWidth="646.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 5:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton fx:id="rbp5a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo5" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp5b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo5">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp5c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo5">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp5d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo5">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Label fx:id="pregunta5" layoutX="142.0" layoutY="50.0" prefHeight="17.0" prefWidth="445.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="452.0" prefWidth="720.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 6:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
-                                    <Button layoutX="575.0" layoutY="395.0" mnemonicParsing="false" text="Next" />
+                                    <RadioButton fx:id="rbp6a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo6" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp6b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo6">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp6c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo6">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp6d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo6">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Button layoutX="558.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnSiguiente3" style="-fx-background-color: #F4A460; -fx-border-color: black; -fx-border-radius: 5px;" text="Next">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                    <Label fx:id="pregunta6" layoutX="143.0" layoutY="50.0" prefHeight="17.0" prefWidth="457.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -147,27 +271,62 @@
                      <children>
                         <HBox prefHeight="452.0" prefWidth="646.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 7:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton fx:id="rbp7a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo7" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp7b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo7">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp7c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo7">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp7d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo7">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Label fx:id="pregunta7" layoutX="140.0" layoutY="50.0" prefHeight="17.0" prefWidth="444.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="452.0" prefWidth="720.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 8:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
-                                    <Button layoutX="607.0" layoutY="396.0" mnemonicParsing="false" text="Next" />
+                                    <RadioButton fx:id="rbp8a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo8" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp8b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo8">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp8c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo8">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp8d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo8">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Button layoutX="558.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnSiguiente4" style="-fx-background-color: #F4A460; -fx-border-color: black; -fx-border-radius: 5px;" text="Next">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                    <Label fx:id="pregunta8" layoutX="143.0" layoutY="50.0" prefHeight="17.0" prefWidth="480.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -182,27 +341,62 @@
                      <children>
                         <HBox prefHeight="452.0" prefWidth="646.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 9:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
+                                    <RadioButton fx:id="rbp9a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo9" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp9b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo9">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp9c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo9">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp9d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo9">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Label fx:id="pregunta9" layoutX="140.0" layoutY="50.0" prefHeight="17.0" prefWidth="467.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="452.0" prefWidth="720.0">
                            <children>
-                              <AnchorPane prefHeight="452.0" prefWidth="1138.0">
+                              <AnchorPane prefHeight="452.0" prefWidth="1138.0" style="-fx-border-color: black;">
                                  <children>
                                     <Label layoutX="58.0" layoutY="50.0" text="PREGUNTA 10:" />
-                                    <RadioButton layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" />
-                                    <Button layoutX="562.0" layoutY="390.0" mnemonicParsing="false" text="Entregar examen" />
+                                    <RadioButton fx:id="rbp10a" layoutX="15.0" layoutY="98.0" mnemonicParsing="false" text="RadioButton">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupo10" />
+                                       </toggleGroup>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp10b" layoutX="15.0" layoutY="162.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo10">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp10c" layoutX="15.0" layoutY="227.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo10">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <RadioButton fx:id="rbp10d" layoutX="15.0" layoutY="299.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$grupo10">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></RadioButton>
+                                    <Button layoutX="550.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnEntregarExamen" style="-fx-background-color: #87CEEB; -fx-border-color: black; -fx-border-radius: 5px;" text="Entregar examen">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
+                                    <Label fx:id="pregunta10" layoutX="149.0" layoutY="50.0" prefHeight="17.0" prefWidth="469.0" text="Label" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -213,6 +407,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="1248.0" layoutY="659.0" mnemonicParsing="false" text="Ver calificacion" />
+      <Button layoutX="1220.0" layoutY="660.0" mnemonicParsing="false" onAction="#btnVerCalificacion" style="-fx-background-color: #90EE90; -fx-border-color: black; -fx-border-radius: 5px;" text="Ver calificacion" />
    </children>
 </AnchorPane>

@@ -1,0 +1,7 @@
+.button{
+    -fx-cursor:hand;
+}
+
+.radio-button{
+    -fx-text-fill: black;
+}
