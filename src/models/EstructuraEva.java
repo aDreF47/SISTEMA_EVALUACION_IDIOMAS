@@ -5,6 +5,7 @@ import java.time.LocalTime;
 public class EstructuraEva {
     
     private String idEstructura;
+    private String tipoExamen;
     private short cantidad;
     private float puntaje;
     private LocalTime duracion; 
@@ -29,6 +30,14 @@ public class EstructuraEva {
         } else {
             throw new IllegalArgumentException("El idEstructura debe tener un máximo de 5 caracteres.");
         }
+    }
+
+    public String getTipoExamen() {
+        return tipoExamen;
+    }
+
+    public void setTipoExamen(String tipoExamen) {
+        this.tipoExamen = tipoExamen;
     }
 
     public short getCantidad() {

@@ -5,16 +5,16 @@ import java.util.List;
 public class BancoPregunta {
     
     private int idPregunta; 
-    private String idCurso; 
+    private String idModulo; 
     private String contenido; 
     private List<String> alternativas; 
     private String respuestaCorrecta; 
 
     public BancoPregunta() {}
 
-    public BancoPregunta(int idPregunta, String idCurso, String contenido, List<String> alternativas, String respuestaCorrecta) {
+    public BancoPregunta(int idPregunta, String idModulo, String contenido, List<String> alternativas, String respuestaCorrecta) {
         this.idPregunta = idPregunta;
-        setIdCurso(idCurso); 
+        this.idModulo = idModulo;
         this.contenido = contenido;
         this.alternativas = alternativas;
         this.respuestaCorrecta = respuestaCorrecta;
@@ -28,18 +28,15 @@ public class BancoPregunta {
         this.idPregunta = idPregunta;
     }
 
-    public String getIdCurso() {
-        return idCurso;
+    public String getIdModulo() {
+        return idModulo;
     }
 
-    public void setIdCurso(String idCurso) {
-        if (idCurso != null && idCurso.length() <= 3) {
-            this.idCurso = idCurso;
-        } else {
-            throw new IllegalArgumentException("El idCurso debe ser una cadena de máximo 3 caracteres.");
-        }
+    public void setIdModulo(String idModulo) {
+        this.idModulo = idModulo;
     }
 
+   
     public String getContenido() {
         return contenido;
     }
@@ -68,7 +65,7 @@ public class BancoPregunta {
     public String toString() {
         return "Pregunta{" +
                "idPregunta=" + idPregunta +
-               ", idCurso='" + idCurso + '\'' +
+               ", idModulo='" + idModulo + '\'' +
                ", contenido='" + contenido + '\'' +
                ", alternativas=" + alternativas +
                ", respuestaCorrecta='" + respuestaCorrecta + '\'' +

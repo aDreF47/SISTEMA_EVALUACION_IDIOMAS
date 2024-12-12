@@ -1,23 +1,29 @@
 package models;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Horario {
     
     private String idHorario;
+    private String idModulo;
     private LocalTime horarioInicio; 
     private LocalTime horaFin; 
-    private String diaSemana; 
-    private int disponible; 
+    private String diaSemana;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
+    
 
     public Horario() {}
 
-    public Horario(String idHorario, LocalTime horarioInicio, LocalTime horaFin, String diaSemana, int disponible) {
-        setIdHorario(idHorario);
-        setHorarioInicio(horarioInicio);
-        setHoraFin(horaFin);
-        setDiaSemana(diaSemana);
-        setDisponible(disponible);
+    public Horario(String idHorario, String idModulo, LocalTime horarioInicio, LocalTime horaFin, String diaSemana, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        this.idHorario = idHorario;
+        this.idModulo = idModulo;
+        this.horarioInicio = horarioInicio;
+        this.horaFin = horaFin;
+        this.diaSemana = diaSemana;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public String getIdHorario() {
@@ -25,11 +31,15 @@ public class Horario {
     }
 
     public void setIdHorario(String idHorario) {
-        if (idHorario != null && idHorario.length() <= 5) {
-            this.idHorario = idHorario;
-        } else {
-            throw new IllegalArgumentException("El idHorario debe tener un máximo de 5 caracteres.");
-        }
+        this.idHorario = idHorario;
+    }
+
+    public String getIdModulo() {
+        return idModulo;
+    }
+
+    public void setIdModulo(String idModulo) {
+        this.idModulo = idModulo;
     }
 
     public LocalTime getHorarioInicio() {
@@ -37,11 +47,7 @@ public class Horario {
     }
 
     public void setHorarioInicio(LocalTime horarioInicio) {
-        if (horarioInicio != null) {
-            this.horarioInicio = horarioInicio;
-        } else {
-            throw new IllegalArgumentException("El horarioInicio no puede ser nulo.");
-        }
+        this.horarioInicio = horarioInicio;
     }
 
     public LocalTime getHoraFin() {
@@ -49,11 +55,7 @@ public class Horario {
     }
 
     public void setHoraFin(LocalTime horaFin) {
-        if (horaFin != null && (horarioInicio == null || horaFin.isAfter(horarioInicio))) {
-            this.horaFin = horaFin;
-        } else {
-            throw new IllegalArgumentException("La horaFin debe ser posterior al horarioInicio.");
-        }
+        this.horaFin = horaFin;
     }
 
     public String getDiaSemana() {
@@ -61,33 +63,24 @@ public class Horario {
     }
 
     public void setDiaSemana(String diaSemana) {
-        if (diaSemana != null && diaSemana.length() <= 25) {
-            this.diaSemana = diaSemana;
-        } else {
-            throw new IllegalArgumentException("El diaSemana debe tener un máximo de 25 caracteres.");
-        }
+        this.diaSemana = diaSemana;
     }
 
-    public int getDisponible() {
-        return disponible;
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setDisponible(int disponible) {
-        if (disponible == 0 || disponible == 1) {
-            this.disponible = disponible;
-        } else {
-            throw new IllegalArgumentException("El disponible debe ser 0 (no disponible) o 1 (disponible).");
-        }
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    @Override
-    public String toString() {
-        return "Horario{" +
-               "idHorario='" + idHorario + '\'' +
-               ", horarioInicio=" + horarioInicio +
-               ", horaFin=" + horaFin +
-               ", diaSemana='" + diaSemana + '\'' +
-               ", disponible=" + disponible +
-               '}';
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
     }
+
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    
 }

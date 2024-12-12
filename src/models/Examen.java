@@ -6,6 +6,7 @@ public class Examen {
 
     private int idExamen; 
     private String idEstructura; 
+    private String idModulo;
     private LocalDateTime fechaExamen;
 
 
@@ -27,6 +28,14 @@ public class Examen {
         } else {
             throw new IllegalArgumentException("El idExamen debe ser un entero positivo.");
         }
+    }
+
+    public String getIdModulo() {
+        return idModulo;
+    }
+
+    public void setIdModulo(String idModulo) {
+        this.idModulo = idModulo;
     }
 
     public String getIdEstructura() {

@@ -4,8 +4,13 @@
  */
 package controllers;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -15,6 +20,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -29,58 +36,44 @@ public class ClienteController {
     @FXML
     private Label docentecorreo;
     @FXML
-    private TabPane PaneDocente;
-    @FXML
-    private Tab tabDisponibilidad;
-    @FXML
-    private TableView<?> tableCursoDisponible;
-    @FXML
-    private TableColumn<?, ?> colCursoDisponible;
-    @FXML
-    private TableColumn<?, ?> colHoraDisponible;
-    @FXML
-    private TableView<?> tableCursoElegido;
-    @FXML
-    private TableColumn<?, ?> colCursoElegido;
-    @FXML
-    private TableColumn<?, ?> colHoraElegido;
-    @FXML
-    private TextField txtDiaDisponible;
-    @FXML
-    private TextField txtHoraInicio;
-    @FXML
-    private TextField txtHoraFinal;
-    @FXML
-    private Tab tabHorarioGenerado;
-    @FXML
-    private VBox horarioGeneradoContainer;
-    @FXML
-    private Text mensajeNoMasPropuestas;
-    @FXML
-    private Tab tabReporte;
-    @FXML
     private TableView<?> tablaReporte;
-    @FXML
-    private TableColumn<?, ?> cicloRepDocente;
-    @FXML
-    private TableColumn<?, ?> seccionRepDocente;
-    @FXML
-    private TableColumn<?, ?> cursoRepDocente;
     @FXML
     private TableColumn<?, ?> horasRepDocente;
     @FXML
-    private TableColumn<?, ?> deRepDocente;
+    private TableColumn<?, ?> colIdioma;
     @FXML
-    private TableColumn<?, ?> hastaRepDocente;
+    private TableColumn<?, ?> colHoraI;
     @FXML
-    private TableColumn<?, ?> diaRepDocente;
+    private TableView<?> tableCursos;
     @FXML
-    private Button btnDescargarReporte;
-
+    private TableColumn<?, ?> colHoraFin;
     @FXML
-    private void DisponibilidadAction(ActionEvent event) {
-    }
-
+    private TableColumn<?, ?> colDia;
+    @FXML
+    private TableColumn<?, ?> colDocente;
+    @FXML
+    private TableColumn<?, ?> colVacante;
+    @FXML
+    private TextField txtCodigoPago;
+    @FXML
+    private TableColumn<?, ?> colIdiomaMat;
+    @FXML
+    private TableColumn<?, ?> colHoraInicio;
+    @FXML
+    private TableColumn<?, ?> colHoraF;
+    @FXML
+    private TableColumn<?, ?> colDiaCurso;
+    @FXML
+    private TableColumn<?, ?> colDocen;
+    @FXML
+    private Tab tabModulos;
+    @FXML
+    private Tab tabMatricula;
+    @FXML
+    private Tab tabMisCursos;
+    @FXML
+    private TabPane paneCliente;
+    
     @FXML
     private void HorarioAction(ActionEvent event) {
     }
@@ -90,39 +83,79 @@ public class ClienteController {
     }
 
     @FXML
-    private void SalirAction(ActionEvent event) {
+    private void btnSalirAction(ActionEvent event) throws IOException {
+        Parent regresarLogin = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+        Scene registrarScene = new Scene(regresarLogin);
+        
+        registrarScene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
+        // Obtener el escenario actual y cambiar la escena
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(registrarScene);
+        window.show();
+    
     }
 
     @FXML
-    private void ElegirCursoAction(ActionEvent event) {
+    private void AdquirirAction(ActionEvent event) {
+        paneCliente.lookup(".tab-header-area").setVisible(false); // Oculta el área del encabezado
+        paneCliente.getSelectionModel().select(tabMatricula);
     }
 
     @FXML
-    private void EditarCursoAction(ActionEvent event) {
+    private void btnAceptaAction(ActionEvent event) {
     }
 
     @FXML
-    private void BorrarCursoAction(ActionEvent event) {
+    private void btnAquirirCurso(ActionEvent event) {
+        paneCliente.getSelectionModel().select(tabMisCursos);
     }
 
     @FXML
-    private void AgregarDisponibilidadAction(ActionEvent event) {
+    private void btnRendirExamen(ActionEvent event) {
+        try {
+            // Cargar la nueva vista desde examenView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/examenView.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el Stage actual desde el evento
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Configurar la nueva escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void GenerarHorarioAction(ActionEvent event) {
+    private void TransaccionAction(ActionEvent event) {
+        try {
+            // Cargar el archivo FXML de la nueva ventana
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/PagoView.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Crear un nuevo escenario (Stage) para la ventana
+            Stage stage = new Stage();
+            stage.setTitle("Pago");
+            stage.setScene(new Scene(root));
+
+            //Configurar como modal para bloquear interacción con la ventana principal
+            stage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana principal mientras la nueva está abierta
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Define quién es la ventana padre
+
+            // Mostrar la nueva ventana
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void GenerarNuevoHorarioAction(ActionEvent event) {
+    private void DisponibilidadAction(ActionEvent event) {
     }
-
-    @FXML
-    private void SeleccionarHorarioAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void generarReporte(ActionEvent event) {
-    }
+ 
     
 }
