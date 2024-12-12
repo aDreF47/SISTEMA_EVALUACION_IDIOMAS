@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
@@ -142,21 +144,37 @@ public class ExamenController {
     private Label pregunta9;
     @FXML
     private Label pregunta10;
+    @FXML
+    private TabPane paneExamen;
+    @FXML
+    private Tab tabPreg12;
+    @FXML
+    private Tab tabPreg34;
+    @FXML
+    private Tab tabPreg56;
+    @FXML
+    private Tab tabPreg78;
+    @FXML
+    private Tab tabPreg910;
 
     @FXML
     private void btnSiguiente1(ActionEvent event) {
+         paneExamen.getSelectionModel().select(tabPreg34);
     }
 
     @FXML
     private void btnSiguiente2(ActionEvent event) {
+        paneExamen.getSelectionModel().select(tabPreg56);
     }
 
     @FXML
     private void btnSiguiente3(ActionEvent event) {
+        paneExamen.getSelectionModel().select(tabPreg78);
     }
 
     @FXML
     private void btnSiguiente4(ActionEvent event) {
+        paneExamen.getSelectionModel().select(tabPreg910);
     }
 
     @FXML

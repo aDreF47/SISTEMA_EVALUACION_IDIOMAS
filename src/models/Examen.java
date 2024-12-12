@@ -12,10 +12,11 @@ public class Examen {
 
     public Examen() {}
 
-    public Examen(int idExamen, String idEstructura, LocalDateTime fechaExamen) {
-        setIdExamen(idExamen);
-        setIdEstructura(idEstructura);
-        setFechaExamen(fechaExamen);
+    public Examen(int idExamen, String idEstructura, String idModulo, LocalDateTime fechaExamen) {
+        this.idExamen = idExamen;
+        this.idEstructura = idEstructura;
+        this.idModulo = idModulo;
+        this.fechaExamen = fechaExamen;
     }
 
     public int getIdExamen() {

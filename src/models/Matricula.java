@@ -9,11 +9,11 @@ public class Matricula {
     private String idModulo;
     private int idEstudiante;
     private LocalDateTime fechaMatricula;
-    private String estado;
+    private int estado;
 
     public Matricula() {}
 
-    public Matricula(int idMatricula, String idModulo, int idEstudiante, LocalDateTime fechaMatricula, String estado) {
+    public Matricula(int idMatricula, String idModulo, int idEstudiante, LocalDateTime fechaMatricula, int estado) {
         this.idMatricula = idMatricula;
         this.idModulo = idModulo;
         this.idEstudiante = idEstudiante;
@@ -53,11 +53,11 @@ public class Matricula {
         this.fechaMatricula = fechaMatricula;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

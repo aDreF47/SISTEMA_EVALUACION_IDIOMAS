@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="712.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExamenController">
+<AnchorPane id="AnchorPane" prefHeight="712.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ExamenController">
    <children>
       <AnchorPane layoutX="54.0" layoutY="33.0" prefHeight="122.0" prefWidth="596.0" style="-fx-background-color: #87CEEB; -fx-border-color: black;">
          <children>
@@ -53,9 +53,9 @@
             <TextField fx:id="txydni" layoutX="369.0" layoutY="18.0" promptText="Introducir DNI" style="-fx-border-radius: 2px;" />
          </children>
       </AnchorPane>
-      <TabPane layoutX="54.0" layoutY="161.0" prefHeight="481.0" prefWidth="1277.0" style="-fx-background-color: #B9E5E8;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="paneExamen" layoutX="54.0" layoutY="161.0" prefHeight="481.0" prefWidth="1277.0" style="-fx-background-color: #B9E5E8;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="1 y 2">
+          <Tab fx:id="tabPreg12" text="1 y 2">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -125,7 +125,7 @@
                   </HBox>
                </content>
             </Tab>
-            <Tab text="3 y 4">
+            <Tab fx:id="tabPreg34" text="3 y 4">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -195,7 +195,7 @@
                   </HBox>
                </content>
             </Tab>
-            <Tab text="5 y 6">
+            <Tab fx:id="tabPreg56" text="5 y 6">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -265,7 +265,7 @@
                   </HBox>
                </content>
             </Tab>
-            <Tab text="7 y 8">
+            <Tab fx:id="tabPreg78" text="7 y 8">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -335,7 +335,7 @@
                   </HBox>
                </content>
             </Tab>
-            <Tab text="9 y 10">
+            <Tab fx:id="tabPreg910" text="9 y 10">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>

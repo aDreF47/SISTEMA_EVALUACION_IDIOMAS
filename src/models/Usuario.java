@@ -11,9 +11,12 @@ public class Usuario {
     private String email;
     private String password;
     private LocalDateTime fechaRegistro;
-    private boolean estado;
+    private int estado;
 
-    public Usuario(int idUsuario, String nombre, String apellido, String DNI, String email, String password, LocalDateTime fechaRegistro, boolean estado) {
+    public Usuario(){
+        this.estado=1;
+    }
+    public Usuario(int idUsuario, String nombre, String apellido, String DNI, String email, String password, LocalDateTime fechaRegistro, int estado) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -80,12 +83,17 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", email=" + email + ", password=" + password + ", fechaRegistro=" + fechaRegistro + ", estado=" + estado + '}';
     }
     
     

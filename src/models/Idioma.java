@@ -5,9 +5,9 @@ package models;
 public class Idioma {
     private String idIdioma;
     private String idioma;
-    private boolean estado;
+    private int estado;
 
-    public Idioma(String idIdioma, String idioma, boolean estado) {
+    public Idioma(String idIdioma, String idioma, int estado) {
         this.idIdioma = idIdioma;
         this.idioma = idioma;
         this.estado = estado;
@@ -29,11 +29,11 @@ public class Idioma {
         this.idioma = idioma;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     

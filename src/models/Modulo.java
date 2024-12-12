@@ -9,12 +9,12 @@ public class Modulo {
     private String nombre;
     private int numModulo;
     private int vacantes;
-    private boolean estado;
+    private int estado;
     private LocalDateTime fechaRegistro;
 
     public Modulo() {}
 
-    public Modulo(String idModulo, String idIdioma, String nombre, int numModulo, int vacantes, boolean estado, LocalDateTime fechaRegistro) {
+    public Modulo(String idModulo, String idIdioma, String nombre, int numModulo, int vacantes, int estado, LocalDateTime fechaRegistro) {
         this.idModulo = idModulo;
         this.idIdioma = idIdioma;
         this.nombre = nombre;
@@ -64,11 +64,11 @@ public class Modulo {
         this.vacantes = vacantes;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

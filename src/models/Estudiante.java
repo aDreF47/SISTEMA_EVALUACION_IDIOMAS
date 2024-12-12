@@ -6,11 +6,11 @@ public class Estudiante {
     private int idEstudiante;
     private int idUsuario;
     private String codigo;
-    private boolean estado;
+    private int estado;
 
     public Estudiante() {}
 
-    public Estudiante(int idEstudiante, int idUsuario, String codigo, boolean estado) {
+    public Estudiante(int idEstudiante, int idUsuario, String codigo, int estado) {
         this.idEstudiante = idEstudiante;
         this.idUsuario = idUsuario;
         this.codigo = codigo;
@@ -41,11 +41,11 @@ public class Estudiante {
         this.codigo = codigo;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

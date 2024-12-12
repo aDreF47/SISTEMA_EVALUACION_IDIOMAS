@@ -47,7 +47,7 @@
                     <ColumnConstraints prefWidth="100.0" />
                 </columnConstraints>
                 <children>
-                    <Button onAction="#btnLongin" styleClass="login-button" text="Log In" />
+                    <Button onAction="#btnLogin" styleClass="login-button" text="Log In" />
                     <Button onAction="#btnSignin" styleClass="signin-button" text="Sign in" GridPane.columnIndex="1" />
                 </children>
             <rowConstraints>
