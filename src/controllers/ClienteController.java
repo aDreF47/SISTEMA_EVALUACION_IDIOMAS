@@ -90,7 +90,9 @@ public class ClienteController {
         registrarScene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
         // Obtener el escenario actual y cambiar la escena
         Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        
         window.setScene(registrarScene);
+        window.centerOnScreen();
         window.show();
     
     }

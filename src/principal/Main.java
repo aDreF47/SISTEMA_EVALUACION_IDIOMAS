@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginVew.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root); //Scena fundamentl para FXs
         
@@ -40,17 +40,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    /*@Override
-    public void start(Stage primaryStage) throws Exception {
-        String a = "PagoView";
-        String b = "ClienteView";
-        String c = "ExamenView";
-        String d = "RetroalimentacionView";
-        String f = "LoginVew";
-        Parent root1 = FXMLLoader.load(getClass().getResource("/views/"+f+".fxml"));
-        primaryStage.setTitle("Sistema de Evaluación de Idiomas - Login");
-        primaryStage.setScene(new Scene(root1));
-        primaryStage.show();
-
-    }*/
 }
