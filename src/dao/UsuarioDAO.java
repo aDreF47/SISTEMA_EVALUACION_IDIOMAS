@@ -61,31 +61,32 @@ public class UsuarioDAO {
         }
         return isValidUserName;
     }
+    
     public Usuario validarYObtenerUsuario(String email, String password) {
         Usuario usuario = null;
-        String query = "SELECT id_usuario, email, contrasena FROM usuario WHERE email = ? AND contrasena = ?";
-        
-        try (Connection con = Conexion.conectar();
-             PreparedStatement ps = con.prepareStatement(query)) {
-             
+        String query = "SELECT id_usuario, email, contrasena, estado FROM usuario WHERE email = ? AND contrasena = ?";
+
+        try (Connection con = Conexion.conectar(); PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                usuario = new Usuario() {};
+                usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("id_usuario"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setPassword(rs.getString("contrasena"));
-                usuario.setEstado(rs.getInt("estado"));
-                
+                usuario.setEstado(rs.getInt("estado")); // Columna 'estado' ahora incluida
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return usuario;
     }
+
+    
     
     public boolean validarUsuarioUnico(String email) {
         String query = "SELECT COUNT(*) FROM usuario WHERE email = ?";

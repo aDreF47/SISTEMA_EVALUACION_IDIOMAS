@@ -2,6 +2,7 @@
 package models;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Usuario {
     private int idUsuario;
@@ -14,6 +15,7 @@ public class Usuario {
     private int estado;
 
     public Usuario(){
+        this.fechaRegistro = LocalDateTime.now();
         this.estado=1;
     }
     public Usuario(int idUsuario, String nombre, String apellido, String DNI, String email, String password, LocalDateTime fechaRegistro, int estado) {
@@ -83,13 +85,15 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public int isEstado() {
+    public int getEstado() {
         return estado;
     }
 
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
 
     @Override
     public String toString() {

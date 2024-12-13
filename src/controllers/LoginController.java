@@ -47,8 +47,8 @@ public class LoginController {
         if (usuarioDAO == null) {
         usuarioDAO = new UsuarioDAO();
         }
-        String email = txtEmail.getText();
-        String password = txtPassword.getText();
+        String email = txtEmail.getText().trim(); 
+        String password = txtPassword.getText().trim();
         System.out.println(email);
         
         if (email.isEmpty() || password.isEmpty()) {
@@ -65,31 +65,26 @@ public class LoginController {
             return;
         }
         
-        System.out.println("hola3");
+        if (usuario.getEstado() == 0) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Su cuenta está inactiva. Por favor regístrese.");
+            return;
+        }
                  
         mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Alert", "Bienvenido ");
 
         // Cargar la vista correspondiente según el tipo de usuario
-        FXMLLoader loader;
-        Parent root;
-        Scene scene=null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        
+    // Cambiar la escena actual
         Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
-        if (usuario.isEstado() == 1) {
-            // Cargar la vista de Cliente
-            loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
-            root = loader.load();
-            //ClienteController cC = loader.getController();
-            //cC.colocarNombreCompleto(userName);
-            scene = new Scene(root);
-            window.setTitle("Cliente");
-        } else if (usuario.isEstado() == 0) {
-           mostrarMensajeAlerta(Alert.AlertType.ERROR, "Alert", "Por favor Registrarse.");             
-        }
-
-        // Mostrar la nueva escena
         window.setScene(scene);
+        window.setTitle("Cliente");
         window.show();
+
+      
+        
         //abrirVentana("/views/ClienteView.fxml", "Cliente");
         // Verificar credenciales y acceder
         /*if (sistema.verificarAcceso(email, password)) {
