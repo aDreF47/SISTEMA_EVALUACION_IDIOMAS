@@ -1,4 +1,40 @@
-.manito {
+
+
+/* Botones personalizados */
+
+.btnRE:hover {
+    -fx-background-color: linear-gradient(to bottom, #0f0, #0f0); /* Hover más oscuro */
+}
+
+/* Botón activo */
+.btnRE:pressed {
+    -fx-background-color: linear-gradient(to bottom, #cc7a00, #b36b00); /* Activo más oscuro */
+}
+
+.btnRE{
+    -fx-background-color: linear-gradient(to bottom, #ff9900, #e68a00); /* Gradiente naranja */
+    -fx-text-fill: white;               /* Texto blanco */
+    -fx-font-size: 20px;                /* Tamaño del texto */
+    -fx-border-radius: 5px;             /* Bordes redondeados */
+    -fx-padding: 8 15 8 15;             /* Espaciado interno */
+}
+
+.btnClass:hover {
+    -fx-background-color: linear-gradient(to bottom, #0f0, #0f0); /* Hover más oscuro */
+}
+
+/* Botón activo */
+.btnClass:pressed {
+    -fx-background-color: linear-gradient(to bottom, #cc7a00, #b36b00); /* Activo más oscuro */
+}
+
+.btnClass{
+    -fx-background-color: linear-gradient(to bottom, #ff9900, #e68a00); /* Gradiente naranja */
+    -fx-text-fill: white;               /* Texto blanco */
+    -fx-font-size: 20px;                /* Tamaño del texto */
+    -fx-border-radius: 5px;             /* Bordes redondeados */
+    -fx-padding: 8 15 8 15;             /* Espaciado interno */
+}.manito {
     -fx-cursor: hand;
 }
 .hbox-matricula {

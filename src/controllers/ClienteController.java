@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -37,7 +38,11 @@ import models.Usuario;
 public class ClienteController {
 
     @FXML
-    private TableView<?> tablaReporte;
+    private Label idnombre;
+    @FXML
+    private Label docentecodigo;
+    @FXML
+    private Label docentecorreo;
     @FXML
     private TableColumn<?, ?> horasRepDocente;
     
@@ -203,11 +208,30 @@ Platform.runLater(() -> {
     private void btnAquirirCurso(ActionEvent event) {
         paneCliente.getSelectionModel().select(tabMisCursos);
     }
-
+    
+    @FXML
+    private void btnClases(ActionEvent event){
+        
+    }
+    
+    
+    
     @FXML
     private void btnRendirExamen(ActionEvent event) {
         try {
-            // Cargar la vista ExamenView.fxml
+             Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("¿Estás seguro de que quieres rendir el examen?");
+        //alert.setContentText("Esta acción te llevará al inicio del examen. Asegúrate de estar preparado.");
+
+        // Mostrar el cuadro de diálogo y esperar la respuesta del usuario
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Aquí se maneja la lógica si el usuario confirma
+            System.out.println("Iniciando el examen...");
+            // Puedes agregar aquí el código para iniciar la funcionalidad del examen
+                        // Cargar la vista ExamenView.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/examenView.fxml"));
             Parent root = loader.load();
 
@@ -228,6 +252,10 @@ Platform.runLater(() -> {
 
             // Mostrar la ventana sin cerrar ClienteView.fxml
             stage.show();
+        } else {
+            // Aquí se maneja si el usuario cancela
+            System.out.println("El usuario canceló el inicio del examen.");
+        }
         } catch (IOException e) {
             e.printStackTrace();
         }
