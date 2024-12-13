@@ -70,6 +70,7 @@ public class ClienteController {
     @FXML
     private TabPane paneCliente;
     
+    
     @FXML
     private void HorarioAction(ActionEvent event) {
     }
@@ -77,7 +78,10 @@ public class ClienteController {
     @FXML
     private void ReporteAction(ActionEvent event) {
     }
-
+    public void initialize(){
+        
+    }
+    
     @FXML
     private void btnSalirAction(ActionEvent event) throws IOException {
         Parent regresarLogin = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
@@ -95,7 +99,7 @@ public class ClienteController {
 
     @FXML
     private void AdquirirAction(ActionEvent event) {
-        paneCliente.lookup(".tab-header-area").setVisible(false); // Oculta el área del encabezado
+        
         paneCliente.getSelectionModel().select(tabMatricula);
     }
 

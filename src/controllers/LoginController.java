@@ -77,6 +77,8 @@ public class LoginController {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
+        // Agregar la hoja de estilos
+            scene.getStylesheets().add(getClass().getResource("/styles/styleCliente.css").toExternalForm());
     // Cambiar la escena actual
         Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
