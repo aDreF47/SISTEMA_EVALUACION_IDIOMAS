@@ -13,12 +13,12 @@ public class Nota {
     public Nota() {}
 
     public Nota(int idNota, int idExamen, int idEstudiante, double puntaje, LocalDateTime fechaCompletado) {
-        setIdNota(idNota);
-        setIdExamen(idExamen);
-        setIdEstudiante(idEstudiante);
-        setPuntaje(puntaje);
-        setFechaCompletado(fechaCompletado);
-    }
+        this.idNota = idNota;
+        this.idExamen = idExamen;
+        this.idEstudiante = idEstudiante;
+        this.puntaje = puntaje;
+        this.fechaCompletado = fechaCompletado;
+    } 
 
     public int getIdNota() {
         return idNota;

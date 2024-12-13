@@ -44,3 +44,5 @@ desktop.ini
 test/*
 
 src/utils/Conexion.java
+
+.vscode/*

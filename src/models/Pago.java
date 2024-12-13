@@ -6,19 +6,27 @@ public class Pago {
     
     private String idPago;
     private int idEstudiante;
+    private String idMatricula;
     private double monto;
     private LocalDateTime fechaPago;
-    private String estado;
+    private String descripcion;
+    private String codigoPago;
+    private int estado;
     
     public Pago() {}
 
-    public Pago(String idPago, int idEstudiante, double monto, LocalDateTime fechaPago, String estado) {
-        setIdPago(idPago);
-        setIdEstudiante(idEstudiante);
-        setMonto(monto);
-        setFechaPago(fechaPago);
-        setEstado(estado);
+    public Pago(String idPago, int idEstudiante, String idMatricula, double monto, LocalDateTime fechaPago, String descripcion, String codigoPago, int estado) {
+        this.idPago = idPago;
+        this.idEstudiante = idEstudiante;
+        this.idMatricula = idMatricula;
+        this.monto = monto;
+        this.fechaPago = fechaPago;
+        this.descripcion = descripcion;
+        this.codigoPago = codigoPago;
+        this.estado = estado;
     }
+
+    
 
     public String getIdPago() {
         return idPago;
@@ -68,26 +76,42 @@ public class Pago {
         }
     }
 
-    public String getEstado() {
+    public String getCodigoPago() {
+        return codigoPago;
+    }
+
+    public void setCodigoPago(String codigoPago) {
+        this.codigoPago = codigoPago;
+    }
+
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
-        if (estado != null && estado.length() <= 40) {
-            this.estado = estado;
-        } else {
-            throw new IllegalArgumentException("El estado debe tener como máximo 40 caracteres.");
-        }
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Pago{" +
-               "idPago='" + idPago + '\'' +
-               ", idEstudiante=" + idEstudiante +
-               ", monto=" + monto +
-               ", fechaPago=" + fechaPago +
-               ", estado='" + estado + '\'' +
-               '}';
+       
+    public String getIdMatricula() {
+        return idMatricula;
+    }
+
+    public void setIdMatricula(String idMatricula) {
+        this.idMatricula = idMatricula;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
