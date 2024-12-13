@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import java.io.IOException;
@@ -115,18 +111,27 @@ public class ClienteController {
     @FXML
     private void btnRendirExamen(ActionEvent event) {
         try {
-            // Cargar la nueva vista desde examenView.fxml
+            // Cargar la vista ExamenView.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/examenView.fxml"));
             Parent root = loader.load();
 
-            // Obtener el Stage actual desde el evento
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Configurar la nueva escena
+            // Crear un nuevo Stage para la ventana de examen
+            Stage stage = new Stage();
+            stage.setTitle("Examen");
             Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
 
+            // Agregar la hoja de estilos
+            scene.getStylesheets().add(getClass().getResource("/styles/styleExamen.css").toExternalForm());
+
+            // Configurar el Stage
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+            // Mostrar la ventana sin cerrar ClienteView.fxml
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
