@@ -1,7 +1,112 @@
-.button{
-    -fx-cursor:hand;
+/* Archivo styleExamen.css */
+
+/* Estilo general para el fondo del AnchorPane */
+.anchor-pane {
+    -fx-background-color: white;
+}
+.anchor-pane-gradient {
+    -fx-background-color: linear-gradient(to bottom, #f0f8ff, #e6e6fa);
 }
 
-.radio-button{
+
+/* Estilo para los contenedores de información */
+.informacion-container {
+    -fx-background-color: #87CEEB;
+    -fx-border-color: black;
+}
+
+/* Estilo para los Labels */
+.label {
+    -fx-font-family: "System";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
     -fx-text-fill: black;
+}
+
+.label-normal {
+    -fx-font-weight: normal;
+}
+
+/* Estilo para los TextFields */
+.text-field {
+    -fx-border-radius: 2px;
+    -fx-border-color: black;
+    -fx-prompt-text-fill: grey;
+}
+
+/* Estilo para el TabPane */
+.tab-pane {
+    -fx-background-color: #B9E5E8;
+}
+
+.tab {
+    -fx-font-weight: bold;
+}
+
+/* Estilo para los HBox y AnchorPane de las preguntas */
+.hbox {
+    -fx-border-color: black;
+}
+
+.anchor-pane-pregunta {
+    -fx-border-color: black;
+}
+
+/* Estilo para las Labels de preguntas */
+.pregunta-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #00008B;
+    -fx-font-size: 14px;
+}
+
+/* Estilo para los RadioButtons */
+.radio-button {
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+}
+
+/* Estilo para los Buttons */
+.button {
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.next-button {
+    -fx-background-color: #F4A460;
+}
+
+.entregar-button {
+    -fx-background-color: #87CEEB;
+}
+
+.ver-calificacion-button {
+    -fx-background-color: #90EE90;
+}
+
+/* Efectos adicionales */
+.button:hover {
+    -fx-background-color: #FFA07A;
+}
+
+.radio-button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 255, 0.5), 5, 0, 0, 0);
+}
+
+.text-field:focused {
+    -fx-border-color: blue;
+}
+
+.tab:selected {
+    -fx-background-color: #ADD8E6;
+    -fx-text-fill: white;
+}
+
+.radio-button:hover, .button:hover {
+    -fx-cursor: hand;
+}
+
+.tab-header-area {
+    visibility: hidden;
 }
