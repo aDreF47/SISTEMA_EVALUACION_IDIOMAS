@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -147,37 +148,105 @@
             
             <!-- Tab 3: Reporte -->
             <Tab fx:id="tabMisCursos" text="Mis cursos">
-                <VBox spacing="10.0" style="-fx-padding: 15;">
-                    <children>
-                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="900.0" text="Lista de Cursos">
-                            <font>
-                                <Font name="System Bold Italic" size="23.0" />
-                            </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                        </Label>
-                        <TableView fx:id="tablaReporte" prefHeight="257.0" prefWidth="895.0">
-                            <columns>
-                                <TableColumn fx:id="colIdiomaMiscursos" prefWidth="110.0" resizable="false" text="Idioma" />
-                                <TableColumn fx:id="horasRepDocente" minWidth="6.0" prefWidth="142.0" resizable="false" text="Horas">
-                                    <columns>
-                                        <TableColumn fx:id="colHoraInicio" prefWidth="75.0" resizable="false" text="De" />
-                                        <TableColumn fx:id="colHoraF" prefWidth="75.0" resizable="false" text="Hasta" />
-                                    </columns>
-                                </TableColumn>
-                                <TableColumn fx:id="colDiaCurso" prefWidth="131.0" resizable="false" text="Dia" />
-                        <TableColumn fx:id="colFechaIni" prefWidth="131.0" resizable="false" text="Fecha de Inicio" />
-                        <TableColumn fx:id="colFechaFin" prefWidth="131.0" resizable="false" text="Fecha de Fin" />
-                        <TableColumn fx:id="colDocen" prefWidth="131.0" resizable="false" text="Docente" />
-                        <TableColumn fx:id="colCalificacion" prefWidth="131.0" resizable="false" text="Calificacion" />
-                            </columns>
-                        </TableView>
-                  <Button mnemonicParsing="false" text="Clases" />
-                  <Button mnemonicParsing="false" onAction="#btnRendirExamen" text="Rendir Examen" />
-                  <Button layoutX="25.0" layoutY="371.0" mnemonicParsing="false" onAction="#btnRendirExamen" text="Back" />
-                    </children>
-                </VBox>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane prefHeight="465.0" prefWidth="881.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                                <VBox alignment="BOTTOM_LEFT" prefHeight="465.0" prefWidth="877.0" spacing="10.0" style="-fx-padding: 15;">
+                                                                    <children>
+                                                                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="900.0" style="-fx-background-color: #f39c12;" text="Lista de Cursos">
+                                                                            <font>
+                                                                                <Font name="System Bold Italic" size="23.0" />
+                                                                            </font>
+                                                                     <VBox.margin>
+                                                                        <Insets />
+                                                                     </VBox.margin>
+                                                                        </Label>
+                                                                        <TableView fx:id="tablaReporte" prefHeight="308.0" prefWidth="900.0">
+                                                                            <columns>
+                                                                                <TableColumn fx:id="colIdiomaMiscursos" prefWidth="110.0" resizable="false" text="Idioma" />
+                                                                                <TableColumn fx:id="horasRepDocente" minWidth="6.0" prefWidth="142.0" resizable="false" text="Horas">
+                                                                                    <columns>
+                                                                                        <TableColumn fx:id="colHoraInicio" prefWidth="75.0" resizable="false" text="De" />
+                                                                                        <TableColumn fx:id="colHoraF" prefWidth="75.0" resizable="false" text="Hasta" />
+                                                                                    </columns>
+                                                                                </TableColumn>
+                                                                                <TableColumn fx:id="colDiaCurso" prefWidth="131.0" resizable="false" text="Dia" />
+                                                                        <TableColumn fx:id="colFechaIni" prefWidth="131.0" resizable="false" text="Fecha de Inicio" />
+                                                                        <TableColumn fx:id="colFechaFin" prefWidth="131.0" resizable="false" text="Fecha de Fin" />
+                                                                        <TableColumn fx:id="colDocen" prefWidth="131.0" resizable="false" text="Docente" />
+                                                                        <TableColumn fx:id="colCalificacion" prefWidth="131.0" resizable="false" text="Calificacion" />
+                                                                            </columns>
+                                                                        </TableView>
+                                                                  <Button mnemonicParsing="false" text="Clases" />
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <VBox>
+                                                                           <children>
+                                                                              <AnchorPane>
+                                                                                 <children>
+                                                                                    <Button layoutX="805.0" mnemonicParsing="false" onAction="#btnRendirExamen" text="Rendir Examen" />
+                                                                                    <Button mnemonicParsing="false" onAction="#btnRendirExamen" text="Back" />
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
             </Tab>
         </TabPane>
     </center>
