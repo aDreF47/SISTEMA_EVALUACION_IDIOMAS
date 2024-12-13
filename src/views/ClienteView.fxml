@@ -172,7 +172,7 @@
                                 </TableColumn>
                                 <TableColumn fx:id="colDiaCurso" prefWidth="131.0" resizable="false" text="Dia" />
                                 <TableColumn fx:id="colFechaIni" prefWidth="131.0" resizable="false" text="Fecha de Inicio" />
-                                <TableColumn fx:id="colFechaFin" prefWidth="131.0" resizable="false" text="Fecha de Fin" />
+                                <TableColumn fx:id="colFechaFinMisCursos" prefWidth="131.0" resizable="false" text="Fecha de Fin" />
                                 <TableColumn fx:id="colDocen" prefWidth="131.0" resizable="false" text="Docente" />
                                 <TableColumn fx:id="colCalificacion" prefWidth="131.0" resizable="false" text="Calificacion" />
                             </columns>
