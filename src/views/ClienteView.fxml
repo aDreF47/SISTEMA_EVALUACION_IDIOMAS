@@ -79,16 +79,15 @@
         <HBox spacing="10.0">
             <!-- Cursos Disponibles -->
             <VBox prefHeight="379.0" prefWidth="791.0" spacing="15.0" style="-fx-padding: 15; -fx-background-color: #FFFFFF; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.2, 0, 2);">
-                <TableView fx:id="tableCursos" prefWidth="727.0">
+                <TableView fx:id="tablaHorarios" prefWidth="727.0">
                     <columns>
-                        <TableColumn fx:id="colIdioma" prefWidth="81.0" text="Idioma" />
-                        <TableColumn fx:id="colHoraI" prefWidth="88.0" text="Hora Inicio" />
-                        <TableColumn fx:id="colHoraFin" prefWidth="88.0" text="Hora Fin" />
-                        <TableColumn fx:id="colDia" prefWidth="71.0" text="Día" />
-                           <TableColumn fx:id="colFechaIni" prefWidth="84.0" text="Fecha Inicio" />
-                           <TableColumn fx:id="colFechFin" prefWidth="94.0" text="Fecha Fin" />
-                        <TableColumn fx:id="colDocente" prefWidth="140.0" text="Docente" />
-                        <TableColumn fx:id="colVacante" prefWidth="70.0" text="Vacantes" />
+                        <TableColumn fx:id="colIdioma" text="Idioma" />
+                        <TableColumn fx:id="colHorario" text="Horario" />
+                        <TableColumn fx:id="colDia" prefWidth="127.0" text="Día" />
+                        <TableColumn fx:id="colFechaInicio" prefWidth="87.0" text="F. Inicio" />
+                        <TableColumn fx:id="colFechaFin" prefWidth="86.0" text="F. Fin" />
+                        <TableColumn fx:id="colDocente" prefWidth="205.0" text="Docente" />
+                        <TableColumn fx:id="colVacantes" prefWidth="61.0" text="Vacantes" />
                     </columns>
                 </TableView>
             </VBox>
@@ -167,7 +166,7 @@
                                 <TableColumn fx:id="colIdiomaMat" prefWidth="110.0" resizable="false" text="Idioma" />
                                 <TableColumn fx:id="horasRepDocente" minWidth="6.0" prefWidth="142.0" resizable="false" text="Horas">
                                     <columns>
-                                        <TableColumn fx:id="colHoraInicio" prefWidth="75.0" resizable="false" text="De" />
+                                        <TableColumn fx:id="colHoraInicioMis" prefWidth="75.0" resizable="false" text="De" />
                                         <TableColumn fx:id="colHoraF" prefWidth="75.0" resizable="false" text="Hasta" />
                                     </columns>
                                 </TableColumn>

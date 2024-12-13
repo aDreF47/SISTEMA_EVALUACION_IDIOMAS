@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
+import models.Rol;
 import models.Usuario;
 import utils.Conexion;
 
-/**
- *
- * @author JuniorG
- */
+
 public class UsuarioDAO {
     //private Conexion nc = new Conexion();
     private ArrayList<Usuario> listaEstudiantes = new ArrayList<>();
@@ -62,22 +61,37 @@ public class UsuarioDAO {
         return isValidUserName;
     }
     
-    public Usuario validarYObtenerUsuario(String email, String password) {
+    public Usuario validarYObtenerUsuario(String emailOUsuario, String password) {
         Usuario usuario = null;
-        String query = "SELECT id_usuario, email, contrasena, estado FROM usuario WHERE email = ? AND contrasena = ?";
+        String query = """
+            SELECT u.*, r.idRol, r.nombre AS nombreRol
+            FROM usuarios u
+            JOIN UsuarioRol ur ON u.idUsuario = ur.idUsuario
+            JOIN Rol r ON ur.idRol = r.idRol
+            WHERE (u.email = ? OR u.usuario = ?) AND u.contrasena = ? AND u.estado = 1
+        """;
 
         try (Connection con = Conexion.conectar(); PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, email);
-            ps.setString(2, password);
+            ps.setString(1, emailOUsuario);
+            ps.setString(2, emailOUsuario);
+            ps.setString(3, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id_usuario"));
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setDni(rs.getString("dni"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setPassword(rs.getString("contrasena"));
-                usuario.setEstado(rs.getInt("estado")); // Columna 'estado' ahora incluida
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setFechaRegistro(rs.getTimestamp("fechaRegistro").toLocalDateTime());
+                usuario.setEstado(rs.getInt("estado"));
+
+                // Crear el rol asociado
+                Rol rol = new Rol(rs.getString("idRol"), rs.getString("nombreRol"));
+                usuario.setRol(rol);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,6 +99,8 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    
 
     
     

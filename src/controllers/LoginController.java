@@ -8,6 +8,7 @@ import dao.UsuarioDAO;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.Usuario;
+
+import javafx.scene.Node;
+
 
 /**
  *
@@ -47,43 +51,41 @@ public class LoginController {
         if (usuarioDAO == null) {
         usuarioDAO = new UsuarioDAO();
         }
-        String email = txtEmail.getText().trim(); 
+        String emailOUsuario  = txtEmail.getText().trim(); 
         String password = txtPassword.getText().trim();
-        System.out.println(email);
         
-        if (email.isEmpty() || password.isEmpty()) {
+        if (emailOUsuario .isEmpty() || password.isEmpty()) {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Por favor complete todos los campos.");
-            System.out.println("Hola1");
             return;
         }
-        System.out.println(email);
-        System.out.println(password);
-        Usuario usuario = usuarioDAO.validarYObtenerUsuario(email, password);
+        Usuario usuario = usuarioDAO.validarYObtenerUsuario(emailOUsuario , password);
         if (usuario == null) {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Usuario o contraseña incorrectos.");
-            System.out.println("hola2");
             return;
         }
         
         if (usuario.getEstado() == 0) {
-            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Su cuenta está inactiva. Por favor regístrese.");
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Actualmente su cuenta se encuaentra desactivado. comunicque con soporte");
             return;
         }
-                 
-        mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Alert", "Bienvenido ");
 
-        // Cargar la vista correspondiente según el tipo de usuario
+        // Si el usuario es válido, guardar en sesión
+        SesionUsuario.getInstancia().setUsuarioActual(usuario);
+
+        // Cargar la siguiente vista (ClienteView)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-    // Cambiar la escena actual
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.setTitle("Cliente");
-        window.show();
 
-      
+        // Obtener el controlador de la vista ClienteView
+        ClienteController clienteController = loader.getController();
+        clienteController.cargarDatosUsuario();
+
+        // Cambiar la escena
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Cliente");
+        stage.centerOnScreen();
+        stage.show();
         
         //abrirVentana("/views/ClienteView.fxml", "Cliente");
         // Verificar credenciales y acceder

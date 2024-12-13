@@ -3,6 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.util.Optional;
 
+import dao.HorarioDAO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +21,13 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.HorarioDisponible;
+import models.Usuario;
 
 /**
  *
@@ -34,26 +39,12 @@ public class ClienteController {
     private TableView<?> tablaReporte;
     @FXML
     private TableColumn<?, ?> horasRepDocente;
-    @FXML
-    private TableColumn<?, ?> colIdioma;
-    @FXML
-    private TableColumn<?, ?> colHoraI;
-    @FXML
-    private TableView<?> tableCursos;
-    @FXML
-    private TableColumn<?, ?> colHoraFin;
-    @FXML
-    private TableColumn<?, ?> colDia;
-    @FXML
-    private TableColumn<?, ?> colDocente;
-    @FXML
-    private TableColumn<?, ?> colVacante;
+    
     @FXML
     private TextField txtCodigoPago;
     @FXML
     private TableColumn<?, ?> colIdiomaMat;
-    @FXML
-    private TableColumn<?, ?> colHoraInicio;
+    
     @FXML
     private TableColumn<?, ?> colHoraF;
     @FXML
@@ -87,43 +78,96 @@ public class ClienteController {
     @FXML
     private Button btnAdquirirCurso;
     @FXML
-    private TableColumn<?, ?> colFechaIni;
-    @FXML
-    private TableColumn<?, ?> colFechFin;
-    @FXML
     private Label lblNombre;
+    @FXML
+    private Label lblApellido;
     @FXML
     private Label lblCodigoEstudiante;
     @FXML
     private Label lblEmail;
+    
     @FXML
-    private Label lblApellido;
+    private TableView<HorarioDisponible> tablaHorarios;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colIdioma;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colHorario;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colDia;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colFechaInicio;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colFechaFin;
+    @FXML
+    private TableColumn<HorarioDisponible, String> colDocente;
+    @FXML
+    private TableColumn<HorarioDisponible, Integer> colVacantes;
+    
+    HorarioDAO horarioDAO = new HorarioDAO();
+    @FXML
+    private TableColumn<?, ?> colHoraInicioMis;
+    public void initialize() {
+        colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
+        colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
+        colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+        colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
+        colDocente.setCellValueFactory(new PropertyValueFactory<>("docente"));
+        colVacantes.setCellValueFactory(new PropertyValueFactory<>("vacantes"));
+
+        ObservableList<HorarioDisponible> lista = horarioDAO.obtenerHorariosDisponibles();
+        System.out.println("Registros obtenidos: " + lista.size());
+        lista.forEach(horario -> System.out.println(horario.getIdioma() + " - " + horario.getDocente()));
+        tablaHorarios.setItems(lista);
+        
+    }
+    
+    public void cargarDatosUsuario() {
+        Usuario usuario = SesionUsuario.getInstancia().getUsuarioActual();
+
+        if (usuario != null) {
+            lblNombre.setText(usuario.getNombre());
+            lblApellido.setText(usuario.getApellido());
+            lblCodigoEstudiante.setText(String.valueOf(usuario.getIdUsuario()));
+            lblEmail.setText(usuario.getEmail());
+        }
+    }
+
+    public void cargarDatosUsuario(Usuario usuario) {
+        lblNombre.setText(usuario.getNombre());
+        lblApellido.setText(usuario.getApellido());
+        lblCodigoEstudiante.setText(String.valueOf(usuario.getIdUsuario()));
+        lblEmail.setText(usuario.getEmail());
+    }
+    
     
 
     @FXML
     private void btnSalirAction(ActionEvent event) throws IOException {
-        Optional<ButtonType> result = mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Confirmacion", "Seguro que desea salir?");
+        // Mostrar confirmación antes de salir
+        Optional<ButtonType> result = mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Confirmación", "¿Seguro que desea salir?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("Saliendo..."); // Actualizar la tabla después de eliminar
-            //logica para salir
-            //limpiarCampos();
+            System.out.println("Saliendo...");
 
-            Parent regresarLogin = FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
-            Scene registrarScene = new Scene(regresarLogin);
-            
-            registrarScene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
+            // Cerrar la sesión del usuario actual
+            SesionUsuario.getInstancia().cerrarSesion();
+
+            // Cargar el archivo FXML de la vista Login
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
+            Parent root = loader.load();
+
+            // Aplicar los estilos a la nueva escena
+            Scene loginScene = new Scene(root);
+            loginScene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
+
             // Obtener el escenario actual y cambiar la escena
-            Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            
-            window.setScene(registrarScene);
-            window.centerOnScreen();
-            window.show();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.centerOnScreen();
+            stage.show();
         }
-
-
-        
-    
     }
+
 
     private Optional<ButtonType> mostrarMensajeAlerta(Alert.AlertType tipo, String titulo, String message) {
         Alert alert = new Alert(tipo);

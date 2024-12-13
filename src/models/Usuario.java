@@ -8,26 +8,33 @@ public class Usuario {
     private int idUsuario;
     private String nombre;
     private String apellido;
-    private String DNI;
+    private String dni;
     private String email;
-    private String password;
+    private String usuario;
+    private String contrasena;
     private LocalDateTime fechaRegistro;
     private int estado;
+    private Rol rol; // Rol asociado al usuario
+
 
     public Usuario(){
         this.fechaRegistro = LocalDateTime.now();
         this.estado=1;
     }
-    public Usuario(int idUsuario, String nombre, String apellido, String DNI, String email, String password, LocalDateTime fechaRegistro, int estado) {
+    
+    public Usuario(int idUsuario, String nombre, String apellido, String dni, String email, String usuario, String contrasena, LocalDateTime fechaRegistro, int estado, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.DNI = DNI;
+        this.dni = dni;
         this.email = email;
-        this.password = password;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
+        this.rol = rol;
     }
+    
 
     public int getIdUsuario() {
         return idUsuario;
@@ -53,12 +60,12 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getEmail() {
@@ -69,12 +76,19 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUsuario() {
+        return usuario;
+    }
+    
+    public void setUsuario(String us) {
+        this.usuario = us;
+    }
+    public String getcontrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public LocalDateTime getFechaRegistro() {
@@ -93,12 +107,32 @@ public class Usuario {
         this.estado = estado;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+    
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     
 
+    
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", email=" + email + ", password=" + password + ", fechaRegistro=" + fechaRegistro + ", estado=" + estado + '}';
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni='" + dni + '\'' +
+                ", email='" + email + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", fechaRegistro=" + fechaRegistro +
+                ", estado=" + estado +
+                ", rol=" + rol +
+                '}';
     }
+    
     
     
 }
