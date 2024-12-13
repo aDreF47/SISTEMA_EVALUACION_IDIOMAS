@@ -87,6 +87,7 @@ public class LoginController {
         stage.centerOnScreen();
         stage.show();
         
+        
         //abrirVentana("/views/ClienteView.fxml", "Cliente");
         // Verificar credenciales y acceder
         /*if (sistema.verificarAcceso(email, password)) {

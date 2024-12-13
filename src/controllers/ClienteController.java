@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import dao.HorarioDAO;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -106,7 +107,18 @@ public class ClienteController {
     HorarioDAO horarioDAO = new HorarioDAO();
     @FXML
     private TableColumn<?, ?> colHoraInicioMis;
+    @FXML
     public void initialize() {
+Platform.runLater(() -> {
+    Node tabHeader = paneCliente.lookup(".tab-header-area");
+    if (tabHeader != null) {
+        tabHeader.setVisible(false);
+    } else {
+        System.out.println("No se encontró el nodo '.tab-header-area'.");
+    }
+});
+
+
         colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
         colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
