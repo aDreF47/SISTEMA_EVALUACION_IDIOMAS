@@ -179,7 +179,7 @@ public class ClienteController {
 
     @FXML
     private void AdquirirAction(ActionEvent event) {
-        paneCliente.lookup(".tab-header-area").setVisible(false); // Oculta el área del encabezado
+        
         paneCliente.getSelectionModel().select(tabMatricula);
     }
 
