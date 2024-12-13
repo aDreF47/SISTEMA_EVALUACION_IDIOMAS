@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClienteController">
+<BorderPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClienteController">
     <!-- Top Section -->
     <top>
         <HBox spacing="15.0" style="-fx-padding: 10; -fx-background-color: #0078D7;">
@@ -157,9 +157,9 @@
                         <Insets />
                      </VBox.margin>
                         </Label>
-                        <TableView fx:id="tablaReporte" prefHeight="249.0" prefWidth="900.0">
+                        <TableView fx:id="tablaReporte" prefHeight="257.0" prefWidth="895.0">
                             <columns>
-                                <TableColumn fx:id="colIdiomaMat" prefWidth="110.0" resizable="false" text="Idioma" />
+                                <TableColumn fx:id="colIdiomaMiscursos" prefWidth="110.0" resizable="false" text="Idioma" />
                                 <TableColumn fx:id="horasRepDocente" minWidth="6.0" prefWidth="142.0" resizable="false" text="Horas">
                                     <columns>
                                         <TableColumn fx:id="colHoraInicio" prefWidth="75.0" resizable="false" text="De" />
@@ -167,11 +167,15 @@
                                     </columns>
                                 </TableColumn>
                                 <TableColumn fx:id="colDiaCurso" prefWidth="131.0" resizable="false" text="Dia" />
+                        <TableColumn fx:id="colFechaIni" prefWidth="131.0" resizable="false" text="Fecha de Inicio" />
+                        <TableColumn fx:id="colFechaFin" prefWidth="131.0" resizable="false" text="Fecha de Fin" />
                         <TableColumn fx:id="colDocen" prefWidth="131.0" resizable="false" text="Docente" />
+                        <TableColumn fx:id="colCalificacion" prefWidth="131.0" resizable="false" text="Calificacion" />
                             </columns>
                         </TableView>
                   <Button mnemonicParsing="false" text="Clases" />
                   <Button mnemonicParsing="false" onAction="#btnRendirExamen" text="Rendir Examen" />
+                  <Button layoutX="25.0" layoutY="371.0" mnemonicParsing="false" onAction="#btnRendirExamen" text="Back" />
                     </children>
                 </VBox>
             </Tab>
