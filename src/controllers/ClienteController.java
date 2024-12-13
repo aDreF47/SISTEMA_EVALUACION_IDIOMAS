@@ -36,8 +36,6 @@ public class ClienteController {
     @FXML
     private Label docentecorreo;
     @FXML
-    private TableView<?> tablaReporte;
-    @FXML
     private TableColumn<?, ?> horasRepDocente;
     @FXML
     private TableColumn<?, ?> colIdioma;
@@ -56,8 +54,6 @@ public class ClienteController {
     @FXML
     private TextField txtCodigoPago;
     @FXML
-    private TableColumn<?, ?> colIdiomaMat;
-    @FXML
     private TableColumn<?, ?> colHoraInicio;
     @FXML
     private TableColumn<?, ?> colHoraF;
@@ -73,6 +69,16 @@ public class ClienteController {
     private Tab tabMisCursos;
     @FXML
     private TabPane paneCliente;
+    @FXML
+    private TableView<?> tabladeMisCursos;
+    @FXML
+    private TableColumn<?, ?> colIdiomaMiscursos;
+    @FXML
+    private TableColumn<?, ?> colFechaIni;
+    @FXML
+    private TableColumn<?, ?> colFechaFin;
+    @FXML
+    private TableColumn<?, ?> colCalificacion;
     
     @FXML
     private void HorarioAction(ActionEvent event) {
@@ -111,7 +117,14 @@ public class ClienteController {
     private void btnAquirirCurso(ActionEvent event) {
         paneCliente.getSelectionModel().select(tabMisCursos);
     }
-
+    
+    @FXML
+    private void btnClases(ActionEvent event){
+        
+    }
+    
+    
+    
     @FXML
     private void btnRendirExamen(ActionEvent event) {
         try {
