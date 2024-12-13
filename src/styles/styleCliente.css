@@ -1,0 +1,122 @@
+.manito {
+    -fx-cursor: hand;
+}
+.hbox-matricula {
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+    -fx-background-color: #ffffff;
+}
+
+.vbox-pago, .vbox-detalles {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+}
+
+.label-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.label-field {
+    -fx-font-size: 14px;
+}
+
+.textfield, .datepicker {
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3px;
+}
+
+.button-aceptar, .button-adquirir {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-padding: 10px 15px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.button-adquirir {
+    -fx-background-color: #28a745;
+}
+
+.button-aceptar:hover, .button-adquirir:hover {
+    -fx-opacity: 0.9;
+}
+
+.vbox-pago, .vbox-detalles {
+    -fx-background-color: #f4f4f9;
+    -fx-border-color: #a9a9a9;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.2, 0, 2);
+}
+
+.tableview {
+    -fx-background-color: white;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-selection-bar: #0078d7;
+    -fx-selection-bar-non-focused: lightgray;
+}
+
+.button-aceptar{
+    -fx-background-color: #1d72b8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button-adquirir {
+    -fx-background-color: #1db851;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button-regresar{
+    -fx-background-color: #d74400;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button-regresar:hover{
+    -fx-background-color: #9b0c0c;
+    -fx-opacity: 0.85;
+}
+
+.button-adquirir:hover {
+    -fx-background-color: #2ee44c;
+    -fx-opacity: 0.85;
+}
+
+.button-aceptar:hover {
+    -fx-background-color: #0d79d8;
+    -fx-opacity: 0.85;
+}
+
+.tableview .column-header {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+}
+
