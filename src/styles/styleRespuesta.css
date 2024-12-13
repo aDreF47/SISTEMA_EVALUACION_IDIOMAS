@@ -1,0 +1,65 @@
+/* Fondo general del AnchorPane */
+.anchor-pane {
+    -fx-background-color: #E7D7C9; /* Fondo beige claro */
+}
+
+/* Estilos para el TabPane */
+.tab-pane {
+    -fx-background-color: #EDE9E3; /* Fondo gris muy claro */
+}
+
+.tab {
+    -fx-background-color: #EDE9E3; /* Fondo de las pestañas */
+    -fx-text-fill: #4A4A4A;        /* Texto gris oscuro */
+    -fx-border-color: #D4CFC9;     /* Borde suave */
+    -fx-border-radius: 5;          /* Bordes redondeados */
+    -fx-padding: 8;                /* Espaciado interno */
+}
+
+/* Estilos para los Pane */
+.pane {
+    -fx-background-color: #E0DDD7; /* Fondo gris cálido */
+    -fx-border-color: #C7C1B8;     /* Borde gris claro */
+    -fx-border-radius: 8;          /* Bordes redondeados */
+    -fx-background-radius: 8;
+    -fx-padding: 15;               /* Espaciado interno */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 2, 2); /* Sombra ligera */
+}
+
+/* Estilo para las etiquetas */
+.label {
+    -fx-font-size: 12px;           /* Tamaño de fuente */
+    -fx-text-fill: #4A4A4A;        /* Texto gris oscuro */
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #C7C1B8; /* Fondo gris suave */
+    -fx-text-fill: #4A4A4A;        /* Texto gris oscuro */
+    -fx-font-size: 13px;           /* Tamaño de fuente mediano */
+    -fx-border-radius: 8;          /* Bordes redondeados */
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 1, 1); /* Sombra suave */
+}
+
+.button:hover {
+    -fx-background-color: #B5B0A8; /* Fondo más oscuro al pasar el ratón */
+}
+
+/* Botón para salir o acciones críticas */
+.button-danger {
+    -fx-background-color: #D9534F; /* Rojo suave para acciones críticas */
+    -fx-text-fill: white;
+}
+
+.button-danger:hover {
+    -fx-background-color: #C9302C; /* Rojo más oscuro al pasar el cursor */
+}
+/* Estilo para los panes de comentarios con fondo verde */
+.paneComentario {
+    -fx-background-color: #E0DDD7; /* Fondo verde brillante */
+    -fx-padding: 10px;            /* Espaciado interno */
+}
+.tab-header-area {
+    visibility: hidden;
+}

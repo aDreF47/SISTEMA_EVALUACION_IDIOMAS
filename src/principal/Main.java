@@ -12,8 +12,8 @@ public class Main extends Application {
         String a = "PagoView";
         String b = "ClienteView";
         String c = "ExamenView";
-        String d = "RetroalimentacionView";
-        Parent root1 = FXMLLoader.load(getClass().getResource("/views/"+b+".fxml"));
+        String d = "RespuestasView";
+        Parent root1 = FXMLLoader.load(getClass().getResource("/views/"+d+".fxml"));
         primaryStage.setTitle("Sistema de Evaluación de Idiomas - Pagos");
         primaryStage.setScene(new Scene(root1));
         primaryStage.show();
