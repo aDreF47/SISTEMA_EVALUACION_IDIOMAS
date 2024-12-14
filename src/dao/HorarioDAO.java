@@ -12,7 +12,7 @@ public class HorarioDAO {
     public ObservableList<HorarioDisponible> obtenerHorariosDisponibles() {
         ObservableList<HorarioDisponible> listaHorarios = FXCollections.observableArrayList();
     
-        String query = "SELECT id.idioma AS Idioma, " +
+        String query = "SELECT m.NOMBRE || ' '|| m.NUMEROMODULO AS Idioma," +
                        "TO_CHAR(h.horaInicio, 'HH24:MI') || ' - ' || TO_CHAR(h.horaFin, 'HH24:MI') AS Horario, " +
                        "h.diaSemana AS Día, " +
                        "TO_CHAR(h.fechaInicio, 'YYYY-MM-DD') AS FechaInicio, " +

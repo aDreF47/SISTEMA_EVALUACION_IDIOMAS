@@ -114,16 +114,15 @@ public class ClienteController {
     private TableColumn<?, ?> colHoraInicioMis;
     @FXML
     public void initialize() {
-Platform.runLater(() -> {
-    Node tabHeader = paneCliente.lookup(".tab-header-area");
-    if (tabHeader != null) {
-        tabHeader.setVisible(false);
-    } else {
-        System.out.println("No se encontró el nodo '.tab-header-area'.");
-    }
-});
-
-
+    Platform.runLater(() -> {
+        Node tabHeader = paneCliente.lookup(".tab-header-area");
+            if (tabHeader != null) {
+                tabHeader.setVisible(false);
+            } else {
+                System.out.println("No se encontró el nodo '.tab-header-area'.");
+            }
+        });
+        slecionarHorario();
         colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
         colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
@@ -138,6 +137,25 @@ Platform.runLater(() -> {
         tablaHorarios.setItems(lista);
         
     }
+
+    private void slecionarHorario(){
+        // Listener para capturar selección de la tabla de horarios
+    tablaHorarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            cargarDetallesCurso(newSelection); // Método para cargar detalles en TabPane
+        }
+    });
+    }
+
+    private void cargarDetallesCurso(HorarioDisponible horario) {
+        lblIdioma.setText("Idioma: " + horario.getIdioma());
+        lblHoraInicio.setText("Hora Inicio: " + horario.getHorario().split("-")[0].trim());
+        lblHoraFin.setText("Hora Fin: " + horario.getHorario().split("-")[1].trim());
+        lblDia.setText("Día: " + horario.getDia());
+        lblDocente.setText("Docente: " + horario.getDocente());
+        lblVacantes.setText("Vacantes Disponibles: " + horario.getVacantes());
+    }
+    
     
     public void cargarDatosUsuario() {
         Usuario usuario = SesionUsuario.getInstancia().getUsuarioActual();
@@ -262,27 +280,35 @@ Platform.runLater(() -> {
     }
 
     @FXML
-    private void TransaccionAction(ActionEvent event) {
-        try {
-            // Cargar el archivo FXML de la nueva ventana
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/PagoView.fxml"));
-            Parent root = fxmlLoader.load();
+private void TransaccionAction(ActionEvent event) {
+    try {
+        // Obtener el usuario actual desde la sesión
+        Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
 
-            // Crear un nuevo escenario (Stage) para la ventana
-            Stage stage = new Stage();
-            stage.setTitle("Pago");
-            stage.setScene(new Scene(root));
+        // Cargar el archivo FXML de la nueva ventana
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/PagoView.fxml"));
+        Parent root = fxmlLoader.load();
 
-            //Configurar como modal para bloquear interacción con la ventana principal
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana principal mientras la nueva está abierta
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow()); // Define quién es la ventana padre
+        // Obtener el controlador de la nueva vista
+        PagoController pagoController = fxmlLoader.getController();
+        pagoController.cargarDatosUsuario(usuarioActual); // Pasar datos del usuario al controlador
 
-            // Mostrar la nueva ventana
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Crear un nuevo escenario (Stage) para la ventana
+        Stage stage = new Stage();
+        stage.setTitle("Pago");
+        stage.setScene(new Scene(root));
+
+        // Configurar como modal para bloquear interacción con la ventana principal
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+        // Mostrar la nueva ventana
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     @FXML
     private void irPanelHorarioAction(ActionEvent event) {
