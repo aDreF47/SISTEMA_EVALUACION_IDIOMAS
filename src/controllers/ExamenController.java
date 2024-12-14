@@ -1,6 +1,8 @@
 
 package controllers;
 
+import dao.EstudianteDAO;
+import dao.DocenteDAO;
 import java.io.IOException;
 import java.util.Optional;
 import javafx.event.ActionEvent;
@@ -155,7 +157,33 @@ public class ExamenController {
     private Label pregunta10;
     @FXML
     private TabPane tabPane;
+    
+    
+    
+    @FXML
+    private Label lblProfesor; // Etiqueta para mostrar el nombre del profesor
+    @FXML
+    private Label lblAlumno;
+    private DocenteDAO docenteDAO = new DocenteDAO(); // Instancia del DAO de usuarios
+    private EstudianteDAO estudianteDAO = new EstudianteDAO(); // Instancia del DAO de estudiantes
+      @FXML
+    public void initialize() {
+       
+        //ALGO PARA LEER QUIZAS
+        
+        int idExamen = 1; // Este valor puede ser dinámico
+        String codigoAlumno = "A12345"; // Código del alumno, también puede ser dinámico
 
+        // Obtener el nombre del profesor asignado al examen
+        String nombreProfesor = docenteDAO.profesorExamen(idExamen) ;
+        lblProfesor.setText(nombreProfesor); // Asignar el nombre al Label
+
+        // Obtener el nombre del alumno por código
+        String nombreAlumno = estudianteDAO.alumnoPorCodigo(codigoAlumno);
+        lblAlumno.setText(nombreAlumno); // Asignar el nombre al Label
+    }
+
+    
     @FXML
     private void btnSiguiente1(ActionEvent event) {
         tabPane.getSelectionModel().selectNext();
