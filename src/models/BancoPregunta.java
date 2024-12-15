@@ -8,7 +8,8 @@ public class BancoPregunta {
     private String idModulo; 
     private String contenido; 
     private List<String> alternativas; 
-    private String respuestaCorrecta; 
+    private String respuestaCorrecta;
+    private String reptralimentacion;
 
     public BancoPregunta() {}
 

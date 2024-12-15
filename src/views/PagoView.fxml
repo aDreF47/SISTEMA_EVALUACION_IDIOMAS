@@ -39,7 +39,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="dpFechaPago" promptText="MM/DD/AAAA" />
+                <DatePicker fx:id="dpFechaPago" onAction="#DpfechaPagoAction" promptText="MM/DD/AAAA" />
             </children>
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

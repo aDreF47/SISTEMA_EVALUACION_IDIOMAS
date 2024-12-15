@@ -1,9 +1,12 @@
 package controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import dao.HorarioDAO;
+import dao.PagoDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,19 +41,11 @@ import models.Usuario;
 public class ClienteController {
 
     @FXML
-    private Label idnombre;
-    @FXML
-    private Label docentecodigo;
-    @FXML
-    private Label docentecorreo;
-    @FXML
     private TableColumn<?, ?> horasRepDocente;
-    
+
     @FXML
     private TextField txtCodigoPago;
-    @FXML
-    private TableColumn<?, ?> colIdiomaMat;
-    
+
     @FXML
     private TableColumn<?, ?> colHoraF;
     @FXML
@@ -91,7 +86,7 @@ public class ClienteController {
     private Label lblCodigoEstudiante;
     @FXML
     private Label lblEmail;
-    
+
     @FXML
     private TableView<HorarioDisponible> tablaHorarios;
     @FXML
@@ -108,21 +103,31 @@ public class ClienteController {
     private TableColumn<HorarioDisponible, String> colDocente;
     @FXML
     private TableColumn<HorarioDisponible, Integer> colVacantes;
-    
+
     HorarioDAO horarioDAO = new HorarioDAO();
     @FXML
     private TableColumn<?, ?> colHoraInicioMis;
     @FXML
+    private TableView<?> tabladeMisCursos;
+    @FXML
+    private TableColumn<?, ?> colIdiomaMiscursos;
+    @FXML
+    private TableColumn<?, ?> colFechaIni;
+    @FXML
+    private TableColumn<?, ?> colFechaFinMisCursos;
+    @FXML
+    private TableColumn<?, ?> colCalificacion;
+
     public void initialize() {
-    Platform.runLater(() -> {
-        Node tabHeader = paneCliente.lookup(".tab-header-area");
+        Platform.runLater(() -> {
+            Node tabHeader = paneCliente.lookup(".tab-header-area");
             if (tabHeader != null) {
                 tabHeader.setVisible(false);
             } else {
                 System.out.println("No se encontró el nodo '.tab-header-area'.");
             }
         });
-        slecionarHorario();
+        selecionarHorario();
         colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
         colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
@@ -135,16 +140,16 @@ public class ClienteController {
         System.out.println("Registros obtenidos: " + lista.size());
         lista.forEach(horario -> System.out.println(horario.getIdioma() + " - " + horario.getDocente()));
         tablaHorarios.setItems(lista);
-        
+
     }
 
-    private void slecionarHorario(){
+    private void selecionarHorario() {
         // Listener para capturar selección de la tabla de horarios
-    tablaHorarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-        if (newSelection != null) {
-            cargarDetallesCurso(newSelection); // Método para cargar detalles en TabPane
-        }
-    });
+        tablaHorarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                cargarDetallesCurso(newSelection); // Método para cargar detalles en TabPane
+            }
+        });
     }
 
     private void cargarDetallesCurso(HorarioDisponible horario) {
@@ -155,8 +160,7 @@ public class ClienteController {
         lblDocente.setText("Docente: " + horario.getDocente());
         lblVacantes.setText("Vacantes Disponibles: " + horario.getVacantes());
     }
-    
-    
+
     public void cargarDatosUsuario() {
         Usuario usuario = SesionUsuario.getInstancia().getUsuarioActual();
 
@@ -167,20 +171,29 @@ public class ClienteController {
             lblEmail.setText(usuario.getEmail());
         }
     }
-
-    public void cargarDatosUsuario(Usuario usuario) {
-        lblNombre.setText(usuario.getNombre());
-        lblApellido.setText(usuario.getApellido());
-        lblCodigoEstudiante.setText(String.valueOf(usuario.getIdUsuario()));
-        lblEmail.setText(usuario.getEmail());
+    
+    @FXML
+    private void irPanelHorarioAction(ActionEvent event) {
+        paneCliente.getSelectionModel().select(tabModulos);
     }
-    
-    
+
+    @FXML
+    private void irPanelMisCursosAction(ActionEvent event) {
+        paneCliente.getSelectionModel().select(tabMisCursos);
+    }
+
+//    public void cargarDatosUsuario(Usuario usuario) {
+//        lblNombre.setText(usuario.getNombre());
+//        lblApellido.setText(usuario.getApellido());
+//        lblCodigoEstudiante.setText(String.valueOf(usuario.getIdUsuario()));
+//        lblEmail.setText(usuario.getEmail());
+//    }
 
     @FXML
     private void btnSalirAction(ActionEvent event) throws IOException {
         // Mostrar confirmación antes de salir
-        Optional<ButtonType> result = mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Confirmación", "¿Seguro que desea salir?");
+        Optional<ButtonType> result = mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Confirmación",
+                "¿Seguro que desea salir?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             System.out.println("Saliendo...");
 
@@ -203,7 +216,6 @@ public class ClienteController {
         }
     }
 
-
     private Optional<ButtonType> mostrarMensajeAlerta(Alert.AlertType tipo, String titulo, String message) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
@@ -212,112 +224,91 @@ public class ClienteController {
         return alert.showAndWait();
     }
 
+    /*
+    ==================================================
+    panel 2 de matricula
+    ===============================================
+    */
+    
     @FXML
-    private void AdquirirAction(ActionEvent event) {
-        
-        paneCliente.getSelectionModel().select(tabMatricula);
-    }
-
-    @FXML
-    private void btnAceptaAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnAquirirCurso(ActionEvent event) {
-        paneCliente.getSelectionModel().select(tabMisCursos);
+    private void btnMatriculaAction(ActionEvent event) {
+        paneCliente.getSelectionModel().selectNext(); 
     }
     
     @FXML
-    private void btnClases(ActionEvent event){
-        
-    }
-    
-    
-    
-    @FXML
-    private void btnRendirExamen(ActionEvent event) {
+    private void TransaccionAction(ActionEvent event) {
         try {
-             Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
-        alert.setHeaderText("¿Estás seguro de que quieres rendir el examen?");
-        //alert.setContentText("Esta acción te llevará al inicio del examen. Asegúrate de estar preparado.");
+            // Obtener el usuario actual desde la sesión
+            Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
 
-        // Mostrar el cuadro de diálogo y esperar la respuesta del usuario
-        Optional<ButtonType> result = alert.showAndWait();
+            // Cargar el archivo FXML de la nueva ventana
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/PagoView.fxml"));
+            Parent root = fxmlLoader.load();
 
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Aquí se maneja la lógica si el usuario confirma
-            System.out.println("Iniciando el examen...");
-            // Puedes agregar aquí el código para iniciar la funcionalidad del examen
-                        // Cargar la vista ExamenView.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/examenView.fxml"));
-            Parent root = loader.load();
+            // Obtener el controlador de la nueva vista
+            PagoController pagoController = fxmlLoader.getController();
+            pagoController.cargarDatosUsuario(usuarioActual); // Pasar datos del usuario al controlador
 
-            // Crear un nuevo Stage para la ventana de examen
+            // Crear un nuevo escenario (Stage) para la ventana
             Stage stage = new Stage();
-            stage.setTitle("Examen");
-            Scene scene = new Scene(root);
+            stage.setTitle("Pago");
+            stage.setScene(new Scene(root));
 
-            // Agregar la hoja de estilos
-            scene.getStylesheets().add(getClass().getResource("/styles/styleExamen.css").toExternalForm());
-
-            // Configurar el Stage
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            
+            // Configurar como modal para bloquear interacción con la ventana principal
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
 
-            // Mostrar la ventana sin cerrar ClienteView.fxml
+            // Mostrar la nueva ventana
             stage.show();
-        } else {
-            // Aquí se maneja si el usuario cancela
-            System.out.println("El usuario canceló el inicio del examen.");
-        }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    
+    /*
+    ==================================================
+    panel 2 de matricula
+    ===============================================
+    */
+    
     @FXML
-private void TransaccionAction(ActionEvent event) {
-    try {
-        // Obtener el usuario actual desde la sesión
-        Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
+    private void btnAceptaMatriculaAction(ActionEvent event) {
+        PagoDAO pagDAO = new PagoDAO();
 
-        // Cargar el archivo FXML de la nueva ventana
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/PagoView.fxml"));
-        Parent root = fxmlLoader.load();
+        String codPago = txtCodigoPago.getText().trim(); // Eliminar espacios
+        LocalDate fechaPago = datePickerPago.getValue();
+        System.out.println(fechaPago);
 
-        // Obtener el controlador de la nueva vista
-        PagoController pagoController = fxmlLoader.getController();
-        pagoController.cargarDatosUsuario(usuarioActual); // Pasar datos del usuario al controlador
+        if (fechaPago == null || codPago.isEmpty()) {
+            mostrarMensajeAlerta(AlertType.WARNING, "Error", "Debe ingresar código de pago y fecha.");
+            return;
+        }
 
-        // Crear un nuevo escenario (Stage) para la ventana
-        Stage stage = new Stage();
-        stage.setTitle("Pago");
-        stage.setScene(new Scene(root));
+        // Convertir LocalDate a String en formato compatible con la base de datos
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaFormateada = fechaPago.format(formatter);
 
-        // Configurar como modal para bloquear interacción con la ventana principal
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        System.out.println("Código de pago enviado: " + codPago);
+        System.out.println("Fecha formateada enviada: " + fechaFormateada);
 
-        // Mostrar la nueva ventana
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
+        // Validar registro del pago
+        boolean existeRegistroPago = pagDAO.verificarRegistroPago(codPago, fechaFormateada);
+        
+        if (!existeRegistroPago) {
+            mostrarMensajeAlerta(AlertType.ERROR, "Error", "Pago no registrado.");
+            return;
+        }
 
+        // Validar estado del pago
+        boolean estadoPago = pagDAO.verificarEstadoPago(codPago, fechaFormateada);
+        if (!estadoPago) {
+            mostrarMensajeAlerta(AlertType.WARNING, "Error", "El pago ya ha sido usado.");
+            return;
+        }
 
-    @FXML
-    private void irPanelHorarioAction(ActionEvent event) {
-        paneCliente.getSelectionModel().select(tabModulos);
-    }
-
-    @FXML
-    private void irPanelMisCursosAction(ActionEvent event) {
-        paneCliente.getSelectionModel().select(tabMisCursos);
+        // Si pasa las validaciones
+        mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Pago verificado correctamente.");
     }
 
     @FXML
@@ -325,5 +316,104 @@ private void TransaccionAction(ActionEvent event) {
         paneCliente.getSelectionModel().select(tabModulos);
 
     }
- 
+    
+    @FXML
+    private void btnAquirirCurso(ActionEvent event) {
+    }
+
+    @FXML
+    private void validarFechaPagoMatriculaAction(ActionEvent event) {
+        LocalDate selectedDate = datePickerPago.getValue();
+        LocalDate today = LocalDate.now();
+
+        // Validación de fecha: no permitir días posteriores al actual
+        if (selectedDate != null && selectedDate.isAfter(today)) {
+            mostrarMensajeAlerta(AlertType.ERROR, "Fecha inválida", "No se puede seleccionar una fecha futura.");
+            datePickerPago.setValue(today); // Restablece a la fecha actual
+        }
+    }
+
+    
+    
+        // @FXML
+    // private void btnAquirirCurso(ActionEvent event) {
+    // PagoDAO pagDAO = new PagoDAO();
+    // String codPago = txtCodigoPago.getText();
+    // LocalDate fechaPago = datePickerPago.getValue();
+
+    // boolean existeRegistroPago = pagDAO.verificarRegistroPago(codPago,
+    // fechaPago);
+    // boolean estadoPago = pagDAO.verificarEstadoPago(codPago, fechaPago);
+
+    // if (!existeRegistroPago) {
+    // mostrarMensajeAlerta(AlertType.ERROR, "Error", "Pago no registrado");
+    // imgCheck.setVisible(false); // Ocultar el check
+    // } else if (!estadoPago) {
+    // mostrarMensajeAlerta(AlertType.WARNING, "Error", "El pago ya ha sido usado");
+    // imgCheck.setVisible(false); // Ocultar el check
+    // } else {
+    // mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Pago verificado
+    // correctamente");
+    // imgCheck.setVisible(true); // Mostrar el check
+    // }
+    // // paneCliente.getSelectionModel().select(tabMisCursos);
+    // }
+
+    
+    /*
+    ==================================================
+    panel 3 de mis cursos
+    ===============================================
+    */
+
+    @FXML
+    private void btnClases(ActionEvent event) {
+        System.out.println("Ingresando a clases");
+    }
+    @FXML
+    private void btnRendirExamen(ActionEvent event) {
+        try {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmación");
+            alert.setHeaderText("¿Estás seguro de que quieres rendir el examen?");
+            // alert.setContentText("Esta acción te llevará al inicio del examen. Asegúrate
+            // de estar preparado.");
+
+            // Mostrar el cuadro de diálogo y esperar la respuesta del usuario
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Aquí se maneja la lógica si el usuario confirma
+                System.out.println("Iniciando el examen...");
+                // Puedes agregar aquí el código para iniciar la funcionalidad del examen
+                // Cargar la vista ExamenView.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/examenView.fxml"));
+                Parent root = loader.load();
+
+                // Crear un nuevo Stage para la ventana de examen
+                Stage stage = new Stage();
+                stage.setTitle("Examen");
+                Scene scene = new Scene(root);
+
+                // Agregar la hoja de estilos
+                scene.getStylesheets().add(getClass().getResource("/styles/styleExamen.css").toExternalForm());
+
+                // Configurar el Stage
+                stage.setScene(scene);
+                stage.centerOnScreen();
+
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+                // Mostrar la ventana sin cerrar ClienteView.fxml
+                stage.show();
+            } else {
+                // Aquí se maneja si el usuario cancela
+                System.out.println("El usuario canceló el inicio del examen.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

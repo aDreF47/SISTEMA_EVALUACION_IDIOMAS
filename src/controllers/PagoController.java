@@ -14,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -59,7 +60,7 @@ private void depositarAction(ActionEvent event) {
         double monto = 20.00; // Monto fijo
         String codPago = generarCodigoPago();
 
-        if (dni == null || dni.isEmpty() || descripcion == null || descripcion.isEmpty() || fecha == null) {
+        if (!estanLLenos( dni, fecha)) {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Por favor, complete todos los campos.");
             return;
         }
@@ -93,8 +94,8 @@ private void depositarAction(ActionEvent event) {
 }
 
 
-    private boolean estanLLenos(String dni, String monto, LocalDate fecha, String descripcion) {
-        return !dni.isEmpty() && !monto.isEmpty() && !fecha.equals("") && !descripcion.isEmpty();
+    private boolean estanLLenos(String dni, LocalDate fecha) {
+        return !dni.isEmpty() && !fecha.equals("");
     }
 
     private String generarCodigoPago() {
@@ -132,5 +133,18 @@ private void depositarAction(ActionEvent event) {
             stage.close();
         }
     }
+
+    @FXML
+    private void DpfechaPagoAction(ActionEvent event) {
+        LocalDate selectedDate = dpFechaPago.getValue();
+        LocalDate today = LocalDate.now();
+
+        // Validación de fecha: no permitir días posteriores al actual
+        if (selectedDate != null && selectedDate.isAfter(today)) {
+            mostrarMensajeAlerta(AlertType.ERROR,"Fecha inválida", "No se puede seleccionar una fecha futura.");
+            dpFechaPago.setValue(today); // Restablece a la fecha actual
+        }
+    }
+
 
 }

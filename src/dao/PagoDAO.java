@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import models.Pago;
@@ -38,7 +39,6 @@ public class PagoDAO {
         }
     }
     
-
     public boolean validarYUsarCodigoPago(String codPago, int idMatricula) {
         String queryValidar = "SELECT estado FROM Pago WHERE codPago = ?";
     
@@ -74,7 +74,50 @@ public class PagoDAO {
             return false;
         }
     }
+
+    // Verificar si existe el registro del pago
+    public boolean verificarRegistroPago(String codPago, String fechaPago) {
+        String query = "SELECT COUNT(*) AS total FROM Pago WHERE CODPAGO = ? AND TRUNC(FECHAPAGO) = TRUNC(TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(query)) {
+    
+            ps.setString(1, codPago);
+            ps.setString(2, fechaPago);
+    
+            System.out.println("Consulta SQL: " + query);
+            System.out.println("Código de pago: " + codPago);
+            System.out.println("Fecha enviada: " + fechaPago);
+    
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                System.out.println("hola si existe el pago en registro");
+                System.out.println(rs.getInt("total"));
+                return rs.getInt("total") > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     
 
-    
+    // Verificar si el pago está disponible (ESTADO = 0)
+    public boolean verificarEstadoPago(String codPago, String fechaPago) {
+        String query = "SELECT ESTADO FROM Pago WHERE CODPAGO = ? AND TRUNC(FECHAPAGO) = TO_TIMESTAMP(?, 'YYYY-MM-DD')";
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, codPago);
+            ps.setString(2, fechaPago);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                System.out.println("hola si existe el pago, SU ESTADO ES: " + rs.getInt("ESTADO") );
+                return rs.getInt("ESTADO") == 0; // Estado = 0 significa no usado
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
