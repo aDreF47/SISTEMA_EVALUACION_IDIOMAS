@@ -2,39 +2,44 @@
 
 /* Botones personalizados */
 
-.btnRE:hover {
-    -fx-background-color: linear-gradient(to bottom, #0f0, #0f0); /* Hover más oscuro */
-}
-
-/* Botón activo */
-.btnRE:pressed {
-    -fx-background-color: linear-gradient(to bottom, #cc7a00, #b36b00); /* Activo más oscuro */
-}
-
-.btnRE{
-    -fx-background-color: linear-gradient(to bottom, #ff9900, #e68a00); /* Gradiente naranja */
+/* Botón normal */
+.btnRE {
+    -fx-background-color: linear-gradient(to bottom, #3399ff, #1e90ff); /* Gradiente azul */
     -fx-text-fill: white;               /* Texto blanco */
     -fx-font-size: 20px;                /* Tamaño del texto */
     -fx-border-radius: 5px;             /* Bordes redondeados */
     -fx-padding: 8 15 8 15;             /* Espaciado interno */
+    -fx-cursor: hand;
+}
+
+/* Botón al pasar el mouse (hover) */
+.btnRE:hover {
+    -fx-background-color: linear-gradient(to bottom, #1e90ff, #1a75ff); /* Azul más oscuro en hover */
+}
+
+/* Botón al ser presionado (activo) */
+.btnRE:pressed {
+    -fx-background-color: linear-gradient(to bottom, #004080, #003366); /* Azul más oscuro cuando se presiona */
 }
 
 .btnClass:hover {
-    -fx-background-color: linear-gradient(to bottom, #0f0, #0f0); /* Hover más oscuro */
+    -fx-background-color: linear-gradient(to bottom, #1e90ff, #1a75ff); /* Hover más oscuro */
 }
 
 /* Botón activo */
 .btnClass:pressed {
-    -fx-background-color: linear-gradient(to bottom, #cc7a00, #b36b00); /* Activo más oscuro */
+    -fx-background-color: linear-gradient(to bottom, #004080, #003366); /* Activo más oscuro */
 }
 
 .btnClass{
-    -fx-background-color: linear-gradient(to bottom, #ff9900, #e68a00); /* Gradiente naranja */
+    -fx-background-color: linear-gradient(to bottom, #3399ff, #1e90ff); /* Gradiente naranja */
     -fx-text-fill: white;               /* Texto blanco */
     -fx-font-size: 20px;                /* Tamaño del texto */
     -fx-border-radius: 5px;             /* Bordes redondeados */
     -fx-padding: 8 15 8 15;             /* Espaciado interno */
-}.manito {
+    -fx-cursor: hand;
+}
+.manito {
     -fx-cursor: hand;
 }
 .hbox-matricula {

@@ -36,27 +36,9 @@ import models.Usuario;
  * @author nando
  */
 public class ClienteController {
-
-    @FXML
-    private Label idnombre;
-    @FXML
-    private Label docentecodigo;
-    @FXML
-    private Label docentecorreo;
-    @FXML
-    private TableColumn<?, ?> horasRepDocente;
     
     @FXML
     private TextField txtCodigoPago;
-    @FXML
-    private TableColumn<?, ?> colIdiomaMat;
-    
-    @FXML
-    private TableColumn<?, ?> colHoraF;
-    @FXML
-    private TableColumn<?, ?> colDiaCurso;
-    @FXML
-    private TableColumn<?, ?> colDocen;
     @FXML
     private Tab tabModulos;
     @FXML
@@ -110,9 +92,29 @@ public class ClienteController {
     private TableColumn<HorarioDisponible, Integer> colVacantes;
     
     HorarioDAO horarioDAO = new HorarioDAO();
+    
+    @FXML
+    private TableView<?> tabladeMisCursos;
+    @FXML
+    private TableColumn<?, ?> colIdiomaMiscursos;
+    @FXML
+    private TableColumn<?, ?> horasRepDocente;
     @FXML
     private TableColumn<?, ?> colHoraInicioMis;
     @FXML
+    private TableColumn<?, ?> colHoraF;
+    @FXML
+    private TableColumn<?, ?> colDiaCurso;
+    @FXML
+    private TableColumn<?, ?> colFechaIni;
+    @FXML
+    private TableColumn<?, ?> colFechaFinMisCursos;
+    @FXML
+    private TableColumn<?, ?> colDocen;
+    @FXML
+    private TableColumn<?, ?> colEvaluaciones;
+    @FXML
+    private TableColumn<?, ?> colNotas;
     public void initialize() {
     Platform.runLater(() -> {
         Node tabHeader = paneCliente.lookup(".tab-header-area");
