@@ -1,11 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdministrativoController">
-    
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="961.0" stylesheets="@../styles/styleAdministrativo.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdministrativoController">
+   <top>
+      <GridPane prefHeight="75.0" prefWidth="319.0" style="-fx-background-color: #1494c1;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="10.0" prefWidth="224.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="927.0" minWidth="10.0" prefWidth="716.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="992.0" minWidth="10.0" prefWidth="102.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="23.0" minHeight="7.0" prefHeight="7.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Administrativo" textAlignment="CENTER" wrappingWidth="217.13671875" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#btnSalir" prefHeight="33.0" prefWidth="54.0" styleClass="btn-salir" text="Salir" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="columAdm1" text="Presentacion1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="944.0">
+                     <children>
+                        <Text layoutX="57.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asignar Idioma" />
+                        <ChoiceBox fx:id="choiceIdioma" layoutX="57.0" layoutY="39.0" prefWidth="150.0" />
+                        <Text layoutX="57.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asignar Modulo" />
+                        <ChoiceBox fx:id="choiceModulo" layoutX="57.0" layoutY="103.0" prefWidth="150.0" />
+                        <Text layoutX="57.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha" />
+                        <Text layoutX="69.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de Fin" />
+                        <Text layoutX="69.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de Inicio" />
+                        <Text layoutX="57.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dias de Clases" />
+                        <TableView fx:id="tbldocente" layoutX="513.0" layoutY="35.0" prefHeight="200.0" prefWidth="425.0">
+                            <columns>
+                                <TableColumn fx:id="colDocente" prefWidth="200.0" text="Docente" />
+                                <TableColumn fx:id="colEspecializacion" prefWidth="200.0" text="Especialización" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="513.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnAsignarDocente" text="Asignar" />
+                        <TextField fx:id="txtDiaClases" layoutX="58.0" layoutY="360.0" />
+                        <Button layoutX="195.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnCrearHorario" text="Crear Horario" />
+                        <Spinner fx:id="spinnerNivel" layoutX="245.0" layoutY="103.0" prefHeight="25.0" prefWidth="69.0" />
+                        <Text layoutX="245.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel" />
+                        <Text layoutX="239.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario" />
+                        <ChoiceBox fx:id="choiceHorarioInicio" layoutX="272.0" layoutY="208.0" prefWidth="150.0" />
+                        <Text layoutX="251.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de Fin" />
+                        <ChoiceBox fx:id="choiceHorarioFin" layoutX="272.0" layoutY="269.0" prefWidth="150.0" />
+                        <Text layoutX="251.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de Inicio" />
+                        <DatePicker fx:id="dpFechaInicio" layoutX="55.0" layoutY="208.0" />
+                        <DatePicker fx:id="dpFechaFin" layoutX="53.0" layoutY="269.0" prefWidth="179.0" />
+                        <Text layoutX="250.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vacantes" />
+                        <TextField fx:id="txtVacantes" layoutX="246.0" layoutY="41.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Presentacion2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

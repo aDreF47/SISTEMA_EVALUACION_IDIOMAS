@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdministrativoView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root); // Scena fundamentl para FXs
 

@@ -133,6 +133,17 @@ public class Usuario {
                 '}';
     }
     
+    // Campo adicional específico
+    private String especializacion;
+
+    // Getters y Setters para especializacion
+    public String getEspecializacion() {
+        return especializacion;
+    }
+
+    public void setEspecializacion(String especializacion) {
+        this.especializacion = especializacion;
+    }
     
     
 }
