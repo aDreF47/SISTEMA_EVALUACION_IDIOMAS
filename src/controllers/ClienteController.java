@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Random;
 
 import dao.HorarioDAO;
 import dao.PagoDAO;
@@ -33,7 +34,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.Estudiante;
 import models.HorarioDisponible;
+import models.Pago;
 import models.Usuario;
 
 public class ClienteController {
@@ -297,7 +300,7 @@ public class ClienteController {
         boolean existeRegistroPago = pagDAO.verificarRegistroPago(codPago, fechaFormateada);
         
         if (!existeRegistroPago) {
-            mostrarMensajeAlerta(AlertType.ERROR, "Error", "Pago no registrado.");
+            System.out.println("Pago no registrado.");
             return;
         }
 
@@ -311,35 +314,96 @@ public class ClienteController {
         // Actualizar estado del pago
         boolean estadoActualizado = pagDAO.actualizarEstadoPago(codPago);
         if (estadoActualizado) {
-            //RegistrarEstudiante(); /// aqui entra y no registrea
+            RegistrarEstudiante(); /// aqui entra y no registrea
+            //RegistrarMatricula();
             
-            /*lo de aca si muestra*/ mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Pago verificado y actualizado correctamente.");
+            /*lo de aca si muestra*/ mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Matricula exitosa ☻♥");
         } else {
             mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo actualizar el estado del pago.");
         }
     }
     
-    private void RegistrarEstudiante() {
-        EstudianteDAO estDAO = new EstudianteDAO();
-        Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
-    
-        if (usuarioActual != null) {
-            int idUsuario = usuarioActual.getIdUsuario(); // ID del usuario actual
-            int idAsignacion = obtenerIdAsignacionPorHorario(); // Obtener el idAsignacion dinámicamente
-    
-            if (idAsignacion != -1) {
-                boolean registrado = estDAO.registrarEstudianteYMatricula(idUsuario, idAsignacion);
-    
-                if (registrado) {
-                    mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Estudiante y matrícula registrados correctamente.");
-                } else {
-                    mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo completar el registro.");
-                }
-            }
-        } else {
-            mostrarMensajeAlerta(AlertType.ERROR, "Error", "No hay un usuario activo en la sesión.");
-        }
+    private String generarCodigoEstudiante() {
+        Random rand = new Random();
+        int randomNum = rand.nextInt(90000000) + 10000000; // Genera un número aleatorio de 6 dígitos
+        return String.valueOf(randomNum);
     }
+
+    private void RegistrarEstudiante() {
+        try {
+            EstudianteDAO estDAO = new EstudianteDAO();
+            int idUsuario = SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario();
+
+            // Verificar si el estudiante ya existe
+            String codigoExistente = estDAO.buscarEstudiante(idUsuario);
+
+            String codEstudiante;
+            if (codigoExistente != null) {
+                // Si ya existe, usar el código existente
+                codEstudiante = codigoExistente;
+                System.out.println("Estudiante ya registrado con código: ");
+            } else {
+                // Si no existe, generar un nuevo código
+                codEstudiante = generarCodigoEstudiante();
+
+                // Crear el objeto Estudiante
+                Estudiante nuevoEstudiante = new Estudiante(
+                        idUsuario,
+                        codEstudiante,
+                        1 // Estado: sin usar
+                );
+
+                System.out.println("Nuevo estudiante, código generado: " + nuevoEstudiante.getCodigo());
+
+                // Insertar el estudiante en la base de datos
+                boolean exito = estDAO.insertarEstudiante(nuevoEstudiante);
+
+                if (!exito) {
+                    mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar al estudiante. Intente de nuevo.");
+                    return;
+                }
+                System.out.println("Estudiante registrado con éxito.");
+            }
+
+            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito. Código: ");
+
+        } catch (Exception e) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
+            e.printStackTrace();
+        }
+        
+    }
+    // private void RegistrarEstudiante() {
+    //     try {
+    //         String codEstudiante = generarCodigoEstudiante();
+            
+    //         // Crear el objeto Pago
+    //         Estudiante nuevoEstudiante = new Estudiante(
+    //             SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario(), // ID del usuario logueado
+    //             codEstudiante,
+    //             1 // Estado: sin usar
+    //         );
+
+    //         System.out.println("fuera: "+nuevoEstudiante.getCodigo());
+
+    //         // Insertar el estudiante en la base de datos
+    //         EstudianteDAO estDAO = new EstudianteDAO();
+    //         //boolean existeEstudiante = estDAO.buscarEstudiante(nuevoEstudiante);
+    //         boolean exito = estDAO.insertarEstudiante(nuevoEstudiante);
+
+    //         if (exito) {
+    //             System.out.println("Estudiante registrado con éxito.");
+    //             //mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito.");
+    //         } else {
+    //             System.out.println("No se pudo registrar al estudiante. Intente de nuevo.");
+    //             //mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar al estudiante. Intente de nuevo.");
+    //         }
+    //     } catch (Exception e) {
+    //         mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
+    //         e.printStackTrace();
+    //     }
+        
+    // }
 
     @FXML
     private void btnRegresarPanelHorarioAction(ActionEvent event) {

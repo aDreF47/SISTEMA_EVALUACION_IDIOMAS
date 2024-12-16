@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
+
+import models.Estudiante;
 import utils.Conexion;
 
 public class EstudianteDAO {
@@ -40,27 +42,69 @@ public class EstudianteDAO {
         return false;
     }
 
-//    // Método para registrar un nuevo estudiante
-//    public boolean registrarEstudiante(int idUsuario, int estado) {
-//        String query = "INSERT INTO Estudiante (idUsuario, codigo, estado) VALUES (?, ?, ?)";
-//        String codigoEstudiante = generarCodigoEstudiante();
-//
-//        try (Connection con = Conexion.conectar();
-//             PreparedStatement ps = con.prepareStatement(query)) {
-//
-//            ps.setInt(1, idUsuario);
-//            ps.setString(2, codigoEstudiante);
-//            ps.setInt(3, estado);
-//
-//            int filasInsertadas = ps.executeUpdate();
-//            System.out.println("Código de estudiante generado: " + codigoEstudiante);
-//            return filasInsertadas > 0;
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    //recien
+    public String buscarEstudiante(int idUsuario) {
+        String query = "SELECT codigo FROM Estudiante WHERE idUsuario = ?";
+        try (Connection con = Conexion.conectar(); 
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Retornar el código del estudiante si ya existe
+                return rs.getString("codigo");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Retornar null si no se encuentra el estudiante
+        return null;
+    }
+    //recien
+    // public boolean buscarEstudiante(Estudiante estudiante) {
+    //     String query = "SELECT * FROM estudiante WHERE idusuario = ?;";
+    //     String codigoEstudiante = generarCodigoEstudiante();
+ 
+    //     try (Connection con = Conexion.conectar();
+    //          PreparedStatement ps = con.prepareStatement(query)) {
+ 
+    //         ps.setInt(1, estudiante.getIdUsuario());
+    //         ps.setString(2, estudiante.getCodigo());
+    //         ps.setInt(3, estudiante.getEstado());
+ 
+    //         int filasInsertadas = ps.executeUpdate();
+    //         System.out.println("Código de estudiante generado: " + codigoEstudiante);
+    //         return filasInsertadas > 0;
+ 
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false;
+    // }
+
+   // Método para registrar un nuevo estudiante
+   public boolean insertarEstudiante(Estudiante estudiante) {
+       String query = "INSERT INTO Estudiante (idUsuario, codigo, estado) VALUES (?, ?, ?)";
+       System.out.println("en insert: "+estudiante.getCodigo());
+       try (Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement(query)) {
+
+           ps.setInt(1, estudiante.getIdUsuario());
+           ps.setString(2, estudiante.getCodigo());
+           ps.setInt(3, estudiante.getEstado());
+
+           int filasInsertadas = ps.executeUpdate();
+           return filasInsertadas > 0;
+
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       return false;
+   }
+
+
     public boolean registrarEstudianteYMatricula(int idUsuario, int idModulo) {
         String queryEstudiante = "INSERT INTO Estudiante (idUsuario, codigo, estado) VALUES (?, ?, ?)";
         String queryMatricula = "INSERT INTO Matricula (idEstudiante, idModulo, estado) VALUES (?, ?, ?)";
