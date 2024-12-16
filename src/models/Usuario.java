@@ -83,7 +83,7 @@ public class Usuario {
     public void setUsuario(String us) {
         this.usuario = us;
     }
-    public String getcontrasena() {
+    public String getContrasena() {
         return contrasena;
     }
 

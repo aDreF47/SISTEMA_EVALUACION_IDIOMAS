@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -100,9 +101,43 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    
+     
+    public boolean validateDocumentoUnico(String documento) {
+        boolean existeDocumento = false;
+        String consulta = "SELECT * FROM Usuarios WHERE  DNI = ?";
 
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(consulta)) {
+            ps.setString(1, documento);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                existeDocumento = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,e.toString());
+        }
+        return existeDocumento;
+    }
     
+    public boolean validarCorreoUnico(String email) {
+        boolean existeEmail = false;
+        String consulta = "SELECT * FROM Usuarios WHERE  email = ?";
+
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(consulta)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(email);
+
+            if (rs.next()) {
+                existeEmail = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,e.toString());
+        }
+        return existeEmail;
+    }    
     
     public boolean validarUsuarioUnico(String email) {
         String query = "SELECT COUNT(*) FROM usuario WHERE email = ?";
@@ -119,4 +154,53 @@ public class UsuarioDAO {
         }
         return false; // Usuario no existe en la base de datos
     }
+    public boolean registrarCliente(Usuario cliente) {
+        String insertUsuario = "INSERT INTO usuarios (nombre, apellido, dni, email, usuario, contrasena, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String selectIdUsuario = "SELECT idUsuario FROM usuarios WHERE dni = ?";
+        String insertUsuarioRol = "INSERT INTO usuarioRol (idRol, idUsuario) VALUES (?, ?)";
+
+        try (Connection con = Conexion.conectar()) {
+            con.setAutoCommit(false);
+
+            // Insertar en la tabla usuarios
+            try (PreparedStatement psUsuario = con.prepareStatement(insertUsuario)) {
+                psUsuario.setString(1, cliente.getNombre());
+                psUsuario.setString(2, cliente.getApellido());
+                psUsuario.setString(3, cliente.getDni());
+                psUsuario.setString(4, cliente.getEmail());
+                psUsuario.setString(5, cliente.getUsuario());
+                psUsuario.setString(6, cliente.getContrasena());
+                psUsuario.setInt(7, cliente.getEstado());
+                psUsuario.executeUpdate();
+            }
+            // Obtener idUsuario basado en el DNI
+            int idUsuario = -1;
+            try (PreparedStatement psSelectId = con.prepareStatement(selectIdUsuario)) {
+                psSelectId.setString(1, cliente.getDni());
+                try (ResultSet rs = psSelectId.executeQuery()) {
+                    if (rs.next()) {
+                        idUsuario = rs.getInt("idUsuario");
+                    } else {
+                        throw new SQLException("No se encontró el idUsuario para el DNI proporcionado.");
+                    }
+                }
+            }
+
+            // Insertar en la tabla usuarioRol
+            try (PreparedStatement psUsuarioRol = con.prepareStatement(insertUsuarioRol)) {
+                psUsuarioRol.setInt(1, 3); // idRol = 3 para "Estudiante"
+                psUsuarioRol.setInt(2, idUsuario);
+                psUsuarioRol.executeUpdate();
+            }
+
+            con.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
+
+

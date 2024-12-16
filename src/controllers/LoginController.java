@@ -87,7 +87,7 @@ public class LoginController {
         stage.centerOnScreen();
         stage.show();
         
-        
+    }   
         //abrirVentana("/views/ClienteView.fxml", "Cliente");
         // Verificar credenciales y acceder
         /*if (sistema.verificarAcceso(email, password)) {
@@ -107,7 +107,7 @@ public class LoginController {
         } else {
             System.out.println("Acceso denegado. Usuario o contraseña incorrectos.");
         }*/
-    }
+    
     /*private void abrirVentana(String fxmlPath, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -128,7 +128,20 @@ public class LoginController {
         }
     }*/
     @FXML
-    private void btnSignin(ActionEvent event) {
-    }  
+    private void btnSignin(ActionEvent event) throws IOException {
        
+        // Cargar la vista de registro
+        Parent registrarView = FXMLLoader.load(getClass().getResource("/views/RegistrarView.fxml"));
+        Scene registrarScene = new Scene(registrarView);
+
+        // Aplicar la hoja de estilos
+        registrarScene.getStylesheets().add(getClass().getResource("/styles/styleRegistrar.css").toExternalForm());
+
+        // Obtener el escenario actual y cambiar la escena
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(registrarScene);
+        window.setTitle("Registrar");
+        window.centerOnScreen();
+        window.show();
+    }       
 }

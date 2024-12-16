@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" minHeight="300" minWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistrarController">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <image>
+                <Image url="@../images/fondo.jpeg" />
+            </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+        </ImageView>
+        <BorderPane prefHeight="720.0" prefWidth="1280.0">
+            <center>
+                <BorderPane prefHeight="368.0" prefWidth="492.0" BorderPane.alignment="CENTER">
+                    <left>
+                        <VBox fx:id="panelDatos" prefHeight="326.0" prefWidth="630.0" spacing="10.0" styleClass="register-pane" BorderPane.alignment="CENTER">
+                            <children>
+                                <HBox styleClass="pnelHBox">
+                                    <children>
+                                        <Label prefHeight="20.0" prefWidth="300.0" styleClass="labelss" text="Nombres*">
+                                            <font>
+                                               <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="31.0" prefWidth="523.0" spacing="10.0">
+                                    <children>
+                                        <TextField fx:id="txtNombreRegistro" prefHeight="26.0" prefWidth="300.0" promptText="Nombre completo" />
+                                    </children>
+                                </HBox>
+                        <HBox prefHeight="20.0" prefWidth="300.0">
+                           <children>
+                                        <Label styleClass="labelss" text="Apellidos*">
+                                            <font>
+                                               <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="28.0" prefWidth="630.0">
+                           <children>
+                              <TextField fx:id="txtApellidoRegistro" prefHeight="26.0" prefWidth="300.0" promptText="Nombre completo" />
+                           </children>
+                        </HBox>
+                                <HBox prefHeight="31.0" prefWidth="523.0" spacing="10.0">
+                                    <children>
+                                        <Label prefHeight="18.0" prefWidth="161.0" text="DNI*">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <TextField fx:id="txtDocumentoRegistro" prefHeight="26.0" prefWidth="300.0" promptText="Número de documento" />
+                                    </children>
+                                </HBox>
+                                <HBox styleClass="pnelHBox">
+                                    <children>
+                                        <Label prefHeight="26.0" prefWidth="300.0" styleClass="labelss" text="Correo*">
+                                            <font>
+                                               <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox styleClass="pnelHBox">
+                                    <children>
+                                        <TextField fx:id="txtCorreoRegistro" prefHeight="26.0" prefWidth="300.0" promptText="Correo eléctronico" />
+                                    </children>
+                                </HBox>
+                                <HBox styleClass="pnelHBox" />
+                                <HBox styleClass="pnelHBox" />
+                            </children>
+                        </VBox>
+                    </left>
+                    <top>
+                        <Separator prefHeight="56.0" prefWidth="1074.0" BorderPane.alignment="CENTER" />
+                    </top>
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <center>
+                        <VBox fx:id="panelCrearcuenta" prefHeight="364.0" prefWidth="408.0" spacing="20.0" styleClass="register-pane" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label text="Usuario">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtUsuarioRegistro" promptText="Nombre de ususario" />
+                                <Label text="Contraseña:">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <PasswordField fx:id="txtContraseñaRegistro" promptText="Contraseña" />
+                                <Label text="Verificar contraseña:">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <PasswordField fx:id="txtContraseñaConfirmadcionRegistro" promptText="Contraseña" />
+                                <CheckBox fx:id="chckTerminosYCondiciones" mnemonicParsing="false" onAction="#chbxTerminosAction" text="He leído y acepto los términos y condiciones de uso" />
+                                <HBox alignment="CENTER" prefHeight="179.0" prefWidth="408.0" spacing="20.0">
+                                    <children>
+                                        <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#btnRegistrarAction" text="Registrar" />
+                                        <Button fx:id="btnSalirRegistro" mnemonicParsing="false" onAction="#btnSalirRegistroAction" text="Regresar" />
+                                    </children>
+                                </HBox>
+                            </children>
+                     <BorderPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </BorderPane.margin>
+                        </VBox>
+               </center>
+                </BorderPane>
+            </center>
+            <top>
+                <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label alignment="CENTER" layoutX="50.0" layoutY="100.0" prefHeight="0.0" prefWidth="626.0" text="Formulario de Registro" textAlignment="CENTER">
+                            <HBox.margin>
+                                <Insets left="300.0" top="20.0" />
+                            </HBox.margin>
+                     <font>
+                        <Font name="Broadway" size="49.0" />
+                     </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </top>
+            <left>
+                <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+                <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+            </right>
+         <bottom>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+        </BorderPane>
+    </children>
+</StackPane>
