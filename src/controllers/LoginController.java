@@ -68,22 +68,52 @@ public class LoginController {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Actualmente su cuenta se encuaentra desactivado. comunicque con soporte");
             return;
         }
+// Obtener el rol del usuario
+        int idRol = usuarioDAO.validarRolUsuario(usuario.getDni());
+        if (idRol == -1) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo determinar el rol del usuario.");
+            return;
+        }
 
-        // Si el usuario es válido, guardar en sesión
+        // Guardar el usuario en sesión
         SesionUsuario.getInstancia().setUsuarioActual(usuario);
 
-        // Cargar la siguiente vista (ClienteView)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
-        Parent root = loader.load();
+        // Cargar la vista correspondiente
+        FXMLLoader loader;
+        Parent root;
+        String style = "";
+        String titulo = "";
 
-        // Obtener el controlador de la vista ClienteView
-        ClienteController clienteController = loader.getController();
-        clienteController.cargarDatosUsuario();
+        switch (idRol) {
+            case 1:
+                loader = new FXMLLoader(getClass().getResource("/views/AdministrativoView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleAdministrativo.css").toExternalForm();
+                titulo = "Administrativo";
+                break;
+            case 2:
+                loader = new FXMLLoader(getClass().getResource("/views/DocenteView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleDocente.css").toExternalForm();
+                titulo = "Docente";
+                break;
+            case 3:
+                loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleCliente.css").toExternalForm();
+                titulo = "Cliente";
+                break;
+            default:
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Rol no reconocido.");
+                return;
+        }
 
-        // Cambiar la escena
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(style);
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Cliente");
+        stage.setScene(scene);
+        stage.setTitle(titulo);
         stage.centerOnScreen();
         stage.show();
         

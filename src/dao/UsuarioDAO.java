@@ -200,6 +200,38 @@ public class UsuarioDAO {
             return false;
         }
     }
+    public int validarRolUsuario(String dni) {
+    String consultaUsuario = "SELECT idUsuario FROM usuarios WHERE dni = ?";
+    String consultaRol = "SELECT idRol FROM usuarioRol WHERE idUsuario = ?";
+
+    try (Connection con = Conexion.conectar();
+         PreparedStatement psUsuario = con.prepareStatement(consultaUsuario);
+         PreparedStatement psRol = con.prepareStatement(consultaRol)) {
+        
+        // Buscar el idUsuario por dni
+        psUsuario.setString(1, dni);
+        ResultSet rsUsuario = psUsuario.executeQuery();
+        if (rsUsuario.next()) {
+            int idUsuario = rsUsuario.getInt("idUsuario");
+            rsUsuario.close();
+            
+            // Buscar el idRol por idUsuario
+            psRol.setInt(1, idUsuario);
+            ResultSet rsRol = psRol.executeQuery();
+            if (rsRol.next()) {
+                int idRol = rsRol.getInt("idRol");
+                rsRol.close();
+                return idRol;
+            }
+            rsRol.close();
+        }
+        rsUsuario.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return -1; // Retorna -1 si ocurre un error o no encuentra el rol
+}
+
 
 }
 
