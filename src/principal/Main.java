@@ -16,7 +16,7 @@ public class Main extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root); // Scena fundamentl para FXs
 
-        scene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles/styleRespuesta.css").toExternalForm());
 
         // Centrar la ventana
         primaryStage.centerOnScreen();
