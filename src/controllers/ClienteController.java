@@ -319,7 +319,27 @@ public class ClienteController {
         }
     }
     
-
+    private void RegistrarEstudiante() {
+        EstudianteDAO estDAO = new EstudianteDAO();
+        Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
+    
+        if (usuarioActual != null) {
+            int idUsuario = usuarioActual.getIdUsuario(); // ID del usuario actual
+            int idAsignacion = obtenerIdAsignacionPorHorario(); // Obtener el idAsignacion dinámicamente
+    
+            if (idAsignacion != -1) {
+                boolean registrado = estDAO.registrarEstudianteYMatricula(idUsuario, idAsignacion);
+    
+                if (registrado) {
+                    mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Estudiante y matrícula registrados correctamente.");
+                } else {
+                    mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo completar el registro.");
+                }
+            }
+        } else {
+            mostrarMensajeAlerta(AlertType.ERROR, "Error", "No hay un usuario activo en la sesión.");
+        }
+    }
 
     @FXML
     private void btnRegresarPanelHorarioAction(ActionEvent event) {

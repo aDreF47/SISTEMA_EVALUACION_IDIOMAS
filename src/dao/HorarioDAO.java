@@ -15,6 +15,7 @@ public class HorarioDAO {
         String query = "SELECT m.NOMBRE || ' '|| m.NUMEROMODULO AS Idioma," +
                        "TO_CHAR(h.horaInicio, 'HH24:MI') || ' - ' || TO_CHAR(h.horaFin, 'HH24:MI') AS Horario, " +
                        "h.diaSemana AS Día, " +
+                       //"h.idHorario AS CODIGO"+ // ESTO
                        "TO_CHAR(h.fechaInicio, 'YYYY-MM-DD') AS FechaInicio, " +
                        "TO_CHAR(h.fechaFin, 'YYYY-MM-DD') AS FechaFin, " +
                        "u.nombre || ' ' || u.apellido AS Docente, " +
