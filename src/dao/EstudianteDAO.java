@@ -1,13 +1,139 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
-/**
- *
- * @author nando
- */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Random;
+import utils.Conexion;
+
 public class EstudianteDAO {
-    
+
+    // Método para generar un código único de 8 dígitos
+    private String generarCodigoEstudiante() {
+        Random random = new Random();
+        String codigo;
+        boolean existe;
+
+        do {
+            codigo = String.format("%08d", random.nextInt(100000000)); // Genera un número de 8 dígitos
+            existe = verificarCodigoExistente(codigo);
+        } while (existe);
+
+        return codigo;
+    }
+
+    // Método para verificar si el código ya existe en la base de datos
+    private boolean verificarCodigoExistente(String codigo) {
+        String query = "SELECT COUNT(*) AS total FROM Estudiante WHERE codigo = ?";
+        try (Connection con = Conexion.conectar();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total") > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+//    // Método para registrar un nuevo estudiante
+//    public boolean registrarEstudiante(int idUsuario, int estado) {
+//        String query = "INSERT INTO Estudiante (idUsuario, codigo, estado) VALUES (?, ?, ?)";
+//        String codigoEstudiante = generarCodigoEstudiante();
+//
+//        try (Connection con = Conexion.conectar();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//
+//            ps.setInt(1, idUsuario);
+//            ps.setString(2, codigoEstudiante);
+//            ps.setInt(3, estado);
+//
+//            int filasInsertadas = ps.executeUpdate();
+//            System.out.println("Código de estudiante generado: " + codigoEstudiante);
+//            return filasInsertadas > 0;
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+    public boolean registrarEstudianteYMatricula(int idUsuario, int idModulo) {
+        String queryEstudiante = "INSERT INTO Estudiante (idUsuario, codigo, estado) VALUES (?, ?, ?)";
+        String queryMatricula = "INSERT INTO Matricula (idEstudiante, idModulo, estado) VALUES (?, ?, ?)";
+
+        Connection con = null;
+        PreparedStatement psEstudiante = null;
+        PreparedStatement psMatricula = null;
+        ResultSet rsGenerado = null;
+
+        try {
+            con = Conexion.conectar();
+            con.setAutoCommit(false); // Deshabilitar autocommit para manejar transacciones
+
+            // 1. Registrar el estudiante
+            String codigoEstudiante = generarCodigoEstudiante();
+            psEstudiante = con.prepareStatement(queryEstudiante, new String[] { "idEstudiante" });
+            psEstudiante.setInt(1, idUsuario);
+            psEstudiante.setString(2, codigoEstudiante);
+            psEstudiante.setInt(3, 1); // Estado 1 = Activo
+
+            int filasEstudiante = psEstudiante.executeUpdate();
+
+            if (filasEstudiante == 0) {
+                throw new Exception("Error al registrar el estudiante.");
+            }
+
+            // Obtener el ID del estudiante recién insertado
+            rsGenerado = psEstudiante.getGeneratedKeys();
+            int idEstudiante = -1;
+            if (rsGenerado.next()) {
+                idEstudiante = rsGenerado.getInt(1);
+            } else {
+                throw new Exception("No se pudo obtener el ID del estudiante.");
+            }
+
+            // 2. Registrar la matrícula
+            psMatricula = con.prepareStatement(queryMatricula);
+            psMatricula.setInt(1, idEstudiante);
+            psMatricula.setInt(2, idModulo); // Relación con el módulo
+            psMatricula.setInt(3, 1); // Estado 1 = Matriculado
+
+            int filasMatricula = psMatricula.executeUpdate();
+            if (filasMatricula == 0) {
+                throw new Exception("Error al registrar la matrícula.");
+            }
+
+            // Confirmar la transacción
+            con.commit();
+            System.out.println("Estudiante y matrícula registrados exitosamente. Código: " + codigoEstudiante);
+            return true;
+
+        } catch (Exception e) {
+            if (con != null) {
+                try {
+                    con.rollback(); // Deshacer cambios si algo falla
+                } catch (Exception rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rsGenerado != null) rsGenerado.close();
+                if (psEstudiante != null) psEstudiante.close();
+                if (psMatricula != null) psMatricula.close();
+                if (con != null) con.close();
+            } catch (Exception closeEx) {
+                closeEx.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+
 }

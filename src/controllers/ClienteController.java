@@ -1,5 +1,6 @@
 package controllers;
 
+import dao.EstudianteDAO;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 import dao.HorarioDAO;
 import dao.PagoDAO;
+import dao.UsuarioDAO;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,10 +36,6 @@ import javafx.stage.Stage;
 import models.HorarioDisponible;
 import models.Usuario;
 
-/**
- *
- * @author nando
- */
 public class ClienteController {
 
     @FXML
@@ -127,7 +125,7 @@ public class ClienteController {
                 System.out.println("No se encontró el nodo '.tab-header-area'.");
             }
         });
-        selecionarHorario();
+        
         colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
         colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
         colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
@@ -143,13 +141,15 @@ public class ClienteController {
 
     }
 
-    private void selecionarHorario() {
+    private boolean selecionarHorario() {
+        boolean respuesta = false;
         // Listener para capturar selección de la tabla de horarios
         tablaHorarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 cargarDetallesCurso(newSelection); // Método para cargar detalles en TabPane
             }
         });
+        return respuesta;
     }
 
     private void cargarDetallesCurso(HorarioDisponible horario) {
@@ -182,12 +182,12 @@ public class ClienteController {
         paneCliente.getSelectionModel().select(tabMisCursos);
     }
 
-//    public void cargarDatosUsuario(Usuario usuario) {
+    public void cargarDatosUsuario(Usuario usuario) {
 //        lblNombre.setText(usuario.getNombre());
 //        lblApellido.setText(usuario.getApellido());
 //        lblCodigoEstudiante.setText(String.valueOf(usuario.getIdUsuario()));
 //        lblEmail.setText(usuario.getEmail());
-//    }
+    }
 
     @FXML
     private void btnSalirAction(ActionEvent event) throws IOException {
@@ -226,12 +226,13 @@ public class ClienteController {
 
     /*
     ==================================================
-    panel 2 de matricula
+    panel 1 de horarios de los modulos
     ===============================================
     */
     
     @FXML
     private void btnMatriculaAction(ActionEvent event) {
+        selecionarHorario();
         paneCliente.getSelectionModel().selectNext(); 
     }
     
@@ -307,9 +308,18 @@ public class ClienteController {
             return;
         }
 
-        // Si pasa las validaciones
-        mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Pago verificado correctamente.");
+        // Actualizar estado del pago
+        boolean estadoActualizado = pagDAO.actualizarEstadoPago(codPago);
+        if (estadoActualizado) {
+            //RegistrarEstudiante(); /// aqui entra y no registrea
+            
+            /*lo de aca si muestra*/ mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Pago verificado y actualizado correctamente.");
+        } else {
+            mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo actualizar el estado del pago.");
+        }
     }
+    
+
 
     @FXML
     private void btnRegresarPanelHorarioAction(ActionEvent event) {

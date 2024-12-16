@@ -25,7 +25,7 @@
     <!-- Top Section -->
     <top>
         <HBox spacing="15.0" style="-fx-padding: 10; -fx-background-color: #0078D7;">
-            <Text style="-fx-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Estudiante" />
+            <Text style="-fx-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Cliente" />
             <Region HBox.hgrow="ALWAYS" />
             <Button onAction="#irPanelHorarioAction" style="-fx-background-color: #005A9E; -fx-text-fill: white;" styleClass="manito" text="Horarios" />
             <Button onAction="#irPanelMisCursosAction" style="-fx-background-color: #005A9E; -fx-text-fill: white;" styleClass="manito" text="Mis cursos" />
