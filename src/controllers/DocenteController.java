@@ -7,6 +7,7 @@ package controllers;
 import dao.BancoPreguntaDAO;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.awt.Insets;
+import java.text.Normalizer;
 import java.util.Optional;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -165,8 +166,6 @@ public class DocenteController {
     @FXML
     private Button btnInsertar;
     @FXML
-    private Button btnActualizar;
-    @FXML
     private Label lblEvalPregunta;
     @FXML
     private Label lblEvalop1;
@@ -178,6 +177,10 @@ public class DocenteController {
     private Label lblEvalop3;
     @FXML
     private Label lblEvalop4;
+    @FXML
+    private TableColumn<BancoPregunta, Integer> colBPId;
+    @FXML
+    private Button btnEliminar;
     
     @FXML
     public void switchForm(ActionEvent event){
@@ -199,8 +202,21 @@ public class DocenteController {
         }
     }
     
+    private FilteredList<BancoPregunta> listaFiltradas; // Lista filtrada
+    
+    
+    public class Utilidades {
+        public static String eliminarAcentos(String texto) {
+            if (texto == null) return "";
+            return Normalizer.normalize(texto, Normalizer.Form.NFD)
+                             .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                             .toLowerCase();
+        }
+    }
+
     public void initialize() {
          // Configurar las columnas
+        colBPId.setCellValueFactory(new PropertyValueFactory<>("idPregunta"));
         colBPModulo.setCellValueFactory(new PropertyValueFactory<>("modulo"));
         colBPPregunta.setCellValueFactory(new PropertyValueFactory<>("contenido"));
         colBPop1.setCellValueFactory(new PropertyValueFactory<>("alternativa1"));
@@ -212,15 +228,39 @@ public class DocenteController {
         // Cargar datos en el TableView
         
         ObservableList<BancoPregunta> listaPreguntas = bancoDAO.obtenerBancoPregunta();
+        listaFiltradas = new FilteredList<>(listaPreguntas, p -> true); // Instancia correcta de FilteredList
+
         System.out.println("Registros obtenidos: " + listaPreguntas.size());
         tableEval.setItems(listaPreguntas);
-        txtModulo.setTextFormatter(new TextFormatter<>(change -> {
+        
+        btnEvalSearch.setOnAction(event -> aplicarFiltro());
+        /*txtModulo.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getControlNewText().matches("\\d*")) { // Solo permite números
                 return change;
             }
             return null;
-        }));
+        }));*/
     }
+    
+@FXML
+    private void aplicarFiltro() {
+        String filtro = Utilidades.eliminarAcentos(testfEvalSearch.getText()).toLowerCase();
+
+        listaFiltradas.setPredicate(pregunta -> {
+            if (filtro == null || filtro.isEmpty()) {
+                return true; // Mostrar todo si no hay filtro
+            }
+
+            // Eliminar acentos y convertir a minúsculas
+            String moduloSinAcentos = Utilidades.eliminarAcentos(pregunta.getModulo()).toLowerCase();
+
+            // Verificar si el módulo contiene la cadena ingresada
+            return moduloSinAcentos.contains(filtro);
+        });
+
+        tableEval.setItems(listaFiltradas); // Actualizar el TableView con la lista filtrada
+    }
+
         
     @FXML
     private void registrarPregunta() {
@@ -358,10 +398,10 @@ private void cargarPreguntasEnTabla() {
 }
 
 
-    @FXML
     private void actualizarTabla() {
         // Lógica para recargar la tabla (similar a tu método inicializador de la tabla)
         System.out.println("Actualizar tabla: implementar lógica de actualización.");
+        
     }
 
     private void limpiarCampos() {
@@ -381,5 +421,43 @@ private void cargarPreguntasEnTabla() {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+    
+    @FXML
+    private void eliminarPregunta() {
+    // Obtener la pregunta seleccionada
+    BancoPregunta preguntaSeleccionada = tableEval.getSelectionModel().getSelectedItem();
+
+    if (preguntaSeleccionada != null) {
+        int idPregunta = preguntaSeleccionada.getIdPregunta();
+
+        // Mostrar confirmación
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Eliminar Pregunta");
+        confirmacion.setHeaderText("¿Estás seguro de eliminar esta pregunta?");
+        confirmacion.setContentText("Se eliminará permanentemente de la base de datos.");
+
+        Optional<ButtonType> result = confirmacion.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Eliminar de la base de datos
+            bancoDAO.eliminarPregunta(idPregunta);
+
+            // Eliminar directamente de la TableView
+            tableEval.getItems().remove(preguntaSeleccionada);
+
+            // Mensaje opcional
+            System.out.println("Pregunta eliminada correctamente.");
+        }
+    } else {
+        // Alerta si no hay selección
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Selección requerida");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Por favor, seleccione una pregunta para eliminar.");
+        alerta.showAndWait();
+    }
+}
+
+
    
 }

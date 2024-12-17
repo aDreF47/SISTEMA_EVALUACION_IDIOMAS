@@ -26,7 +26,8 @@ public class BancoPreguntaDAO {
     public ObservableList<BancoPregunta> obtenerBancoPregunta() {
         ObservableList<BancoPregunta> listaPreguntas = FXCollections.observableArrayList();
     
-        String query = "SELECT i.Idioma || ' ' || m.nombre || ' ' || m.numeroModulo AS Modulo, " +
+        String query = "SELECT bp.idPregunta, " + 
+                       "i.Idioma || ' ' || m.nombre || ' ' || m.numeroModulo AS Modulo, " +
                        "bp.contenido, " +
                        "bp.alternativa1, bp.alternativa2, bp.alternativa3, bp.alternativa4, " +
                        "bp.respuestaCorrecta " +
@@ -43,6 +44,7 @@ public class BancoPreguntaDAO {
             while (rs.next()) {
                 //listaPregunta.add(new BancoPregunta(
                 BancoPregunta pregunta = new BancoPregunta(
+                        rs.getInt("idPregunta"),
                         rs.getString("Modulo"),
                         rs.getString("contenido"),
                         rs.getString("alternativa1"),
@@ -61,7 +63,7 @@ public class BancoPreguntaDAO {
         return listaPreguntas;
     }
     
-public void insertarPregunta(String idModulo, String contenido, String alternativa1,
+    public void insertarPregunta(String idModulo, String contenido, String alternativa1,
                                  String alternativa2, String alternativa3, String alternativa4,
                                  String respuestaCorrecta, String retroalimentacion) {
         String sql = "{CALL insertar_pregunta_banco(?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -85,5 +87,24 @@ public void insertarPregunta(String idModulo, String contenido, String alternati
             e.printStackTrace();
         }
     }
+    public void eliminarPregunta(int idPregunta) {
+    String sql = "DELETE FROM banco_pregunta WHERE idPregunta = ?";
+
+    try (Connection con = Conexion.conectar();
+         PreparedStatement pst = con.prepareStatement(sql)) {
+        
+        pst.setInt(1, idPregunta);
+        int filasAfectadas = pst.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            System.out.println("Pregunta eliminada correctamente.");
+        } else {
+            System.out.println("No se encontró la pregunta con ID: " + idPregunta);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 
 }

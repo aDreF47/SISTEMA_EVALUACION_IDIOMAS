@@ -127,14 +127,15 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TextField fx:id="testfEvalSearch" layoutX="25.0" layoutY="28.0" />
-                                    <Button fx:id="btnEvalSearch" layoutX="146.0" layoutY="28.0" mnemonicParsing="false">
+                                    <TextField fx:id="testfEvalSearch" layoutX="25.0" layoutY="28.0" promptText="Buscar" />
+                                    <Button fx:id="btnEvalSearch" layoutX="146.0" layoutY="28.0" mnemonicParsing="false" onAction="#aplicarFiltro">
                                        <graphic>
                                           <FontAwesomeIconView fx:id="iconEvalSearch" glyphName="SEARCH" />
                                        </graphic>
                                     </Button>
                                     <TableView fx:id="tableEval" layoutX="25.0" layoutY="67.0" prefHeight="194.0" prefWidth="1080.0">
                                       <columns>
+                                          <TableColumn fx:id="colBPId" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="colBPModulo" prefWidth="135.0" text="MODULO" />
                                           <TableColumn fx:id="colBPPregunta" prefWidth="350.0" text="PREGUNTA" />
                                           <TableColumn fx:id="colBPop1" minWidth="0.0" prefWidth="100.0" text="OPCION-1" />
@@ -157,8 +158,7 @@
                               <TextField fx:id="textfEvalTipo" layoutX="763.0" layoutY="404.0" />
                               <Label fx:id="lblEvalop1" layoutX="221.0" layoutY="342.0" text="OPCION-1:" />
                               <TextField fx:id="txtOpcion1" layoutX="221.0" layoutY="366.0" />
-                              <Button fx:id="btnInsertar" layoutX="31.0" layoutY="505.0" mnemonicParsing="false" onAction="#insertarPregunta" text="Insertar" />
-                              <Button fx:id="btnActualizar" layoutX="221.0" layoutY="505.0" mnemonicParsing="false" onAction="#actualizarTabla" text="Actualizar" />
+                              <Button fx:id="btnInsertar" layoutX="26.0" layoutY="507.0" mnemonicParsing="false" onAction="#insertarPregunta" text="Insertar" />
                               <Label fx:id="lblEvalHora1" layoutX="957.0" layoutY="318.0" text="HORA:" />
                               <TextField fx:id="textfEvalHora1" layoutX="957.0" layoutY="342.0" />
                               <Label fx:id="lblEvalMod1" layoutX="27.0" layoutY="342.0" text="MODULO:" />
@@ -173,11 +173,12 @@
                               <TextField fx:id="txtOpcion3" layoutX="414.0" layoutY="367.0" />
                               <Label fx:id="lblEvalop4" layoutX="414.0" layoutY="407.0" text="OPCION-4:" />
                               <TextField fx:id="txtOpcion4" layoutX="414.0" layoutY="431.0" />
+                              <Button fx:id="btnEliminar" layoutX="221.0" layoutY="507.0" mnemonicParsing="false" onAction="#eliminarPregunta" text="Eliminar" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="formExam" prefHeight="583.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="formExam" prefHeight="583.0" prefWidth="1152.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="561.0" prefWidth="1124.0" stylesheets="@../styles/styleDocente.css">
                            <styleClass>

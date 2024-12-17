@@ -5,6 +5,7 @@ import java.util.List;
 public class BancoPregunta {
     
     //
+    private int idPregunta;
     private String modulo; 
     private String contenido; 
     private String alternativa1;
@@ -16,7 +17,8 @@ public class BancoPregunta {
     public BancoPregunta() {
     }
 
-    public BancoPregunta(String modulo, String contenido, String alternativa1, String alternativa2, String alternativa3, String alternativa4, String respuestaCorrecta) {
+    public BancoPregunta(int idPregunta, String modulo, String contenido, String alternativa1, String alternativa2, String alternativa3, String alternativa4, String respuestaCorrecta) {
+        this.idPregunta = idPregunta;
         this.modulo = modulo;
         this.contenido = contenido;
         this.alternativa1 = alternativa1;
@@ -27,17 +29,19 @@ public class BancoPregunta {
     }
 
     
+    /**
+     * @return the idPregunta
+     */
+    public int getIdPregunta() {
+        return idPregunta;
+    }
 
-   /* @Override
-    public String toString() {
-        return "Pregunta{" +
-               "idPregunta=" + idPregunta +
-               ", modulo='" + modulo + '\'' +
-               ", contenido='" + contenido + '\'' +
-               ", alternativas=" + alternativas +
-               ", respuestaCorrecta='" + respuestaCorrecta + '\'' +
-               '}';
-    }*/
+    /**
+     * @param idPregunta the idPregunta to set
+     */
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
+    }
 
     /**
      * @return the modulo
@@ -136,4 +140,6 @@ public class BancoPregunta {
     public void setRespuestaCorrecta(String respuestaCorrecta) {
         this.respuestaCorrecta = respuestaCorrecta;
     }
+
+    
 }
