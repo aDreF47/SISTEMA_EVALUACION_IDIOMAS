@@ -324,12 +324,6 @@ public class UsuarioDAO {
         return listaCursos;
     }
 
-
-
-    
-    
-    
-}
     public boolean registrarCliente(Usuario cliente) {
         String insertUsuario = "INSERT INTO usuarios (nombre, apellido, dni, email, usuario, contrasena, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String selectIdUsuario = "SELECT idUsuario FROM usuarios WHERE dni = ?";
