@@ -15,21 +15,22 @@ public class Matricula {
         this.fechaMatricula = LocalDateTime.now();
     }
 
-    public Matricula(int idMatricula, int idEstudiante, int idAsignacion, int estado) {
+    public Matricula(int idMatricula, int idAsignacion, int idEstudiante, LocalDateTime fechaMatricula, int estado) {
         this.idMatricula = idMatricula;
+        this.idAsignacion = idAsignacion;
+        this.idEstudiante = idEstudiante;
+        this.fechaMatricula = fechaMatricula;
+        this.estado = estado;
+    }
+
+    public Matricula(int idAsignacion, int idEstudiante, LocalDateTime fechaMatricula, int estado) {
+        this.idAsignacion = idAsignacion;
         this.idEstudiante = idEstudiante;
         this.idAsignacion = idAsignacion;
         this.estado = estado;
         this.fechaMatricula = LocalDateTime.now();
     }
-
-    public Matricula(int idEstudiante, int idAsignacion, int estado) {
-        this.idEstudiante = idEstudiante;
-        this.idAsignacion = idAsignacion;
-        this.estado = estado;
-        this.fechaMatricula = LocalDateTime.now();
-    }
-
+    
     public int getIdMatricula() {
         return idMatricula;
     }
@@ -54,6 +55,16 @@ public class Matricula {
         this.idAsignacion = idAsignacion;
     }
 
+
+    public int getIdAsignacion() {
+        return idAsignacion;
+    }
+
+    public void setIdAsignacion(int idAsignacion) {
+        this.idAsignacion = idAsignacion;
+    }
+
+    
     public LocalDateTime getFechaMatricula() {
         return fechaMatricula;
     }

@@ -16,6 +16,11 @@ public class Estudiante {
         this.codigo = codigo;
         this.estado = estado;
     }
+    public Estudiante(int idUsuario, String codigo, int estado) {
+        this.idUsuario = idUsuario;
+        this.codigo = codigo;
+        this.estado = estado;
+    }
 
     public Estudiante(int idUsuario, String codigo, int estado) {
         this.idUsuario = idUsuario;

@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
-
 import models.Estudiante;
+import models.Matricula;
 import utils.Conexion;
 
 public class EstudianteDAO {
@@ -177,6 +177,43 @@ public class EstudianteDAO {
         }
         return false;
     }
+    
+    //Creado reciend
+    public int verificarIdEstudiante(String codigo) {
+        String query = "SELECT idEstudiante FROM Estudiante WHERE codigo = ?";
+        try (Connection con = Conexion.conectar(); 
+             PreparedStatement ps = con.prepareStatement(query)) {
 
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
 
+            if (rs.next()) {
+                // Retornar el código del estudiante si ya existe
+                return rs.getInt("idEstudiante");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Retornar null si no se encuentra el estudiante
+        return -1;
+    }
+    //creado recien
+    public boolean insertarMatricula(Matricula matricula) {
+        String query = "INSERT INTO Matricula (idAsignacion, idEstudiante, fechaMatricula, estado) VALUES (?, ?, ?, ?)";
+        try (Connection con = Conexion.conectar(); PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, matricula.getIdAsignacion());
+            ps.setInt(2, matricula.getIdEstudiante());
+            ps.setTimestamp(3, java.sql.Timestamp.valueOf(matricula.getFechaMatricula())); // Convertir LocalDate a Date
+            ps.setInt(4, matricula.getEstado());
+
+            int filasInsertadas = ps.executeUpdate();
+            return filasInsertadas > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
