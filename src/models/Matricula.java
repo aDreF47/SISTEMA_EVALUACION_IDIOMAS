@@ -6,19 +6,28 @@ import java.time.LocalDateTime;
 public class Matricula {
     
     private int idMatricula;
-    private String idModulo;
     private int idEstudiante;
+    private int idAsignacion;
     private LocalDateTime fechaMatricula;
     private int estado;
 
-    public Matricula() {}
+    public Matricula() {
+        this.fechaMatricula = LocalDateTime.now();
+    }
 
-    public Matricula(int idMatricula, String idModulo, int idEstudiante, LocalDateTime fechaMatricula, int estado) {
+    public Matricula(int idMatricula, int idEstudiante, int idAsignacion, int estado) {
         this.idMatricula = idMatricula;
-        this.idModulo = idModulo;
         this.idEstudiante = idEstudiante;
-        this.fechaMatricula = fechaMatricula;
+        this.idAsignacion = idAsignacion;
         this.estado = estado;
+        this.fechaMatricula = LocalDateTime.now();
+    }
+
+    public Matricula(int idEstudiante, int idAsignacion, int estado) {
+        this.idEstudiante = idEstudiante;
+        this.idAsignacion = idAsignacion;
+        this.estado = estado;
+        this.fechaMatricula = LocalDateTime.now();
     }
 
     public int getIdMatricula() {
@@ -29,20 +38,20 @@ public class Matricula {
         this.idMatricula = idMatricula;
     }
 
-    public String getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(String idModulo) {
-        this.idModulo = idModulo;
-    }
-
     public int getIdEstudiante() {
         return idEstudiante;
     }
 
     public void setIdEstudiante(int idEstudiante) {
         this.idEstudiante = idEstudiante;
+    }
+
+    public int idAsignacion() {
+        return idAsignacion;
+    }
+
+    public void setIdModulo(int idAsignacion) {
+        this.idAsignacion = idAsignacion;
     }
 
     public LocalDateTime getFechaMatricula() {

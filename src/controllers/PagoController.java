@@ -45,53 +45,54 @@ public class PagoController {
     public void cargarDatosUsuario(Usuario usuario) {
         if (usuario != null) {
             txtDNI.setText(usuario.getDni()); // Autocompleta el DNI del usuario logueado
+            txtDNI.setDisable(true);
             txtMontoIngresado.setText("20.00"); // Fija el monto en 20 soles
             txtMontoIngresado.setDisable(true); // Desactiva el campo de monto para evitar edición
         }
     }
 
     @FXML
-private void depositarAction(ActionEvent event) {
-    try {
-        // Obtener datos desde la interfaz gráfica
-        String dni = txtDNI.getText();
-        String descripcion = txtDescripcion.getText();
-        LocalDate fecha = dpFechaPago.getValue();
-        double monto = 20.00; // Monto fijo
-        String codPago = generarCodigoPago();
+    private void depositarAction(ActionEvent event) {
+        try {
+            // Obtener datos desde la interfaz gráfica
+            String dni = txtDNI.getText();
+            String descripcion = txtDescripcion.getText();
+            LocalDate fecha = dpFechaPago.getValue();
+            double monto = 20.00; // Monto fijo
+            String codPago = generarCodigoPago();
 
-        if (!estanLLenos( dni, fecha)) {
-            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Por favor, complete todos los campos.");
-            return;
+            if (!estanLLenos( dni, fecha)) {
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Por favor, complete todos los campos.");
+                return;
+            }
+
+            // Crear el objeto Pago
+            Pago nuevoPago = new Pago(
+                SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario(), // ID del usuario logueado
+                null, // idMatricula es NULL porque aún no está matriculado
+                monto,
+                java.sql.Date.valueOf(fecha),
+                descripcion,
+                codPago,
+                0 // Estado: sin usar
+            );
+
+            // Insertar el pago en la base de datos
+            PagoDAO pagoDAO = new PagoDAO();
+            boolean exito = pagoDAO.insertarPago(nuevoPago);
+
+            if (exito) {
+                lblCodigoPago.setText(codPago); // Mostrar el código generado
+                mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Depósito registrado con éxito.");
+                limpiarCampos();
+            } else {
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar el depósito. Intente de nuevo.");
+            }
+        } catch (Exception e) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
+            e.printStackTrace();
         }
-
-        // Crear el objeto Pago
-        Pago nuevoPago = new Pago(
-            SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario(), // ID del usuario logueado
-            null, // idMatricula es NULL porque aún no está matriculado
-            monto,
-            java.sql.Date.valueOf(fecha),
-            descripcion,
-            codPago,
-            0 // Estado: sin usar
-        );
-
-        // Insertar el pago en la base de datos
-        PagoDAO pagoDAO = new PagoDAO();
-        boolean exito = pagoDAO.insertarPago(nuevoPago);
-
-        if (exito) {
-            lblCodigoPago.setText(codPago); // Mostrar el código generado
-            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Depósito registrado con éxito.");
-            limpiarCampos();
-        } else {
-            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar el depósito. Intente de nuevo.");
-        }
-    } catch (Exception e) {
-        mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
-        e.printStackTrace();
     }
-}
 
 
     private boolean estanLLenos(String dni, LocalDate fecha) {

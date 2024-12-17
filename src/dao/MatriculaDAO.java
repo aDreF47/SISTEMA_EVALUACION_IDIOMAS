@@ -13,14 +13,7 @@ public class MatriculaDAO {
     // Método para obtener cursos matriculados por un estudiante
     public List<String> obtenerCursosMatriculados(int idEstudiante) {
         List<String> cursos = new ArrayList<>();
-        String query = "SELECT H.idHorario, H.horaInicio, H.horaFin, H.diaSemana, " +
-                       "M.nombre AS nombreModulo, U.nombre || ' ' || U.apellido AS nombreDocente " +
-                       "FROM Matricula MA " +
-                       "JOIN AsignacionDocentes AD ON MA.idAsignacion = AD.idAsignacion " +
-                       "JOIN Horario H ON AD.idHorario = H.idHorario " +
-                       "JOIN Modulo M ON H.idModulo = M.idModulo " +
-                       "JOIN Usuario U ON AD.idUsuario = U.idUsuario " +
-                       "WHERE MA.idEstudiante = ?";
+        String query = "SELECT * FROM VistaHorarioEstudiante WHERE idEstudiante = ?";
 
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(query)) {

@@ -36,6 +36,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Estudiante;
 import models.HorarioDisponible;
+import models.Matricula;
 import models.Pago;
 import models.Usuario;
 
@@ -144,15 +145,13 @@ public class ClienteController {
 
     }
 
-    private boolean selecionarHorario() {
-        boolean respuesta = false;
+    private void selecionarHorario() {
         // Listener para capturar selección de la tabla de horarios
         tablaHorarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 cargarDetallesCurso(newSelection); // Método para cargar detalles en TabPane
             }
         });
-        return respuesta;
     }
 
     private void cargarDetallesCurso(HorarioDisponible horario) {
@@ -235,8 +234,8 @@ public class ClienteController {
     
     @FXML
     private void btnMatriculaAction(ActionEvent event) {
+        paneCliente.getSelectionModel().selectNext();
         selecionarHorario();
-        paneCliente.getSelectionModel().selectNext(); 
     }
     
     @FXML
@@ -315,9 +314,8 @@ public class ClienteController {
         boolean estadoActualizado = pagDAO.actualizarEstadoPago(codPago);
         if (estadoActualizado) {
             RegistrarEstudiante(); /// aqui entra y no registrea
-            //RegistrarMatricula();
             
-            /*lo de aca si muestra*/ mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Matricula exitosa ☻♥");
+            mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Matricula exitosa ☻♥");
         } else {
             mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo actualizar el estado del pago.");
         }
@@ -338,10 +336,12 @@ public class ClienteController {
             String codigoExistente = estDAO.buscarEstudiante(idUsuario);
 
             String codEstudiante;
-            if (codigoExistente != null) {
+
+            // Verificar si el codigo de estudiante existe
+            if (codigoExistente != null) { // si codigo estudiante no existe
                 // Si ya existe, usar el código existente
                 codEstudiante = codigoExistente;
-                System.out.println("Estudiante ya registrado con código: ");
+                System.out.println("Estudiante ya registrado con código: "+codEstudiante);
             } else {
                 // Si no existe, generar un nuevo código
                 codEstudiante = generarCodigoEstudiante();
@@ -364,8 +364,44 @@ public class ClienteController {
                 }
                 System.out.println("Estudiante registrado con éxito.");
             }
+            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito.");
+            //RegistrarMatricula(codEstudiante);
+        } catch (Exception e) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
+            e.printStackTrace();
+        }
+        
+    }
 
-            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito. Código: ");
+    private void RegistrarMatricula(String codEstudiante) {
+        try {
+            EstudianteDAO estDAO = new EstudianteDAO();
+            int idUsuario = SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario();
+
+            // Verificar si el estudiante ya existe
+            int idEstudiante = estDAO.verificarIdEstudiante(idUsuario);
+
+                
+
+                // Crear el objeto Estudiante
+                Matricula nuevaMatricula = new Matricula(
+                    idEstudiante,
+                    idAsignacion,
+                    1 // estado matricula activa
+                );
+
+                System.out.println("Nuevo estudiante, código generado: " + nuevaMatricula.getIdEstudiante());
+
+                // Insertar el estudiante en la base de datos
+                boolean exito = estDAO.insertarMatricula(nuevaMatricula);
+
+                if (!exito) {
+                    mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar al estudiante. Intente de nuevo.");
+                    return;
+                }
+                System.out.println("Estudiante registrado con éxito.");
+            
+            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito.");
 
         } catch (Exception e) {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
@@ -373,37 +409,6 @@ public class ClienteController {
         }
         
     }
-    // private void RegistrarEstudiante() {
-    //     try {
-    //         String codEstudiante = generarCodigoEstudiante();
-            
-    //         // Crear el objeto Pago
-    //         Estudiante nuevoEstudiante = new Estudiante(
-    //             SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario(), // ID del usuario logueado
-    //             codEstudiante,
-    //             1 // Estado: sin usar
-    //         );
-
-    //         System.out.println("fuera: "+nuevoEstudiante.getCodigo());
-
-    //         // Insertar el estudiante en la base de datos
-    //         EstudianteDAO estDAO = new EstudianteDAO();
-    //         //boolean existeEstudiante = estDAO.buscarEstudiante(nuevoEstudiante);
-    //         boolean exito = estDAO.insertarEstudiante(nuevoEstudiante);
-
-    //         if (exito) {
-    //             System.out.println("Estudiante registrado con éxito.");
-    //             //mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito.");
-    //         } else {
-    //             System.out.println("No se pudo registrar al estudiante. Intente de nuevo.");
-    //             //mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar al estudiante. Intente de nuevo.");
-    //         }
-    //     } catch (Exception e) {
-    //         mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
-    //         e.printStackTrace();
-    //     }
-        
-    // }
 
     @FXML
     private void btnRegresarPanelHorarioAction(ActionEvent event) {
