@@ -8,6 +8,6 @@ package dao;
  *
  * @author nando
  */
-public class CursoDAO {
+public class IdiomaDAO {
     
 }

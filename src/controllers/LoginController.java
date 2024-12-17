@@ -68,26 +68,56 @@ public class LoginController {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Actualmente su cuenta se encuaentra desactivado. comunicque con soporte");
             return;
         }
+// Obtener el rol del usuario
+        int idRol = usuarioDAO.validarRolUsuario(usuario.getDni());
+        if (idRol == -1) {
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo determinar el rol del usuario.");
+            return;
+        }
 
-        // Si el usuario es válido, guardar en sesión
+        // Guardar el usuario en sesión
         SesionUsuario.getInstancia().setUsuarioActual(usuario);
 
-        // Cargar la siguiente vista (ClienteView)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
-        Parent root = loader.load();
+        // Cargar la vista correspondiente
+        FXMLLoader loader;
+        Parent root;
+        String style = "";
+        String titulo = "";
 
-        // Obtener el controlador de la vista ClienteView
-        ClienteController clienteController = loader.getController();
-        clienteController.cargarDatosUsuario();
+        switch (idRol) {
+            case 1:
+                loader = new FXMLLoader(getClass().getResource("/views/AdministrativoView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleAdministrativo.css").toExternalForm();
+                titulo = "Administrativo";
+                break;
+            case 2:
+                loader = new FXMLLoader(getClass().getResource("/views/DocenteView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleDocente.css").toExternalForm();
+                titulo = "Docente";
+                break;
+            case 3:
+                loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
+                root = loader.load();
+                style = getClass().getResource("/styles/styleCliente.css").toExternalForm();
+                titulo = "Cliente";
+                break;
+            default:
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Rol no reconocido.");
+                return;
+        }
 
-        // Cambiar la escena
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(style);
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Cliente");
+        stage.setScene(scene);
+        stage.setTitle(titulo);
         stage.centerOnScreen();
         stage.show();
         
-        
+    }   
         //abrirVentana("/views/ClienteView.fxml", "Cliente");
         // Verificar credenciales y acceder
         /*if (sistema.verificarAcceso(email, password)) {
@@ -107,7 +137,7 @@ public class LoginController {
         } else {
             System.out.println("Acceso denegado. Usuario o contraseña incorrectos.");
         }*/
-    }
+    
     /*private void abrirVentana(String fxmlPath, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -128,7 +158,20 @@ public class LoginController {
         }
     }*/
     @FXML
-    private void btnSignin(ActionEvent event) {
-    }  
+    private void btnSignin(ActionEvent event) throws IOException {
        
+        // Cargar la vista de registro
+        Parent registrarView = FXMLLoader.load(getClass().getResource("/views/RegistrarView.fxml"));
+        Scene registrarScene = new Scene(registrarView);
+
+        // Aplicar la hoja de estilos
+        registrarScene.getStylesheets().add(getClass().getResource("/styles/styleRegistrar.css").toExternalForm());
+
+        // Obtener el escenario actual y cambiar la escena
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(registrarScene);
+        window.setTitle("Registrar");
+        window.centerOnScreen();
+        window.show();
+    }       
 }

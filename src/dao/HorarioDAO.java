@@ -7,6 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.HorarioDisponible;
 import utils.Conexion;
+import java.sql.SQLException;  
+import models.InformeCurso;   
+import java.sql.CallableStatement;
 
 public class HorarioDAO {
     public ObservableList<HorarioDisponible> obtenerHorariosDisponibles() {
@@ -47,6 +50,35 @@ public class HorarioDAO {
         }
     
         return listaHorarios;
+    }
+    
+    public InformeCurso generarInformeCurso(int idModulo) {
+        InformeCurso informe = null;
+        try (Connection con = Conexion.conectar();
+             CallableStatement stmt = con.prepareCall("{CALL generar_informe_curso(?)}")) {
+            stmt.setInt(1, idModulo);
+            stmt.execute();
+
+            // Obtener los resultados (suponiendo que los recuperas de la base de datos)
+            String query = "SELECT idModulo, fechaGeneracionInforme, puntajePromedio, totalEstudiantes, porcentajeAprobados "
+                         + "FROM Informe_Curso WHERE idModulo = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, idModulo);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                informe = new InformeCurso(
+                    rs.getInt("idModulo"),
+                    rs.getString("fechaGeneracionInforme"),
+                    rs.getDouble("puntajePromedio"),
+                    rs.getInt("totalEstudiantes"),
+                    rs.getDouble("porcentajeAprobados")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return informe;
     }
     
 }
