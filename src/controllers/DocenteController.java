@@ -26,6 +26,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -91,10 +92,6 @@ public class DocenteController {
     @FXML
     private Label lblEvalRE;
     @FXML
-    private Label lblEvalIdioma;
-    @FXML
-    private TextField textfEvalIdioma;
-    @FXML
     private Label lblEvalFecha;
     @FXML
     private DatePicker EvalCalendary;
@@ -105,10 +102,6 @@ public class DocenteController {
     @FXML
     private Button btnRegEval;
     @FXML
-    private Button btnModEval;
-    @FXML
-    private Button btnElimEval;
-    @FXML
     private TableColumn<?, ?> colEstC1;
     @FXML
     private TableColumn<?, ?> colEstC2;
@@ -116,10 +109,6 @@ public class DocenteController {
     private AnchorPane formEstudiantes;
     @FXML
     private AnchorPane formEvaluaciones;
-    @FXML
-    private Label lblEvalMod;
-    @FXML
-    private TextField textfEvalMod;
     @FXML
     private Label lblEvalHora1;
     @FXML
@@ -140,6 +129,7 @@ public class DocenteController {
     private TableColumn<BancoPregunta, String> colBPRespuesta;
     
     BancoPreguntaDAO bancoDAO = new BancoPreguntaDAO();
+    
     @FXML
     private Button btnExam;
     @FXML
@@ -152,6 +142,42 @@ public class DocenteController {
     private Tab tabP3_4;
     @FXML
     private AnchorPane formExam;
+    @FXML
+    private TextField txtPregunta;
+    @FXML
+    private TextField txtOpcion1;
+    @FXML
+    private Label lblEvalMod1;
+    @FXML
+    private TextField txtModulo;
+    @FXML
+    private Label lblEvalIdioma1;
+    @FXML
+    private TextField textfEvalIdioma1;
+    @FXML
+    private TextField txtRespuesta;
+    @FXML
+    private TextField txtOpcion2;
+    @FXML
+    private TextField txtOpcion3;
+    @FXML
+    private TextField txtOpcion4;
+    @FXML
+    private Button btnInsertar;
+    @FXML
+    private Button btnActualizar;
+    @FXML
+    private Label lblEvalPregunta;
+    @FXML
+    private Label lblEvalop1;
+    @FXML
+    private Label lblEvalRespuesta;
+    @FXML
+    private Label lblEvalop2;
+    @FXML
+    private Label lblEvalop3;
+    @FXML
+    private Label lblEvalop4;
     
     @FXML
     public void switchForm(ActionEvent event){
@@ -188,6 +214,12 @@ public class DocenteController {
         ObservableList<BancoPregunta> listaPreguntas = bancoDAO.obtenerBancoPregunta();
         System.out.println("Registros obtenidos: " + listaPreguntas.size());
         tableEval.setItems(listaPreguntas);
+        txtModulo.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getControlNewText().matches("\\d*")) { // Solo permite números
+                return change;
+            }
+            return null;
+        }));
     }
         
     @FXML
@@ -290,74 +322,64 @@ private Tab obtenerOcrearTab() {
     tabPaneExam.getTabs().add(nuevoTab);
     return nuevoTab;
 }
-/*private Tab obtenerTabActual() {
-    // Devuelve el Tab seleccionado actualmente en el TabPane
-    return tabPaneExam.getSelectionModel().getSelectedItem();
-}*/
-  
-   /*private void agregarPreguntaATab(BancoPregunta pregunta) {
-       // Cada Tab tendrá máximo 2 preguntas
-       if (contadorPreguntas % 2 == 0) {
-           tabP1_2 = new Tab("Preguntas " + (contadorPreguntas + 1) + "-" + (contadorPreguntas + 2));
-           tabPaneExam.getTabs().add(tabP1_2);
-       }
 
-       // Crear contenido de la pregunta
-       VBox preguntaBox = new VBox(10);
-       //preguntaBox.setPadding(new Insets(10));
-       preguntaBox.setPadding(new Insets(10, 10, 10, 10)); // Top, Right, Bottom, Left
 
-       preguntaBox.setStyle("-fx-background-color: #f2f2f2; -fx-border-color: #cccccc;");
+@FXML
+private void insertarPregunta() {
+    try {
+        int idModuloInt = Integer.parseInt(txtModulo.getText());
+        String contenido = txtPregunta.getText();
+        String alternativa1 = txtOpcion1.getText();
+        String alternativa2 = txtOpcion2.getText();
+        String alternativa3 = txtOpcion3.getText();
+        String alternativa4 = txtOpcion4.getText();
+        String respuestaCorrecta = txtRespuesta.getText();
+        String retroalimentacion = "Retroalimentación no asignada";
 
-       Label lblPregunta = new Label("Pregunta: " + pregunta.getContenido());
-       Label lblOpcion1 = new Label("A) " + pregunta.getAlternativa1());
-       Label lblOpcion2 = new Label("B) " + pregunta.getAlternativa2());
-       Label lblOpcion3 = new Label("C) " + pregunta.getAlternativa3());
-       Label lblOpcion4 = new Label("D) " + pregunta.getAlternativa4());
-       Label lblRespuesta = new Label("Respuesta Correcta: " + pregunta.getRespuestaCorrecta());
-       lblRespuesta.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+        // Llamar al método DAO para insertar
+        bancoDAO.insertarPregunta(String.valueOf(idModuloInt), contenido, alternativa1,
+                                         alternativa2, alternativa3, alternativa4, respuestaCorrecta, retroalimentacion);
 
-       // Agregar los elementos al contenedor
-       preguntaBox.getChildren().addAll(lblPregunta, lblOpcion1, lblOpcion2, lblOpcion3, lblOpcion4, lblRespuesta);
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Pregunta insertada correctamente.");
 
-       // Agregar contenido al tab actual
-       if (tabP1_2.getContent() == null) {
-           tabP1_2.setContent(new VBox(preguntaBox));
-       } else {
-           VBox existingContent = (VBox) tabP1_2.getContent();
-           existingContent.getChildren().add(preguntaBox);
-       }
+        // Actualizar la TableView
+        cargarPreguntasEnTabla();
 
-       contadorPreguntas++;
-   }
-   
-    /*private ObservableList<BancoPregunta> listaPreguntas;  // Lista principal de preguntas
-    private FilteredList<BancoPregunta> listaFiltrada;  // Lista filtrada
-        
-    
-    
-    
-    public void metodobuttonSearch() {
-        // Cargar los datos de la base de datos
-        listaPreguntas = bancoDAO.obtenerBancoPregunta();
+        // Limpiar los campos después de la inserción
+        limpiarCampos();
+    } catch (NumberFormatException e) {
+        mostrarAlerta(Alert.AlertType.ERROR, "Error de formato", "El campo 'MÓDULO' debe ser un número entero.");
+    }
+}
 
-        // Inicializar la lista filtrada
-        listaFiltrada = new FilteredList<>(listaPreguntas, p -> true);
+private void cargarPreguntasEnTabla() {
+    ObservableList<BancoPregunta> listaPreguntas = bancoDAO.obtenerBancoPregunta();
+    tableEval.setItems(listaPreguntas);
+}
 
-        // Configurar TableView con la lista filtrada
-        tableEval.setItems(listaFiltrada);
 
-        // Agregar filtro en tiempo real
-        testfEvalSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            listaFiltrada.setPredicate(pregunta -> {
-                if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                }
+    @FXML
+    private void actualizarTabla() {
+        // Lógica para recargar la tabla (similar a tu método inicializador de la tabla)
+        System.out.println("Actualizar tabla: implementar lógica de actualización.");
+    }
 
-                String lowerCaseFilter = newValue.toLowerCase();
-                return pregunta.getContenido().toLowerCase().contains(lowerCaseFilter);
-            });
-        });
-    }*/
+    private void limpiarCampos() {
+        txtModulo.clear();
+        txtPregunta.clear();
+        txtOpcion1.clear();
+        txtOpcion2.clear();
+        txtOpcion3.clear();
+        txtOpcion4.clear();
+        txtRespuesta.clear();
+    }
+
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
    
 }

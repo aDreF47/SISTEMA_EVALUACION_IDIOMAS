@@ -8,10 +8,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import models.BancoPregunta;
 import utils.Conexion;
 
@@ -56,5 +59,31 @@ public class BancoPreguntaDAO {
         }
     
         return listaPreguntas;
-    }    
+    }
+    
+public void insertarPregunta(String idModulo, String contenido, String alternativa1,
+                                 String alternativa2, String alternativa3, String alternativa4,
+                                 String respuestaCorrecta, String retroalimentacion) {
+        String sql = "{CALL insertar_pregunta_banco(?, ?, ?, ?, ?, ?, ?, ?)}";
+
+        try (Connection con = Conexion.conectar();
+             CallableStatement cs = con.prepareCall(sql)) {
+
+            cs.setInt(1, Integer.parseInt(idModulo));
+            cs.setString(2, contenido);
+            cs.setString(3, alternativa1);
+            cs.setString(4, alternativa2);
+            cs.setString(5, alternativa3);
+            cs.setString(6, alternativa4);
+            cs.setString(7, respuestaCorrecta);
+            cs.setString(8, retroalimentacion);
+
+            cs.execute();
+            System.out.println("Pregunta insertada correctamente en la base de datos.");
+        } catch (SQLException e) {
+            System.err.println("Error al insertar la pregunta: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }

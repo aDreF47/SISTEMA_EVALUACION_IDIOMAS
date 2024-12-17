@@ -68,7 +68,7 @@
                         <FontAwesomeIconView fx:id="iconBook" glyphName="BOOK" styleClass="icon-student" />
                      </graphic>
                   </Button>
-                  <Button fx:id="btnExam" layoutX="67.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchForm" styleClass="button-student" text="EXAMEN">
+                  <Button fx:id="btnExam" layoutX="57.0" layoutY="434.0" mnemonicParsing="false" onAction="#switchForm" styleClass="button-student" text="FORMATO">
                      <graphic>
                         <FontAwesomeIconView fx:id="iconExam" glyphName="CLIPBOARD" styleClass="icon-student" />
                      </graphic>
@@ -145,22 +145,34 @@
                                       </columns>
                                     </TableView>
                                     <Label fx:id="lblEvalBP" layoutX="502.0" layoutY="20.0" text="BANCO DE PREGUNTAS" />
+                                    <Button fx:id="btnRegEval" layoutX="1011.0" layoutY="20.0" mnemonicParsing="false" onAction="#registrarPregunta" text="Registrar" />
                                  </children>
                               </AnchorPane>
-                              <Label fx:id="lblEvalRE" layoutX="27.0" layoutY="308.0" text="REGISTRO DE EVALUACIÓN" />
-                              <Label fx:id="lblEvalIdioma" layoutX="27.0" layoutY="356.0" text="IDIOMA:" />
-                              <TextField fx:id="textfEvalIdioma" layoutX="27.0" layoutY="380.0" />
-                              <Label fx:id="lblEvalFecha" layoutX="27.0" layoutY="417.0" text="FECHA: " />
-                              <DatePicker fx:id="EvalCalendary" layoutX="27.0" layoutY="444.0" prefHeight="25.0" prefWidth="149.0" />
-                              <Label fx:id="lblEvalTipo" layoutX="27.0" layoutY="482.0" text="TIPO DE EVALUACION:" />
-                              <TextField fx:id="textfEvalTipo" layoutX="27.0" layoutY="506.0" />
-                              <Label fx:id="lblEvalMod" layoutX="221.0" layoutY="356.0" text="MODULO:" />
-                              <TextField fx:id="textfEvalMod" layoutX="221.0" layoutY="380.0" />
-                              <Button fx:id="btnRegEval" layoutX="991.0" layoutY="368.0" mnemonicParsing="false" onAction="#registrarPregunta" text="Registrar" />
-                              <Button fx:id="btnModEval" layoutX="991.0" layoutY="420.0" mnemonicParsing="false" text="Modificar" />
-                              <Button fx:id="btnElimEval" layoutX="991.0" layoutY="475.0" mnemonicParsing="false" text="Eliminar" />
-                              <Label fx:id="lblEvalHora1" layoutX="221.0" layoutY="420.0" text="HORA:" />
-                              <TextField fx:id="textfEvalHora1" layoutX="221.0" layoutY="444.0" />
+                              <Label fx:id="lblEvalRE" layoutX="27.0" layoutY="308.0" text="REGISTRO DE PREGUNTAS" />
+                              <Label fx:id="lblEvalPregunta" layoutX="27.0" layoutY="407.0" text="PREGUNTA:" />
+                              <TextField fx:id="txtPregunta" layoutX="27.0" layoutY="431.0" />
+                              <Label fx:id="lblEvalFecha" layoutX="763.0" layoutY="315.0" text="FECHA: " />
+                              <DatePicker fx:id="EvalCalendary" layoutX="763.0" layoutY="342.0" prefHeight="25.0" prefWidth="149.0" />
+                              <Label fx:id="lblEvalTipo" layoutX="763.0" layoutY="380.0" text="TIPO DE EVALUACION:" />
+                              <TextField fx:id="textfEvalTipo" layoutX="763.0" layoutY="404.0" />
+                              <Label fx:id="lblEvalop1" layoutX="221.0" layoutY="342.0" text="OPCION-1:" />
+                              <TextField fx:id="txtOpcion1" layoutX="221.0" layoutY="366.0" />
+                              <Button fx:id="btnInsertar" layoutX="31.0" layoutY="505.0" mnemonicParsing="false" onAction="#insertarPregunta" text="Insertar" />
+                              <Button fx:id="btnActualizar" layoutX="221.0" layoutY="505.0" mnemonicParsing="false" onAction="#actualizarTabla" text="Actualizar" />
+                              <Label fx:id="lblEvalHora1" layoutX="957.0" layoutY="318.0" text="HORA:" />
+                              <TextField fx:id="textfEvalHora1" layoutX="957.0" layoutY="342.0" />
+                              <Label fx:id="lblEvalMod1" layoutX="27.0" layoutY="342.0" text="MODULO:" />
+                              <TextField fx:id="txtModulo" layoutX="27.0" layoutY="366.0" />
+                              <Label fx:id="lblEvalIdioma1" layoutX="763.0" layoutY="447.0" text="PREGUNTA" />
+                              <TextField fx:id="textfEvalIdioma1" layoutX="763.0" layoutY="471.0" />
+                              <Label fx:id="lblEvalRespuesta" layoutX="414.0" layoutY="470.0" text="RESPUESTA:" />
+                              <TextField fx:id="txtRespuesta" layoutX="414.0" layoutY="494.0" />
+                              <Label fx:id="lblEvalop2" layoutX="221.0" layoutY="407.0" text="OPCION-2:" />
+                              <TextField fx:id="txtOpcion2" layoutX="221.0" layoutY="431.0" />
+                              <Label fx:id="lblEvalop3" layoutX="414.0" layoutY="343.0" text="OPCION-3:" />
+                              <TextField fx:id="txtOpcion3" layoutX="414.0" layoutY="367.0" />
+                              <Label fx:id="lblEvalop4" layoutX="414.0" layoutY="407.0" text="OPCION-4:" />
+                              <TextField fx:id="txtOpcion4" layoutX="414.0" layoutY="431.0" />
                            </children>
                         </AnchorPane>
                      </children>
