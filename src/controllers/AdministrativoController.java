@@ -1,24 +1,37 @@
 package controllers;
 
+import dao.HorarioDAO;
 import dao.UsuarioDAO;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import models.CursoActivo;
 import models.HorarioDisponible;
+import models.InformeCurso;
 import models.Usuario;
 
 public class AdministrativoController implements Initializable {
@@ -45,24 +58,54 @@ public class AdministrativoController implements Initializable {
     private DatePicker dpFechaInicio;
     @FXML
     private DatePicker dpFechaFin;
+    @FXML
+    private Tab columAdm2;
+    @FXML
+    private Tab columAdm3;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private TableView<CursoActivo> tableviewCursosActivos;
+    @FXML
+    private TableColumn<CursoActivo, String> colIdioma;
+    @FXML
+    private TableColumn<CursoActivo, String> colHorario;
+    @FXML
+    private TableColumn<CursoActivo, String> colDia;
+    @FXML
+    private TableColumn<CursoActivo, String> colFechaInicio;
+    @FXML
+    private TableColumn<CursoActivo, String> colFechaFin;
+    @FXML
+    private TableColumn<CursoActivo, String> colDocente2;
+    @FXML
+    private TableColumn<CursoActivo, Integer> colVacantes;
+    @FXML
+    private TableColumn<CursoActivo, Integer> colIdHorario;
+    @FXML
+    private TextField txtmodulo;
+    @FXML
+    private TextField txtFechaGeneracion;
+    @FXML
+    private TextField txtPuntajePromedio;
+    @FXML
+    private TextField txtTotalEstudiantesInscritos;
+    @FXML
+    private TextField txtPorcentajeAprobados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Configurar las columnas
+        // Configuración de la pestaña Presentacion1
         colDocente.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colEspecializacion.setCellValueFactory(new PropertyValueFactory<>("especializacion"));
 
-        // Obtener la lista de docentes y cargarla en la tabla
         ObservableList<Usuario> listaDocentes = UsuarioDAO.obtenerDocentes();
         tbldocente.setItems(listaDocentes);
 
-        // Mostrar en consola para verificar
         listaDocentes.forEach(docente -> System.out.println(
-                "Docente: " + docente.getNombre() + " " + docente.getApellido() +
-                ", Especialización: " + docente.getEspecializacion()
+            "Docente: " + docente.getNombre() + " " + docente.getApellido() +
+            ", Especialización: " + docente.getEspecializacion()
         ));
-        
-        
 
         // Llenar ChoiceBox de Idiomas
         choiceIdioma.getItems().addAll("Inglés", "Portugués");
@@ -80,20 +123,53 @@ public class AdministrativoController implements Initializable {
             choiceHorarioInicio.getItems().add(time);
             choiceHorarioFin.getItems().add(time);
         });
-        
-        
-        
-    }    
 
-    @FXML
-    private void btnSalir(ActionEvent event) {
-        Stage stage = (Stage) btnSalir.getScene().getWindow();
-        stage.close(); // Cierra la ventana actual
+        // Configuración de la pestaña Presentacion2
+        colIdHorario.setCellValueFactory(new PropertyValueFactory<>("idHorario"));
+        colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
+        colHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
+        colDia.setCellValueFactory(new PropertyValueFactory<>("dia"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+        colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
+        colDocente2.setCellValueFactory(new PropertyValueFactory<>("docente"));
+        colVacantes.setCellValueFactory(new PropertyValueFactory<>("vacantes"));
+
+        cargarCursosActivos(); // Llenar la tabla de cursos activos
     }
+   
 
     @FXML
-    private void btnAsignarDocente(ActionEvent event) {
-        // Implementar funcionalidad si se requiere más adelante
+    private void btnSalir(ActionEvent event) throws IOException {
+        // Mostrar confirmación antes de salir
+        Optional<ButtonType> result = mostrarMensajeAlerta(Alert.AlertType.CONFIRMATION, "Confirmación", "¿Seguro que desea salir?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Saliendo...");
+
+            // Cerrar la sesión del usuario actual
+            SesionUsuario.getInstancia().cerrarSesion();
+
+            // Cargar el archivo FXML de la vista Login
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
+            Parent root = loader.load();
+
+            // Aplicar los estilos a la nueva escena
+            Scene loginScene = new Scene(root);
+            loginScene.getStylesheets().add(getClass().getResource("/styles/styleLogin.css").toExternalForm());
+
+            // Obtener el escenario actual y cambiar la escena
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.centerOnScreen();
+            stage.show();
+        }
+    }
+    
+    private Optional<ButtonType> mostrarMensajeAlerta(Alert.AlertType tipo, String titulo, String message) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        return alert.showAndWait();
     }
 
     @FXML
@@ -191,7 +267,65 @@ public class AdministrativoController implements Initializable {
 
         return String.format("%02d:%02d:00", horaInt, Integer.parseInt(horaMinuto[1]));
     }
+    
+    private void cargarCursosActivos() {
+        ObservableList<CursoActivo> listaCursos = UsuarioDAO.obtenerCursosActivos();
+        tableviewCursosActivos.setItems(listaCursos);
+    }
+    
 
+    @FXML
+    private void btnSiguiente(ActionEvent event) {
+        tabPane.getSelectionModel().select(columAdm2);
+    }
+    
+    private HorarioDAO horarioDAO = new HorarioDAO();
+
+    @FXML
+    private void btnGenerarInforme(ActionEvent event) {
+        try {
+            CursoActivo cursoSeleccionado = tableviewCursosActivos.getSelectionModel().getSelectedItem();
+            if (cursoSeleccionado != null) {
+                int idHorarioSeleccionado = cursoSeleccionado.getIdHorario();
+
+                // Llamar al método del DAO
+                InformeCurso informe = horarioDAO.generarInformeCurso(idHorarioSeleccionado);
+
+                // Actualizar los TextField con los valores obtenidos
+                if (informe != null) {
+                    txtmodulo.setText(String.valueOf(informe.getIdModulo()));
+                    txtFechaGeneracion.setText(informe.getFechaGeneracionInforme());
+                    txtPuntajePromedio.setText(String.format("%.2f", informe.getPuntajePromedio()));
+                    txtTotalEstudiantesInscritos.setText(String.valueOf(informe.getTotalEstudiantes()));
+                    txtPorcentajeAprobados.setText(String.format("%.2f", informe.getPorcentajeAprobados()));
+
+                    // Cambiar a la pestaña columAdm3
+                    tabPane.getSelectionModel().select(columAdm3);
+                } else {
+                    showAlert("No se pudo generar el informe", "Revise los datos seleccionados.");
+                }
+            } else {
+                showAlert("Error", "Debe seleccionar un horario válido.");
+            }
+        } catch (Exception e) {
+            showAlert("Error", "Ocurrió un problema al generar el informe.");
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void btnVolver(ActionEvent event) {
+        // Seleccionar el tab Presentación 1
+        tabPane.getSelectionModel().select(columAdm1);
+    }    
 
 
 }
