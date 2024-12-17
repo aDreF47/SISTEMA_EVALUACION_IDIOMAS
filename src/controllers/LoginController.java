@@ -100,8 +100,12 @@ public class LoginController {
             case 3:
                 loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
                 root = loader.load();
+                // Obtener el controlador de la vista ClienteView
+                ClienteController clienteController = loader.getController();
+                clienteController.cargarDatosUsuario();
                 style = getClass().getResource("/styles/styleCliente.css").toExternalForm();
                 titulo = "Cliente";
+                
                 break;
             default:
                 mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Rol no reconocido.");
