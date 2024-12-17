@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -37,9 +38,9 @@
     <left>
 
         <VBox prefHeight="514.0" prefWidth="212.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #F4F4F4;">
-            <ImageView fitHeight="165.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="165.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../images/chilldecojones.png" />
+                    <Image url="@../images/docentePerfil.png" />
                 </image>
                 <VBox.margin>
                     <Insets bottom="25.0" left="50.0" right="50.0" top="25.0" />
@@ -154,7 +155,7 @@
             <Tab fx:id="tabMisCursos" text="Mis cursos">
                 <VBox alignment="BOTTOM_LEFT" prefHeight="465.0" prefWidth="877.0" spacing="10.0" style="-fx-padding: 15;">
                     <children>
-                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="900.0" style="-fx-background-color: #f39c12;" text="Lista de Cursos">
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="900.0" style="-fx-background-color: #808080;" text="Lista de Cursos">
                             <font>
                                 <Font name="System Bold Italic" size="23.0" />
                             </font>
@@ -196,8 +197,12 @@
                                         <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Button mnemonicParsing="false" onAction="#btnRendirExamen" prefHeight="63.0" prefWidth="197.0" styleClass="btnRE" text="Rendir Examen" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                        <Button mnemonicParsing="false" onAction="#btnClases" prefHeight="63.0" prefWidth="107.0" styleClass="btnClass" text="Clases" GridPane.rowIndex="1" />
+                                        <Button mnemonicParsing="false" onAction="#btnRendirExamen" prefHeight="63.0" prefWidth="197.0" style="-fx-background-color: #808080;" text="Rendir Examen" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <styleClass>
+                                    <String fx:value="btnRE" />
+                                    <String fx:value="manito" />
+                                 </styleClass></Button>
+                                        <Button mnemonicParsing="false" onAction="#btnClases" prefHeight="63.0" prefWidth="107.0" style="-fx-background-color: #808080;" styleClass="btnClass" text="Clases" GridPane.rowIndex="1" />
 
                                     </children>
                                 </GridPane>
