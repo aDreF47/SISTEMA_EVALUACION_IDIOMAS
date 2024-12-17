@@ -35,6 +35,7 @@
 
     <!-- Left Section -->
     <left>
+
         <VBox prefHeight="514.0" prefWidth="212.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #F4F4F4;">
             <ImageView fitHeight="165.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -62,11 +63,13 @@
                     <Text style="-fx-font-size: 16px;" text="Email:" GridPane.rowIndex="3" />
                     <Label fx:id="lblCodigoEstudiante" text="cod" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Label fx:id="lblEmail" text="email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label fx:id="lblCodigoEstudiante" text="cod" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Text style="-fx-font-size: 16px;" text="Apellido:" GridPane.rowIndex="1" />
                     <Label fx:id="lblApellido" text="ap" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 </children>
             </GridPane>
         </VBox>
+
     </left>
 
     <!-- Center Section -->
@@ -83,11 +86,11 @@
                                 <columns>
                                     <TableColumn fx:id="colIdioma" text="Idioma" />
                                     <TableColumn fx:id="colHorario" text="Horario" />
-                                    <TableColumn fx:id="colDia" prefWidth="127.0" text="Día" />
+                                    <TableColumn fx:id="colDia" prefWidth="111.0" text="Día" />
                                     <TableColumn fx:id="colFechaInicio" prefWidth="87.0" text="F. Inicio" />
-                                    <TableColumn fx:id="colFechaFin" prefWidth="86.0" text="F. Fin" />
-                                    <TableColumn fx:id="colDocente" prefWidth="205.0" text="Docente" />
-                                    <TableColumn fx:id="colVacantes" prefWidth="61.0" text="Vacantes" />
+                                    <TableColumn fx:id="colFechaFin" prefWidth="87.0" text="F. Fin" />
+                                    <TableColumn fx:id="colDocente" prefWidth="169.0" text="Docente" />
+                                    <TableColumn fx:id="colVacantes" text="Vacantes" />
                                 </columns>
                             </TableView>
                         </VBox>
@@ -195,6 +198,7 @@
                                     <children>
                                         <Button mnemonicParsing="false" onAction="#btnRendirExamen" prefHeight="63.0" prefWidth="197.0" styleClass="btnRE" text="Rendir Examen" GridPane.columnIndex="6" GridPane.rowIndex="1" />
                                         <Button mnemonicParsing="false" onAction="#btnClases" prefHeight="63.0" prefWidth="107.0" styleClass="btnClass" text="Clases" GridPane.rowIndex="1" />
+
                                     </children>
                                 </GridPane>
                             </children>

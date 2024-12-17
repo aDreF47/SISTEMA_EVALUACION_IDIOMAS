@@ -44,7 +44,9 @@ public class PagoDAO {
 
         String queryUsar = "UPDATE Pago SET estado = 1, idMatricula = ? WHERE codPago = ? AND estado = 0";
 
-        try (Connection con = Conexion.conectar(); PreparedStatement psValidar = con.prepareStatement(queryValidar); PreparedStatement psUsar = con.prepareStatement(queryUsar)) {
+        try (Connection con = Conexion.conectar();
+                PreparedStatement psValidar = con.prepareStatement(queryValidar);
+                PreparedStatement psUsar = con.prepareStatement(queryUsar)) {
 
             // Verificar si el código de pago existe y no está usado
             psValidar.setString(1, codPago);
@@ -76,8 +78,8 @@ public class PagoDAO {
     // Verificar si existe el registro del pago
     public boolean verificarRegistroPago(String codPago, String fechaPago) {
         String query = "SELECT COUNT(*) AS total FROM Pago WHERE CODPAGO = ? AND TRUNC(FECHAPAGO) = TRUNC(TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
-        try (Connection con = Conexion.conectar(); 
-            PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = Conexion.conectar();
+                PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, codPago);
             ps.setString(2, fechaPago);
@@ -132,6 +134,5 @@ public class PagoDAO {
         }
         return false;
     }
-    
 
 }

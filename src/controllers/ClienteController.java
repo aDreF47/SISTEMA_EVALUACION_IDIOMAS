@@ -43,10 +43,7 @@ import models.Pago;
 import models.Usuario;
 
 public class ClienteController {
-
-    @FXML
-    private TableColumn<?, ?> horasRepDocente;
-
+    
     @FXML
     private TextField txtCodigoPago;
 
@@ -109,12 +106,15 @@ public class ClienteController {
     private TableColumn<HorarioDisponible, Integer> colVacantes;
 
     HorarioDAO horarioDAO = new HorarioDAO();
-    @FXML
-    private TableColumn<?, ?> colHoraInicioMis;
+    
     @FXML
     private TableView<?> tabladeMisCursos;
     @FXML
     private TableColumn<?, ?> colIdiomaMiscursos;
+    @FXML
+    private TableColumn<?, ?> horasRepDocente;
+    @FXML
+    private TableColumn<?, ?> colHoraInicioMis;
     @FXML
     private TableColumn<?, ?> colFechaIni;
     @FXML
