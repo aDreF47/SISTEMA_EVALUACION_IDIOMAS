@@ -9,6 +9,7 @@ import java.util.Optional;
 import dao.HorarioDAO;
 import dao.PagoDAO;
 import dao.UsuarioDAO;
+import java.time.LocalDateTime;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -36,6 +37,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Estudiante;
 import models.HorarioDisponible;
+import models.Matricula;
 import models.Usuario;
 
 public class ClienteController {
@@ -278,7 +280,7 @@ public class ClienteController {
     @FXML
     private void btnAceptaMatriculaAction(ActionEvent event) {
         PagoDAO pagDAO = new PagoDAO();
-
+        
         String codPago = txtCodigoPago.getText().trim(); // Eliminar espacios
         LocalDate fechaPago = datePickerPago.getValue();
         System.out.println(fechaPago);
@@ -315,7 +317,17 @@ public class ClienteController {
         if (estadoActualizado) {
             RegistrarEstudiante(); /// aqui entra y no registrea
             //RegistrarMatricula();
-            
+            // Obtener el código del estudiante
+            EstudianteDAO estDAO = new EstudianteDAO();
+            int idUsuario = SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario();
+            String codEstudiante = estDAO.buscarEstudiante(idUsuario);
+            if (codEstudiante != null) {
+                // Registrar la matrícula
+                RegistrarMatricula(codEstudiante);
+
+            } else {
+                mostrarMensajeAlerta(AlertType.ERROR, "Error", "No se pudo actualizar el estado del pago.");
+            }
             //lo de aca si muestra 
             mostrarMensajeAlerta(AlertType.INFORMATION, "Éxito", "Matricula exitosa ☻♥");
         } else {
@@ -365,7 +377,7 @@ public class ClienteController {
                 System.out.println("Estudiante registrado con éxito.");
             }
 
-            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito. Código: " + codEstudiante);
+            mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito. Código: ");
 
         } catch (Exception e) {
             mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
@@ -373,37 +385,43 @@ public class ClienteController {
         }
         
     }
-    /*private void RegistrarEstudiante() {
+    private void RegistrarMatricula(String codEstudiante) {
         try {
-            String codEstudiante = generarCodigoEstudiante();
-            
-            // Crear el objeto Pago
-            Estudiante nuevoEstudiante = new Estudiante(
-                SesionUsuario.getInstancia().getUsuarioActual().getIdUsuario(), // ID del usuario logueado
-                codEstudiante,
-                1 // Estado: sin usar
+            EstudianteDAO estDAO = new EstudianteDAO();
+
+            // Buscar el idEstudiante usando el código del estudiante
+            int idEstudiante = estDAO.verificarIdEstudiante(codEstudiante);
+
+            if (idEstudiante == -1) {
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se encontró el estudiante para registrar la matrícula.");
+                return;
+            }
+
+            // Crear el objeto Matricula
+            Matricula nuevaMatricula = new Matricula(
+                    4, // ID de asignación (Este modificar ya que no acepta null)
+                    idEstudiante, // ID del estudiante obtenido
+                    LocalDateTime.now(), // Fecha actual
+                    1 // Estado de la matrícula (activo)
             );
 
-            System.out.println("fuera: "+nuevoEstudiante.getCodigo());
-
-            // Insertar el estudiante en la base de datos
-            EstudianteDAO estDAO = new EstudianteDAO();
-            //boolean existeEstudiante = estDAO.buscarEstudiante(nuevoEstudiante);
-            boolean exito = estDAO.insertarEstudiante(nuevoEstudiante);
+            // Insertar la matrícula en la base de datos
+            boolean exito = estDAO.insertarMatricula(nuevaMatricula);
 
             if (exito) {
-                System.out.println("Estudiante registrado con éxito.");
-                //mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Estudiante registrado con éxito.");
+                mostrarMensajeAlerta(Alert.AlertType.INFORMATION, "Éxito", "Matrícula registrada con éxito.");
             } else {
-                System.out.println("No se pudo registrar al estudiante. Intente de nuevo.");
-                //mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar al estudiante. Intente de nuevo.");
+                mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "No se pudo registrar la matrícula. Intente de nuevo.");
             }
+
         } catch (Exception e) {
-            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado.");
+            mostrarMensajeAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error inesperado al registrar la matrícula.");
             e.printStackTrace();
         }
-        
-    }*/
+    }
+
+
+    
     /*private void RegistrarEstudiante() {
         EstudianteDAO estDAO = new EstudianteDAO();
         Usuario usuarioActual = SesionUsuario.getInstancia().getUsuarioActual();
