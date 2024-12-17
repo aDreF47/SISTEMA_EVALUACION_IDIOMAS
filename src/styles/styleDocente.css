@@ -1,0 +1,155 @@
+/* Fondo general */
+.root {
+    -fx-background-color: #f0f2f5; /* Fondo gris claro */
+}
+
+/* Sidebar (panel izquierdo) con gradiente */
+#panelUser {
+    -fx-background-color: linear-gradient(to bottom, #004d7a, #008793, #00bf72);
+    -fx-padding: 20;
+    -fx-border-radius: 0 10 10 0;
+}
+
+/* Barra superior */
+/* Estilo para el panel superior */
+#panelDocente {
+    -fx-background-color: linear-gradient(to bottom, #0073a1, #009688);
+}
+
+/* Texto del título DOCENTE */
+#lblTeacher {
+    -fx-text-fill: white;
+}
+
+
+/* Estilo del ícono de usuario */
+#iconUser {
+    -fx-fill: white; /* Ícono en blanco */
+}
+
+/* Texto de bienvenida */
+#lblWelcome {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+/* Línea separadora */
+#lineaSep {
+    -fx-stroke: #82e0aa; /* Color verde claro */
+    -fx-stroke-width: 2;
+}
+
+/* Botón transparente con borde blanco */
+#btnStudent {
+    -fx-background-color: transparent;  /* Fondo transparente */
+    -fx-text-fill: white;               /* Texto blanco */
+    -fx-border-color: white;            /* Borde blanco */
+    -fx-border-width: 2;                /* Grosor del borde */
+    -fx-border-radius: 20;              /* Bordes redondeados */
+    -fx-font-size: 14px;                /* Tamaño del texto */
+    -fx-padding: 8 20;                  /* Espaciado interno */
+    -fx-font-family: "Arial";
+}
+
+/* Estilo del ícono en el botón */
+#iconStudents {
+    -fx-fill: white; /* Ícono en blanco */
+}
+
+/* Efecto hover para el botón */
+#btnStudent:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco semitransparente */
+    -fx-cursor: hand;                              /* Cursor tipo mano */
+}
+
+/* Botón transparente con borde blanco */
+#btnEval {
+    -fx-background-color: transparent;  /* Fondo transparente */
+    -fx-text-fill: white;               /* Texto blanco */
+    -fx-border-color: white;            /* Borde blanco */
+    -fx-border-width: 2;                /* Grosor del borde */
+    -fx-border-radius: 20;              /* Bordes redondeados */
+    -fx-font-size: 14px;                /* Tamaño del texto */
+    -fx-padding: 8 20;                  /* Espaciado interno */
+    -fx-font-family: "Arial";
+}
+
+/* Estilo del ícono en el botón */
+#iconBook {
+    -fx-fill: white; /* Ícono en blanco */
+}
+
+/* Efecto hover para el botón */
+#btnEval:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco semitransparente */
+    -fx-cursor: hand;                              /* Cursor tipo mano */
+}
+
+/* Botón transparente con borde blanco */
+#btnExam {
+    -fx-background-color: transparent;  /* Fondo transparente */
+    -fx-text-fill: white;               /* Texto blanco */
+    -fx-border-color: white;            /* Borde blanco */
+    -fx-border-width: 2;                /* Grosor del borde */
+    -fx-border-radius: 20;              /* Bordes redondeados */
+    -fx-font-size: 14px;                /* Tamaño del texto */
+    -fx-padding: 8 20;                  /* Espaciado interno */
+    -fx-font-family: "Arial";
+}
+
+/* Estilo del ícono en el botón */
+#iconExam {
+    -fx-fill: white; /* Ícono en blanco */
+}
+
+/* Efecto hover para el botón */
+#btnExam:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco semitransparente */
+    -fx-cursor: hand;                              /* Cursor tipo mano */
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 6,0,0,0);
+}
+
+.white-bg {
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+}
+
+
+/* Estilo para el fondo general del TabPane */
+.tab-pane {
+    -fx-background-color: #F5F5F5; /* Gris humo */
+    -fx-tab-min-width: 100px; /* Ancho mínimo de cada tab */
+    -fx-tab-min-height: 40px; /* Altura mínima de cada tab */
+}
+
+/* Estilo para las pestañas */
+.tab {
+    -fx-background-color: #D9D9D9; /* Color de fondo gris más oscuro */
+    -fx-background-radius: 5px 5px 0 0; /* Bordes redondeados en la parte superior */
+    -fx-border-color: #BFBFBF; /* Borde de las pestañas */
+    -fx-border-radius: 5px 5px 0 0; /* Borde redondeado igual */
+}
+
+/* Estilo cuando la pestaña está seleccionada */
+.tab:selected {
+    -fx-background-color: #E6E6E6; /* Gris más claro */
+    -fx-text-fill: #333333; /* Texto más oscuro */
+    -fx-border-color: #8C8C8C; /* Borde más notorio */
+}
+
+/* Estilo para el texto de las pestañas */
+.tab .tab-label {
+    -fx-text-fill: #4F4F4F; /* Gris oscuro */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+    -fx-font-weight: bold; /* Negrita */
+}
+
+/* Cambia el color del contenedor de las pestañas seleccionadas */
+.tab-pane .tab-header-area {
+    -fx-background-color: #D9D9D9; /* Fondo del área de pestañas */
+}

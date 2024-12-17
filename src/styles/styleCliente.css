@@ -1,163 +1,51 @@
-
-
-/* Botones personalizados */
-
-/* Botón normal */
-.btnRE {
-    -fx-background-color: linear-gradient(to bottom, #3399ff, #1e90ff); /* Gradiente azul */
-    -fx-text-fill: white;               /* Texto blanco */
-    -fx-font-size: 20px;                /* Tamaño del texto */
-    -fx-border-radius: 5px;             /* Bordes redondeados */
-    -fx-padding: 8 15 8 15;             /* Espaciado interno */
-    -fx-cursor: hand;
+/* Fondo general de la interfaz */
+.root {
+    -fx-background-color: #f4f6f8; /* Color claro para el fondo */
 }
 
-/* Botón al pasar el mouse (hover) */
-.btnRE:hover {
-    -fx-background-color: linear-gradient(to bottom, #1e90ff, #1a75ff); /* Azul más oscuro en hover */
+/* Sidebar - gradiente moderno */
+#sidebar {
+    -fx-background-color: linear-gradient(to bottom, #004d7a, #008793, #00bf72);
+    -fx-border-radius: 0 10 10 0; /* Bordes redondeados en el lado derecho */
+    -fx-padding: 30 15; /* Relleno interno */
 }
 
-/* Botón al ser presionado (activo) */
-.btnRE:pressed {
-    -fx-background-color: linear-gradient(to bottom, #004080, #003366); /* Azul más oscuro cuando se presiona */
+/* Icono de usuario */
+#userIcon {
+    -fx-fill: white; /* Ícono blanco */
+    -fx-font-size: 80px; /* Tamaño del ícono */
 }
 
-.btnClass:hover {
-    -fx-background-color: linear-gradient(to bottom, #1e90ff, #1a75ff); /* Hover más oscuro */
-}
-
-/* Botón activo */
-.btnClass:pressed {
-    -fx-background-color: linear-gradient(to bottom, #004080, #003366); /* Activo más oscuro */
-}
-
-.btnClass{
-    -fx-background-color: linear-gradient(to bottom, #3399ff, #1e90ff); /* Gradiente naranja */
-    -fx-text-fill: white;               /* Texto blanco */
-    -fx-font-size: 20px;                /* Tamaño del texto */
-    -fx-border-radius: 5px;             /* Bordes redondeados */
-    -fx-padding: 8 15 8 15;             /* Espaciado interno */
-    -fx-cursor: hand;
-}
-.manito {
-    -fx-cursor: hand;
-}
-.hbox-matricula {
-    -fx-padding: 20px;
-    -fx-spacing: 15px;
-    -fx-background-color: #ffffff;
-}
-
-.vbox-pago, .vbox-detalles {
-    -fx-background-color: #f9f9f9;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-padding: 15px;
-    -fx-spacing: 10px;
-}
-
-.label-header {
-    -fx-font-size: 18px;
+/* Títulos en el sidebar */
+.label-welcome {
+    -fx-font-size: 20px;
+    -fx-text-fill: white; /* Texto en blanco */
+    -fx-font-family: "Arial";
     -fx-font-weight: bold;
+    -fx-padding: 10 0;
 }
 
-.label-field {
+/* Línea divisoria */
+.line {
+    -fx-stroke: #82e0aa; /* Verde suave para la línea */
+    -fx-stroke-width: 2;
+}
+
+/* Botón ESTUDIANTES */
+.button-student {
+    -fx-background-color: #ffffff; /* Fondo blanco */
+    -fx-text-fill: #004d7a; /* Color azul oscuro */
     -fx-font-size: 14px;
+    -fx-background-radius: 20; /* Botón redondeado */
+    -fx-padding: 8 20; /* Espaciado interno */
+    -fx-border-color: #004d7a; /* Borde azul oscuro */
+    -fx-border-width: 2;
+    -fx-cursor: hand; /* Cursor tipo mano */
 }
 
-.textfield, .datepicker {
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 3px;
+/* Efecto hover para el botón */
+.button-student:hover {
+    -fx-background-color: #004d7a; /* Fondo azul oscuro */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-border-color: #004d7a;
 }
-
-.button-aceptar, .button-adquirir {
-    -fx-background-color: #0078d7;
-    -fx-text-fill: white;
-    -fx-padding: 10px 15px;
-    -fx-border-radius: 3px;
-    -fx-cursor: hand;
-}
-
-.button-adquirir {
-    -fx-background-color: #28a745;
-}
-
-.button-aceptar:hover, .button-adquirir:hover {
-    -fx-opacity: 0.9;
-}
-
-.vbox-pago, .vbox-detalles {
-    -fx-background-color: #f4f4f9;
-    -fx-border-color: #a9a9a9;
-    -fx-border-width: 1.5px;
-    -fx-border-radius: 8px;
-    -fx-padding: 20px;
-    -fx-spacing: 15px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.2, 0, 2);
-}
-
-.tableview {
-    -fx-background-color: white;
-    -fx-border-color: #dcdcdc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-selection-bar: #0078d7;
-    -fx-selection-bar-non-focused: lightgray;
-}
-
-.button-aceptar{
-    -fx-background-color: #1d72b8;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
-
-.button-adquirir {
-    -fx-background-color: #1db851;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
-
-.button-regresar{
-    -fx-background-color: #d74400;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
-
-.button-regresar:hover{
-    -fx-background-color: #9b0c0c;
-    -fx-opacity: 0.85;
-}
-
-.button-adquirir:hover {
-    -fx-background-color: #2ee44c;
-    -fx-opacity: 0.85;
-}
-
-.button-aceptar:hover {
-    -fx-background-color: #0d79d8;
-    -fx-opacity: 0.85;
-}
-
-.tableview .column-header {
-    -fx-background-color: #0078d7;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-alignment: center;
-}
-
