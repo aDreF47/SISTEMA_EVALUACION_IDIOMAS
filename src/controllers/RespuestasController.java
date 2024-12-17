@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controllers;
 
+import dao.BancoPreguntaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import models.BancoPregunta;
+import java.util.List;
 
-/**
- *
- * @author nando
- */
 public class RespuestasController {
 
     @FXML
@@ -110,11 +106,36 @@ public class RespuestasController {
     private Label rmarcada10;
     @FXML
     private Label respuesta10;
-
     @FXML
     private TabPane tabPane;
-    
-    
+
+    private BancoPreguntaDAO bancoPreguntaDAO = new BancoPreguntaDAO();
+
+    @FXML
+    public void initialize() {
+        cargarPreguntas();
+    }
+
+    private void cargarPreguntas() {
+    List<BancoPregunta> preguntas = bancoPreguntaDAO.obtenerPreguntasPorExamen(101); // ID del Examen
+
+    // Solo mostrar las preguntas recuperadas del DAO
+    if (preguntas.size() >= 1) {
+        asignarPregunta(pregunta1, respuesta1, rmarcada1, comentarioRC1, preguntas.get(0));
+    }
+    if (preguntas.size() >= 2) {
+        asignarPregunta(pregunta2, respuesta2, rmarcada2, comentarioRC2, preguntas.get(1));
+    }
+}
+
+
+
+    private void asignarPregunta(Label pregunta, Label respuesta, Label rmarcada, Label comentarioRC, BancoPregunta bancoPregunta) {
+        pregunta.setText(bancoPregunta.getContenido());
+        respuesta.setText(bancoPregunta.getRespuestaCorrecta());
+        rmarcada.setText(""); // Respuesta marcada como null por defecto
+        comentarioRC.setText(bancoPregunta.getRetroalimentacion());
+    }
 
     @FXML
     private void NEXT1(ActionEvent event) {
@@ -139,48 +160,32 @@ public class RespuestasController {
     @FXML
     private void OK(ActionEvent event) {
         try {
-        // Cargar la nueva vista (ClienteView.fxml).
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
-        Parent root = loader.load();
-
-        // Crear una nueva ventana (Stage) para la vista.
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Vista Cliente");
-        stage.show();
-
-        // Cerrar la ventana actual.
-        Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Vista Cliente");
+            stage.show();
+            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    }
+
     @FXML
     private void SALIR(ActionEvent event) {
-        
         try {
-        // Cargar la nueva vista (ClienteView.fxml).
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
-        Parent root = loader.load();
-
-        // Crear una nueva ventana (Stage) para la vista.
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Vista Cliente");
-        stage.show();
-
-        // Cerrar la ventana actual.
-        Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ClienteView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Vista Cliente");
+            stage.show();
+            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    }
-    
-    
-
-    
-    
-
 }

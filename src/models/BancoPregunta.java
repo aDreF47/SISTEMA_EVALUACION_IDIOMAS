@@ -4,16 +4,17 @@ import java.util.List;
 
 public class BancoPregunta {
     
-    //
     private int idPregunta;
-    private String modulo; 
-    private String contenido; 
+    private String idModulo;
+    private String contenido;
     private String alternativa1;
     private String alternativa2;
     private String alternativa3;
     private String alternativa4;
-    private String respuestaCorrecta; 
+    private String respuestaCorrecta;
+    private String retroalimentacion;
 
+    public BancoPregunta(int idPregunta, String idModulo, String contenido, String alternativa1, String alternativa2, String alternativa3, String alternativa4, String respuestaCorrecta, String retroalimentacion) {
     public BancoPregunta() {
     }
 
@@ -25,7 +26,12 @@ public class BancoPregunta {
         this.alternativa2 = alternativa2;
         this.alternativa3 = alternativa3;
         this.alternativa4 = alternativa4;
+        this.alternativa1 = alternativa1;
+        this.alternativa2 = alternativa2;
+        this.alternativa3 = alternativa3;
+        this.alternativa4 = alternativa4;
         this.respuestaCorrecta = respuestaCorrecta;
+        this.retroalimentacion = retroalimentacion;
     }
 
     
@@ -57,9 +63,6 @@ public class BancoPregunta {
         this.modulo = modulo;
     }
 
-    /**
-     * @return the contenido
-     */
     public String getContenido() {
         return contenido;
     }
@@ -71,58 +74,34 @@ public class BancoPregunta {
         this.contenido = contenido;
     }
 
-    /**
-     * @return the alternativa1
-     */
     public String getAlternativa1() {
         return alternativa1;
     }
 
-    /**
-     * @param alternativa1 the alternativa1 to set
-     */
     public void setAlternativa1(String alternativa1) {
         this.alternativa1 = alternativa1;
     }
 
-    /**
-     * @return the alternativa2
-     */
     public String getAlternativa2() {
         return alternativa2;
     }
 
-    /**
-     * @param alternativa2 the alternativa2 to set
-     */
     public void setAlternativa2(String alternativa2) {
         this.alternativa2 = alternativa2;
     }
 
-    /**
-     * @return the alternativa3
-     */
     public String getAlternativa3() {
         return alternativa3;
     }
 
-    /**
-     * @param alternativa3 the alternativa3 to set
-     */
     public void setAlternativa3(String alternativa3) {
         this.alternativa3 = alternativa3;
     }
 
-    /**
-     * @return the alternativa4
-     */
     public String getAlternativa4() {
         return alternativa4;
     }
 
-    /**
-     * @param alternativa4 the alternativa4 to set
-     */
     public void setAlternativa4(String alternativa4) {
         this.alternativa4 = alternativa4;
     }
@@ -141,5 +120,13 @@ public class BancoPregunta {
         this.respuestaCorrecta = respuestaCorrecta;
     }
 
+    public String getRetroalimentacion() {
+        return retroalimentacion;
+    }
+
+    public void setRetroalimentacion(String retroalimentacion) {
+        this.retroalimentacion = retroalimentacion;
+    }
+    
     
 }

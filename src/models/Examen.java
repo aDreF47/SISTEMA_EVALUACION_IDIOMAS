@@ -44,10 +44,10 @@ public class Examen {
     }
 
     public void setIdEstructura(String idEstructura) {
-        if (idEstructura != null && idEstructura.length() <= 5) {
+        if (idEstructura != null && idEstructura.length() <= 2) {
             this.idEstructura = idEstructura;
         } else {
-            throw new IllegalArgumentException("El idEstructura debe tener un máximo de 5 caracteres.");
+            throw new IllegalArgumentException("El idEstructura debe tener un máximo de 2 caracteres.");
         }
     }
 

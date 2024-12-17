@@ -24,24 +24,24 @@
                                     <Label layoutX="57.0" layoutY="97.0" text="Respuesta Correcta " />
                                     <Label layoutX="46.0" layoutY="204.0" text="PREGUNTA 2:" />
                                     <Label layoutX="58.0" layoutY="233.0" text="Respuesta Marcada" />
-                                    <Label fx:id="pregunta1" layoutX="129.0" layoutY="44.0" prefHeight="17.0" prefWidth="33.0" text="label" />
+                                    <Label fx:id="pregunta1" layoutX="129.0" layoutY="36.0" prefHeight="26.0" prefWidth="263.0" text="label" />
                                     <Label fx:id="respuesta1" layoutX="184.0" layoutY="97.0" prefHeight="17.0" prefWidth="45.0" text="Label" />
                                     <Label fx:id="pregunta2" layoutX="127.0" layoutY="204.0" text="Label" />
                                     <Label fx:id="respuesta2" layoutX="184.0" layoutY="264.0" text="Label" />
                                     <Label layoutX="58.0" layoutY="71.0" text="Respuesta Marcada" />
                                     <Label layoutX="44.0" layoutY="124.0" text="Retroalimentación" />
-                                    <Label fx:id="rmarcada1" layoutX="184.0" layoutY="71.0" text="Label" />
+                                    <Label fx:id="rmarcada1" layoutX="184.0" layoutY="71.0" prefHeight="18.0" prefWidth="322.0" text="Label" />
                                     <Label layoutX="57.0" layoutY="264.0" text="Respuesta Correcta " />
                                     <Label fx:id="rmarcada2" layoutX="184.0" layoutY="233.0" text="Label" />
                                     <Label layoutX="32.0" layoutY="299.0" text="Retroalimentación" />
-                                    <Pane layoutX="41.0" layoutY="147.0" prefHeight="39.0" prefWidth="513.0" styleClass="paneComentario">
+                                    <Pane layoutX="41.0" layoutY="147.0" prefHeight="55.0" prefWidth="514.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC1" layoutX="35.0" layoutY="11.0" prefHeight="17.0" prefWidth="120.0" text="Label" />
+                                          <Label fx:id="comentarioRC1" layoutX="31.0" layoutY="3.0" prefHeight="48.0" prefWidth="467.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
-                                    <Pane layoutX="42.0" layoutY="325.0" prefHeight="39.0" prefWidth="512.0" styleClass="paneComentario">
+                                    <Pane layoutX="42.0" layoutY="325.0" prefHeight="55.0" prefWidth="512.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC2" layoutX="34.0" layoutY="10.0" text="Label" />
+                                          <Label fx:id="comentarioRC2" layoutX="34.0" layoutY="10.0" prefHeight="37.0" prefWidth="462.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                  </children>
@@ -68,12 +68,12 @@
                                     <Label fx:id="rmarcada4" layoutX="191.0" layoutY="235.0" text="Label" />
                                     <Pane layoutX="52.0" layoutY="143.0" prefHeight="41.0" prefWidth="512.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC3" layoutX="33.0" layoutY="10.0" text="Label" />
+                                          <Label fx:id="comentarioRC3" layoutX="33.0" prefHeight="43.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Pane layoutX="52.0" layoutY="324.0" prefHeight="43.0" prefWidth="512.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC4" layoutX="36.0" layoutY="10.0" text="Label" />
+                                          <Label fx:id="comentarioRC4" layoutX="36.0" layoutY="-1.0" prefHeight="44.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Button layoutX="587.0" layoutY="397.0" mnemonicParsing="false" onAction="#NEXT1" text="NEXT" />
@@ -100,7 +100,7 @@
                                     <Label layoutX="45.0" layoutY="125.0" text="Retroalimentación" />
                                     <Pane layoutX="45.0" layoutY="148.0" prefHeight="44.0" prefWidth="504.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC5" layoutX="29.0" layoutY="14.0" text="Label" />
+                                          <Label fx:id="comentarioRC5" layoutX="29.0" layoutY="-1.0" prefHeight="46.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Label layoutX="45.0" layoutY="200.0" text="PREGUNTA 6:" />
@@ -111,7 +111,7 @@
                                     <Label layoutX="45.0" layoutY="285.0" text="Retroalimentación" />
                                     <Pane layoutX="45.0" layoutY="308.0" prefHeight="44.0" prefWidth="504.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC6" layoutX="29.0" layoutY="14.0" text="Label" />
+                                          <Label fx:id="comentarioRC6" layoutX="29.0" layoutY="-1.0" prefHeight="46.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Label fx:id="rmarcada6" layoutX="185.0" layoutY="226.0" text="Label" />
@@ -129,12 +129,12 @@
                                     <Label layoutX="57.0" layoutY="121.0" text="Retroalimentación" />
                                     <Pane layoutX="57.0" layoutY="146.0" prefHeight="44.0" prefWidth="503.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC7" layoutX="32.0" layoutY="14.0" text="Label" />
+                                          <Label fx:id="comentarioRC7" layoutX="32.0" prefHeight="47.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Pane layoutX="56.0" layoutY="305.0" prefHeight="44.0" prefWidth="503.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC8" layoutX="32.0" layoutY="14.0" text="Label" />
+                                          <Label fx:id="comentarioRC8" layoutX="32.0" layoutY="-1.0" prefHeight="47.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Label layoutX="56.0" layoutY="199.0" text="PREGUNTA 8:" />
@@ -169,7 +169,7 @@
                                     <Label layoutX="47.0" layoutY="126.0" text="Retroalimentación" />
                                     <Pane layoutX="47.0" layoutY="153.0" prefHeight="39.0" prefWidth="501.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC9" layoutX="27.0" layoutY="11.0" text="Label" />
+                                          <Label fx:id="comentarioRC9" layoutX="27.0" layoutY="1.0" prefHeight="36.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Label fx:id="pregunta9" layoutX="130.0" layoutY="47.0" text="Label" />
@@ -186,7 +186,7 @@
                                     <Label layoutX="52.0" layoutY="126.0" text="Retroalimentación" />
                                     <Pane layoutX="52.0" layoutY="151.0" prefHeight="40.0" prefWidth="502.0" styleClass="paneComentario">
                                        <children>
-                                          <Label fx:id="comentarioRC10" layoutX="14.0" layoutY="12.0" text="Label" />
+                                          <Label fx:id="comentarioRC10" layoutX="14.0" prefHeight="38.0" prefWidth="28.0" styleClass="comentarioRetroalimentacion" text="Label" />
                                        </children>
                                     </Pane>
                                     <Label fx:id="pregunta10" layoutX="149.0" layoutY="46.0" text="Label" />
