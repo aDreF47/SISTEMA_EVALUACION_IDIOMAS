@@ -152,19 +152,11 @@
                               <Label fx:id="lblEvalRE" layoutX="27.0" layoutY="308.0" text="REGISTRO DE PREGUNTAS" />
                               <Label fx:id="lblEvalPregunta" layoutX="27.0" layoutY="407.0" text="PREGUNTA:" />
                               <TextField fx:id="txtPregunta" layoutX="27.0" layoutY="431.0" />
-                              <Label fx:id="lblEvalFecha" layoutX="763.0" layoutY="315.0" text="FECHA: " />
-                              <DatePicker fx:id="EvalCalendary" layoutX="763.0" layoutY="342.0" prefHeight="25.0" prefWidth="149.0" />
-                              <Label fx:id="lblEvalTipo" layoutX="763.0" layoutY="380.0" text="TIPO DE EVALUACION:" />
-                              <TextField fx:id="textfEvalTipo" layoutX="763.0" layoutY="404.0" />
                               <Label fx:id="lblEvalop1" layoutX="221.0" layoutY="342.0" text="OPCION-1:" />
                               <TextField fx:id="txtOpcion1" layoutX="221.0" layoutY="366.0" />
                               <Button fx:id="btnInsertar" layoutX="26.0" layoutY="507.0" mnemonicParsing="false" onAction="#insertarPregunta" text="Insertar" />
-                              <Label fx:id="lblEvalHora1" layoutX="957.0" layoutY="318.0" text="HORA:" />
-                              <TextField fx:id="textfEvalHora1" layoutX="957.0" layoutY="342.0" />
                               <Label fx:id="lblEvalMod1" layoutX="27.0" layoutY="342.0" text="MODULO:" />
                               <TextField fx:id="txtModulo" layoutX="27.0" layoutY="366.0" />
-                              <Label fx:id="lblEvalIdioma1" layoutX="763.0" layoutY="447.0" text="PREGUNTA" />
-                              <TextField fx:id="textfEvalIdioma1" layoutX="763.0" layoutY="471.0" />
                               <Label fx:id="lblEvalRespuesta" layoutX="414.0" layoutY="470.0" text="RESPUESTA:" />
                               <TextField fx:id="txtRespuesta" layoutX="414.0" layoutY="494.0" />
                               <Label fx:id="lblEvalop2" layoutX="221.0" layoutY="407.0" text="OPCION-2:" />
@@ -174,11 +166,28 @@
                               <Label fx:id="lblEvalop4" layoutX="414.0" layoutY="407.0" text="OPCION-4:" />
                               <TextField fx:id="txtOpcion4" layoutX="414.0" layoutY="431.0" />
                               <Button fx:id="btnEliminar" layoutX="221.0" layoutY="507.0" mnemonicParsing="false" onAction="#eliminarPregunta" text="Eliminar" />
+                              <AnchorPane layoutX="584.0" layoutY="300.0" prefHeight="236.0" prefWidth="521.0" stylesheets="@../styles/styleDocente.css">
+                                 <styleClass>
+                                    <String fx:value="shadow" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                                 <children>
+                                    <Label fx:id="lblEvalFecha" layoutX="82.0" layoutY="83.0" text="FECHA: " />
+                                    <DatePicker fx:id="EvalCalendary" layoutX="82.0" layoutY="110.0" prefHeight="25.0" prefWidth="149.0" />
+                                    <Label fx:id="lblEvalTipo" layoutX="82.0" layoutY="148.0" text="TIPO DE EVALUACION:" />
+                                    <TextField fx:id="textfEvalTipo" layoutX="82.0" layoutY="172.0" />
+                                    <Label fx:id="lblEvalHora1" layoutX="276.0" layoutY="86.0" text="HORA INICIO:" />
+                                    <TextField fx:id="textfEvalHora1" layoutX="276.0" layoutY="110.0" />
+                                    <Label fx:id="lblEvalIdioma1" layoutX="276.0" layoutY="148.0" text="HORA FIN:" />
+                                    <TextField fx:id="textfEvalIdioma1" layoutX="276.0" layoutY="172.0" />
+                                    <Label layoutX="35.0" layoutY="29.0" text="REGISTRO EVALUACION" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="formExam" prefHeight="583.0" prefWidth="1152.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="formExam" prefHeight="583.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="561.0" prefWidth="1124.0" stylesheets="@../styles/styleDocente.css">
                            <styleClass>
@@ -230,6 +239,8 @@
                                   </Tab>
                                 </tabs>
                               </TabPane>
+                              <Button layoutX="251.0" layoutY="458.0" mnemonicParsing="false" text="Guardar" />
+                              <Button layoutX="827.0" layoutY="458.0" mnemonicParsing="false" text="Quitar" />
                            </children>
                         </AnchorPane>
                      </children>
